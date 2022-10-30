@@ -1,6 +1,23 @@
 import styled, { createGlobalStyle } from "styled-components";
 
+declare module "styled-components" {
+  export interface colorPalette {
+    primary: string;
+    secondary: string;
+    third: string;
+    contrast: string;
+  }
+
+  export interface DefaultTheme {
+    name: string;
+    colors: colorPalette;
+  }
+}
+
 export const GlobalStyle = createGlobalStyle`
+  * {
+    transition: 0.3s;
+  }
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -45,11 +62,10 @@ export const GlobalStyle = createGlobalStyle`
       border-collapse: collapse;
       border-spacing: 0;
   }
-`
+`;
 
 export const Wrapper = styled.div`
-  transition: 0.3s;
   width: 100%;
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.contrast};
-`
+  background-color: ${({ theme }) => theme.colors.contrast};
+`;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { dark, light } from './util/themes';
 import { GlobalStyle, Wrapper } from './globalStyles';
+import { Header } from './components/Header';
 
 function App() {
   const [theme, setTheme] = useState(light)
@@ -15,7 +16,8 @@ function App() {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Wrapper onClick={swapTheme}>
+        <Wrapper>
+          <Header themeHandler={swapTheme} />
 
         </Wrapper>
       </ThemeProvider>
