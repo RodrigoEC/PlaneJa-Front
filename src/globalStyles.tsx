@@ -65,7 +65,15 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   width: 100%;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.contrast};
 `;
+
+export const InnerContainer = styled.div`
+  max-width: 1200px;
+  width: 100%;
+`

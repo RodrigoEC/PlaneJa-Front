@@ -26,15 +26,4 @@ export const Wrapper = styled.div`
     ${({ theme }: { theme: DefaultTheme }) =>
       theme.name === "dark" ? `transform: translate(1.5rem)` : ""};
   }
-  @media screen and (max-width: 750px) {
-    height: 1.5rem;
-    width: 3rem;
-    padding: 0rem 0.25rem;
-    div {
-      width: 1rem;
-      height: 1rem;
-    ${({ theme }: { theme: DefaultTheme }) =>
-        theme.name === 'dark' ? `transform: translate(1rem)` : ""};
-    }
-  }
 `;
