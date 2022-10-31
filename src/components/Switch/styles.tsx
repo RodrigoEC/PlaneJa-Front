@@ -12,18 +12,29 @@ export const Wrapper = styled.div`
   border-radius: 50px;
   cursor: pointer;
   transition: 0.3s;
+
   &:hover {
     opacity: 0.8;
   }
 
-  div {
-    background-color: ${({ theme }) => theme.colors.contrast};
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 100%;
-    transition: 0.3s ease;
-    transition-property: transform background-color;
-    ${({ theme }: { theme: DefaultTheme }) =>
-      theme.name === "dark" ? `transform: translate(1.5rem)` : ""};
+  @media screen and (max-width: 600px) {
+    width: 3rem;
+    height: 1.5rem;
+  }
+`;
+
+export const InnerBall = styled.div`
+  background-color: ${({ theme }) => theme.colors.contrast};
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 100%;
+  transition: 0.3s ease;
+  transition-property: transform background-color;
+  ${({ theme }: { theme: DefaultTheme }) =>
+    theme.name === "dark" ? `transform: translate(125%)` : ""};
+
+  @media screen and (max-width: 600px) {
+    width: 1rem;
+    height: 1rem;
   }
 `;

@@ -1,12 +1,12 @@
 import React, { MouseEventHandler } from 'react'
-import { Wrapper } from './styles'
+import { InnerBall, Wrapper } from './styles'
 
 
 export const Switch = ({ handleSwitch }: { handleSwitch: MouseEventHandler }) => {
 
     return (
         <Wrapper onClick={handleSwitch}>
-            <div></div>
+            <InnerBall/>
         </Wrapper>
     )
 
