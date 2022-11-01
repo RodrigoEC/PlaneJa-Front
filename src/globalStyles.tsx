@@ -65,30 +65,39 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  align-items: center;
   width: 100%;
-  min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.contrast};
 `;
 
 
 export const InnerContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  min-height: 100vh;
   max-width: 1200px;
   width: 100%;
+  box-sizing: border-box;
+  
+  padding: 0 1rem;
 `
 
 export const Body = styled.main`
-  padding: 3rem 0;
-
+  padding: 3rem 0 2rem;
+  flex-grow: 1;
 `
 
 export const Title = styled.h1`
   text-align: center;
   color: ${({ theme }) => theme.colors.primary};
-  font-weight: bold;
+  font-weight: bolder;
   font-size: 1.75rem;
   text-transform: uppercase;
   letter-spacing: 0.4rem;
+  line-height: 1.25;
+
+  @media screen and (max-width: 700px) {
+    font-size: 1.25rem;
+  }
 `

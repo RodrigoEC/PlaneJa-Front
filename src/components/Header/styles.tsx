@@ -8,7 +8,7 @@ export const Wrapper = styled.nav`
   align-items: center;
 
   width: 100%;
-  padding: 1rem 1rem 0.5rem;
+  padding: 1rem 0rem 0.5rem;
   box-sizing: border-box;
 `;
 
