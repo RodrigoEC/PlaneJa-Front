@@ -92,7 +92,7 @@ export const Body = styled.main`
   flex-flow: column;
   align-items: center;
   width: 100%;
-  gap: 2rem;
+  gap: 2.5rem;
 
   padding: 3rem 4rem 2rem;
   box-sizing: border-box;
@@ -117,4 +117,9 @@ export const Title = styled.h1`
     font-size: 1.2rem;
     letter-spacing: 0.2rem;
   }
+`;
+
+export const Divider = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  width: 4rem;
 `;

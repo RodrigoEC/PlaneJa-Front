@@ -7,6 +7,7 @@ import {
   Wrapper,
   Title,
   Body,
+  Divider,
 } from "./globalStyles";
 import { Header } from "./components/Header";
 import { Progress } from "./components/Progress";
@@ -37,6 +38,7 @@ function App() {
               <Title>Ciência da computação</Title>
               <Progress />
               <Status />
+              <Divider />
             </Body>
           </InnerContainer>
         </Wrapper>

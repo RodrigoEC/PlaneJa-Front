@@ -11,8 +11,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-// Title, Data, Atribute
-
 export const Title = styled.h3`
   font-weight: bold;
   font-size: 1.1rem;
