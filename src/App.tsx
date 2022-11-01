@@ -5,11 +5,17 @@ import { GlobalStyle, InnerContainer, Wrapper } from "./globalStyles";
 import { Header } from "./components/Header";
 
 function App() {
-  const [theme, setTheme] = useState(light);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("planeja@theme")
+      ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
+      : light
+  );
 
   const swapTheme = () => {
-    if (light === theme) setTheme(dark);
-    else setTheme(light);
+    let newTheme = theme === light ? dark : light;
+
+    setTheme(newTheme);
+    localStorage.setItem("planeja@theme", JSON.stringify(newTheme));
   };
 
   return (
