@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "./util/themes";
-import { GlobalStyle, InnerContainer, Wrapper } from "./globalStyles";
+import {
+  GlobalStyle,
+  InnerContainer,
+  Wrapper,
+  Title,
+  Body,
+} from "./globalStyles";
 import { Header } from "./components/Header";
 
 function App() {
@@ -25,6 +31,9 @@ function App() {
         <Wrapper>
           <InnerContainer>
             <Header themeHandler={swapTheme} />
+            <Body>
+              <Title>Ciência da computação</Title>
+            </Body>
           </InnerContainer>
         </Wrapper>
       </ThemeProvider>

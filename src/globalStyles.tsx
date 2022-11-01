@@ -37,7 +37,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 100%;
       font: inherit;
       vertical-align: baseline;
-      font-family: 'Roboto', sans-serif !important;
+      font-family: 'Roboto Mono', monospace;
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, 
@@ -73,7 +73,22 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.contrast};
 `;
 
+
 export const InnerContainer = styled.div`
   max-width: 1200px;
   width: 100%;
+`
+
+export const Body = styled.main`
+  padding: 3rem 0;
+
+`
+
+export const Title = styled.h1`
+  text-align: center;
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: bold;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4rem;
 `
