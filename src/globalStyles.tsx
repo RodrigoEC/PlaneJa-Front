@@ -97,6 +97,7 @@ export const Body = styled.main`
   padding: 3rem 4rem 2rem;
   box-sizing: border-box;
   flex-grow: 1;
+  color: ${({ theme }) => theme.colors.primary};
 
   @media screen and (max-width: 700px) {
     padding: 3rem 0rem 2rem;
