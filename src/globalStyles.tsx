@@ -65,28 +65,43 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.contrast};
 `;
-
 
 export const InnerContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: center;
 
   min-height: 100vh;
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
-  
+
   padding: 0 1rem;
-`
+`;
 
 export const Body = styled.main`
-  padding: 3rem 0 2rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+
+  padding: 3rem 4rem 2rem;
+  box-sizing: border-box;
   flex-grow: 1;
-`
+
+  @media screen and (max-width: 700px) {
+    padding: 3rem 0rem 2rem;
+  }
+`;
 
 export const Title = styled.h1`
   text-align: center;
@@ -98,6 +113,7 @@ export const Title = styled.h1`
   line-height: 1.25;
 
   @media screen and (max-width: 700px) {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
   }
-`
+`;

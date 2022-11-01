@@ -9,6 +9,7 @@ import {
   Body,
 } from "./globalStyles";
 import { Header } from "./components/Header";
+import { Progress } from "./components/Progress";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -33,6 +34,7 @@ function App() {
             <Header themeHandler={swapTheme} />
             <Body>
               <Title>Ciência da computação</Title>
+              <Progress />
             </Body>
           </InnerContainer>
         </Wrapper>
