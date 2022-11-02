@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import { InnerBall, Wrapper } from './styles'
 
 

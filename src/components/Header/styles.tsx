@@ -21,6 +21,7 @@ export const Logo = styled(LogoPlaneJa)`
 export const SideIcons = styled.div`
   display: flex;
   gap: 1rem;
+  transition: 0.3s;
   align-items: center;
 `;
 

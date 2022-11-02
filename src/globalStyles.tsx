@@ -15,9 +15,6 @@ declare module "styled-components" {
 }
 
 export const GlobalStyle = createGlobalStyle`
-  * {
-    transition: 0.3s;
-  }
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -70,6 +67,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  transition: 0.3s;
   background-color: ${({ theme }) => theme.colors.contrast};
 `;
 
@@ -112,6 +111,7 @@ export const Title = styled.h1`
   text-transform: uppercase;
   letter-spacing: 0.4rem;
   line-height: 1.25;
+  transition: 0.3s;
 
   @media screen and (max-width: 700px) {
     font-size: 1.2rem;
@@ -121,5 +121,6 @@ export const Title = styled.h1`
 
 export const Divider = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.primary};
+  transition: 0.3s;
   width: 4rem;
 `;
