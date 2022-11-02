@@ -41,6 +41,7 @@ function App() {
               <Status />
               <Divider />
               <FileUpload />
+              <Divider />
             </Body>
           </InnerContainer>
         </Wrapper>

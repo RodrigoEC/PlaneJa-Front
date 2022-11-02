@@ -15,7 +15,6 @@ export const FileUpload = (): ReactElement => {
     } else {
       setFileName(file.name.slice(0, 12) + "..." + file.name.slice(-10));
     }
-    console.log(file);
   }, [file]);
 
   return (
