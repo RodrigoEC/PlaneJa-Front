@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
 import { FileInput } from "../FileInput";
-import { Wrapper, FileName, ClassesVersion } from "./styles";
+import { Wrapper, FileName, ClassesVersion, UploadContainer, QuestionIcon } from "./styles";
 
 export const FileUpload = (): ReactElement => {
   const { file, classesSemester } = useExtractionContext();
@@ -22,7 +22,10 @@ export const FileUpload = (): ReactElement => {
       <ClassesVersion>
         Disciplinas ofertadas: {classesSemester || "--"}
       </ClassesVersion>
-      <FileInput />
+      <UploadContainer>
+        <FileInput />
+        <QuestionIcon />
+      </UploadContainer>
       {file?.name && <FileName>{`${fileName} carregado`}</FileName>}
     </Wrapper>
   );

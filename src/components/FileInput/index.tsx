@@ -9,7 +9,7 @@ export const FileInput = (): ReactElement => {
   return (
     <Label>
       <Text>
-        <span>Enviar Histórico</span>
+        <span>Carregar Histórico</span>
         <UploadIcon />
       </Text>
       <input
