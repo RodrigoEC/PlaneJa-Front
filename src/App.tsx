@@ -12,6 +12,7 @@ import {
 import { Header } from "./components/Header";
 import { Progress } from "./components/Progress";
 import { Status } from "./components/Status";
+import { FileUpload } from "./components/FileUpload";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -39,6 +40,7 @@ function App() {
               <Progress />
               <Status />
               <Divider />
+              <FileUpload />
             </Body>
           </InnerContainer>
         </Wrapper>
