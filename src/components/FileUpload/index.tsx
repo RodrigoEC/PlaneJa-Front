@@ -1,12 +1,20 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
 import { FileInput } from "../FileInput";
 import { Wrapper, FileName, ClassesVersion } from "./styles";
 
 export const FileUpload = (): ReactElement => {
   const { file, classesSemester } = useExtractionContext();
+  const [fileName, setFileName] = useState("");
 
   useEffect(() => {
+    if (!file) return;
+
+    if (file.name.length < 35) {
+      setFileName(file.name);
+    } else {
+      setFileName(file.name.slice(0, 12) + "..." + file.name.slice(-10));
+    }
     console.log(file);
   }, [file]);
 
@@ -16,13 +24,7 @@ export const FileUpload = (): ReactElement => {
         Disciplinas ofertadas: {classesSemester || "--"}
       </ClassesVersion>
       <FileInput />
-      {file?.name && (
-        <FileName>
-          {file.name.length < 35
-            ? file.name
-            : file.name.slice(0, 15) + "..." + file.name.slice(-10)}
-        </FileName>
-      )}
+      {file?.name && <FileName>{`${fileName} carregado`}</FileName>}
     </Wrapper>
   );
 };

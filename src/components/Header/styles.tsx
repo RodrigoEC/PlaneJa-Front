@@ -13,8 +13,8 @@ export const Wrapper = styled.nav`
 `;
 
 export const Logo = styled(LogoPlaneJa)`
-  @media screen and (max-width: 600px) {
-    width: 10rem;
+  @media screen and (max-width: 700px) {
+    width: 9rem;
   }
 `
 

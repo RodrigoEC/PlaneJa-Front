@@ -24,7 +24,15 @@ export const Label = styled.label`
       fill: ${({ theme }) => theme.colors.contrast} !important;
     }
   }
-  
+
+  @media screen and (max-width: 800px) {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+
+    svg {
+      max-width: 12px;
+    }
+  }
 `;
 
 export const Text = styled.div`

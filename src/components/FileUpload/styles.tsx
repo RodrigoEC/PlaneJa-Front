@@ -8,6 +8,10 @@ export const Wrapper = styled.nav`
 
   width: 100%;
   box-sizing: border-box;
+
+  @media screen and (max-width: 800px) {
+    gap: 0.75rem;
+  }
 `;
 
 export const ClassesVersion = styled.span`
