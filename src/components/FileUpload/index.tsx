@@ -11,35 +11,43 @@ import {
 } from "./styles";
 
 export const FileUpload = (): ReactElement => {
-  const { file, classesSemester } = useExtractionContext();
+  const { file, classesSemester, loading, setLoading } = useExtractionContext();
   const [fileName, setFileName] = useState("");
-  const [disabled, setDisabled] = useState(false);
+
+  const submitData = async () => {
+    setLoading(true);
+
+    const interval = setInterval(() => {
+      setLoading(false);
+      clearInterval(interval);
+    }, 5000);
+  };
 
   useEffect(() => {
-    if (!file) {
-      setDisabled(true);
+    if (file?.name.length < 20) {
+      setFileName(file?.name);
     } else {
-      if (file.name.length < 20) {
-        setFileName(file.name);
-      } else {
-        setFileName(file.name.slice(0, 12) + "..." + file.name.slice(-10));
-      }
-
-      setDisabled(false);
+      setFileName(file?.name.slice(0, 12) + "..." + file?.name.slice(-10));
     }
   }, [file]);
 
   return (
     <Wrapper>
       <ClassesVersion>
-        Disciplinas Ofertadas: {classesSemester || "--"}
+        Turmas Ofertadas {classesSemester || "--"}
       </ClassesVersion>
       <UploadContainer>
         <QuestionIcon />
         <FileInput />
-        <Send disabled={disabled}>Enviar</Send>
+        <Send disabled={loading || !file} onClick={submitData}>
+          Enviar
+        </Send>
       </UploadContainer>
-      {file?.name && <FileName title={file?.name}>Arquivo <i>{fileName}</i> Carregado</FileName>}
+      {file?.name && (
+        <FileName title={file?.name}>
+          Arquivo <i>{fileName}</i> carregado
+        </FileName>
+      )}
     </Wrapper>
   );
 };

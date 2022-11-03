@@ -1,6 +1,8 @@
 import { createContext, ReactElement, useContext, useState } from "react";
 
 interface ExtratedContent {
+  loading: boolean;
+  setLoading: Function;
   file: any;
   setFile: Function;
   classesOffered: string;
@@ -8,13 +10,17 @@ interface ExtratedContent {
   classesSemester: string;
   setClassesSemester: Function;
 }
+
+const defaultFunction = () => {}
 const ExtractionContext = createContext<ExtratedContent>({
+  loading: false,
+  setLoading: defaultFunction,
   file: null,
-  setFile: () => {},
+  setFile: defaultFunction,
   classesOffered: '',
-  setClassesOffered: () => {},
+  setClassesOffered: defaultFunction,
   classesSemester: '',
-  setClassesSemester: () => {}
+  setClassesSemester: defaultFunction
 });
 
 
@@ -24,10 +30,13 @@ export const ExtractionProvider = ({
   children: ReactElement;
 }): ReactElement => {
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [classesOffered, setClassesOffered] = useState('');
   const [classesSemester, setClassesSemester] = useState('');
 
   const value = {
+    loading,
+    setLoading,
     file,
     setFile,
     classesOffered,

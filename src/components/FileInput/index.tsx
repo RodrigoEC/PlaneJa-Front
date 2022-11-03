@@ -4,15 +4,22 @@ import { useExtractionContext } from "../../contexts/extraction";
 import { Label, Text } from "./styles";
 
 export const FileInput = (): ReactElement => {
-  const { setFile } = useExtractionContext();
+  const { setFile, loading } = useExtractionContext();
 
   return (
-    <Label>
+    <Label className={loading ? "disabled" : ''}>
       <Text>
-        <span>Carregar Histórico</span>
-        <UploadIcon />
+        {loading ? (
+          <span>Extraindo dados...</span>
+        ) : (
+          <>
+            <span>Carregar Histórico</span>
+            <UploadIcon />
+          </>
+        )}
       </Text>
       <input
+        disabled={loading}
         hidden
         type="file"
         multiple={false}

@@ -9,20 +9,24 @@ export const Label = styled.label`
   border: 2px solid ${({ theme }) => theme.colors.primary};
   box-sizing: border-box;
   transition: 0.3s;
-  cursor: pointer;
-
+  
   svg {
     transition: 0.3s;
     fill: ${({ theme }) => theme.colors.primary};
   }
-
-  &:hover {
+  
+  &:hover:not(.disabled) {
+    cursor: pointer;
     background-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.contrast};
 
     & svg {
       fill: ${({ theme }) => theme.colors.contrast} !important;
     }
+  }
+
+  &.disabled {
+    opacity: 0.7;
   }
 
   @media screen and (max-width: 800px) {
