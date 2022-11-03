@@ -5,7 +5,7 @@ export const Wrapper = styled.nav`
   display: flex;
   flex-flow: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.8rem;
 
   width: 100%;
   box-sizing: border-box;
@@ -36,5 +36,24 @@ export const QuestionIcon = styled(Question)`
 
   &:hover {
     opacity: 0.6;
+  }
+`
+
+export const Send = styled.button`
+  font-size: 0.9rem;
+  background-color: transparent;
+  border: none;
+  color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+
+  &:hover:not(:disabled) {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 `
