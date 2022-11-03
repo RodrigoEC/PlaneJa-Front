@@ -19,7 +19,7 @@ export const FileUpload = (): ReactElement => {
     if (!file) {
       setDisabled(true);
     } else {
-      if (file.name.length < 35) {
+      if (file.name.length < 20) {
         setFileName(file.name);
       } else {
         setFileName(file.name.slice(0, 12) + "..." + file.name.slice(-10));
@@ -39,7 +39,7 @@ export const FileUpload = (): ReactElement => {
         <FileInput />
         <Send disabled={disabled}>Enviar</Send>
       </UploadContainer>
-      {file?.name && <FileName>{`${fileName} carregado`}</FileName>}
+      {file?.name && <FileName title={file?.name}>Arquivo <i>{fileName}</i> Carregado</FileName>}
     </Wrapper>
   );
 };

@@ -16,7 +16,7 @@ export const FileInput = (): ReactElement => {
         hidden
         type="file"
         multiple={false}
-        accept=".jpg, .png, .pdf"
+        accept=".pdf"
         onChange={(e: any) => setFile(e.target.files[0])}
       />
     </Label>

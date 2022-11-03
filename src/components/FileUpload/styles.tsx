@@ -21,6 +21,11 @@ export const FileName = styled.span`
   color: ${({ theme }) => theme.colors.secondary};
   font-weight: bold;
   font-size: 0.75rem;
+
+  i {
+    font-style: italic;
+    opacity: 0.9;
+  }
 `;
 
 export const UploadContainer = styled.div`
