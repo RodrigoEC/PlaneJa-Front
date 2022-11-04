@@ -13,6 +13,7 @@ import { Header } from "./components/Header";
 import { Progress } from "./components/Progress";
 import { Status } from "./components/Status";
 import { FileUpload } from "./components/FileUpload";
+import { QuestionModal } from "./components/QuestionModal";
 
 function App() {
   const [theme, setTheme] = useState(

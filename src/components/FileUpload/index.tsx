@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
 import { FileInput } from "../FileInput";
+import { QuestionModal } from "../QuestionModal";
 import {
   Wrapper,
   FileName,
@@ -13,6 +14,7 @@ import {
 export const FileUpload = (): ReactElement => {
   const { file, classesSemester, loading, setLoading } = useExtractionContext();
   const [fileName, setFileName] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   const submitData = async () => {
     setLoading(true);
@@ -32,22 +34,25 @@ export const FileUpload = (): ReactElement => {
   }, [file]);
 
   return (
-    <Wrapper>
-      <ClassesVersion>
-        Turmas Ofertadas {classesSemester || "--"}
-      </ClassesVersion>
-      <UploadContainer>
-        <QuestionIcon />
-        <FileInput />
-        <Send disabled={loading || !file} onClick={submitData}>
-          Enviar
-        </Send>
-      </UploadContainer>
-      {file?.name && (
-        <FileName title={file?.name}>
-          Arquivo <i>{fileName}</i> carregado
-        </FileName>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <ClassesVersion>
+          Turmas Ofertadas {classesSemester || "--"}
+        </ClassesVersion>
+        <UploadContainer>
+          <QuestionIcon onClick={() => setModalOpen(true)}/>
+          <FileInput />
+          <Send disabled={loading || !file} onClick={submitData}>
+            Enviar
+          </Send>
+        </UploadContainer>
+        {file?.name && (
+          <FileName title={file?.name}>
+            Arquivo <i>{fileName}</i> carregado
+          </FileName>
+        )}
+      </Wrapper>
+      {modalOpen && <QuestionModal onClose={() => setModalOpen(false)} />}
+    </>
   );
 };
