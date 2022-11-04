@@ -32,7 +32,7 @@ export const UploadContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-`
+`;
 
 export const QuestionIcon = styled(Question)`
   fill: ${({ theme }) => theme.colors.primary};
@@ -42,16 +42,17 @@ export const QuestionIcon = styled(Question)`
   &:hover {
     opacity: 0.6;
   }
-`
+`;
 
 export const Send = styled.button`
-  font-size: 0.9rem;
-  background-color: transparent;
-  border: none;
-  color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
+  border: 2px solid ${({ theme }) => theme.colors.contrast};
+  color: ${({ theme }) => theme.colors.contrast};
   cursor: pointer;
   transition: 0.3s;
   font-weight: bold;
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
 
   &:hover:not(:disabled) {
     opacity: 0.8;
@@ -61,4 +62,4 @@ export const Send = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
-`
+`;
