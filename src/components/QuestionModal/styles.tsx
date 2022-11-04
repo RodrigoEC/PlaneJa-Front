@@ -59,6 +59,11 @@ export const Title = styled.h3`
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.2rem;
+
+  @media screen and (max-width: 700px) {
+    letter-spacing: 0.1rem;
+    padding: 0.25rem 0;
+  }
 `;
 
 export const Text = styled.div``;
