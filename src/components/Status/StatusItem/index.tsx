@@ -25,7 +25,14 @@ export const StatusItem = ({
         ) : (
           current
         )}
-        /{max}
+        /{loading ? (
+          <Loading>
+            <span>-</span>
+            <span>-</span>
+          </Loading>
+        ) : (
+          max
+        )}
       </Data>
       <Atribute>créditos</Atribute>
     </Wrapper>
