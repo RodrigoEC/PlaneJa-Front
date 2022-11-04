@@ -3,34 +3,25 @@ import { StatusItem } from "./StatusItem";
 import { Wrapper } from "./styles";
 
 interface Progress {
-  mandatory: {
-    current: number;
-    max: number;
-  };
-  optional: {
-    current: number;
-    max: number;
-  };
+  mandatory: string[];
+  optional: string[];
+  complementary: string[];
 }
 
 export const Status = ({ progress }: { progress: Progress }): ReactElement => {
   return (
     <Wrapper>
-      <StatusItem title="Obrigatórias" {...progress.mandatory} />
-      <StatusItem title="Optativas" {...progress.optional} />
+      <StatusItem title="Obrigatórias" status={progress.mandatory} />
+      <StatusItem title="Optativas" status={progress.optional} />
+      <StatusItem title="Complementares" status={progress.complementary} />
     </Wrapper>
   );
 };
 
 Status.defaultProps = {
   progress: {
-    mandatory: {
-      current: 0,
-      max: 130
-    },
-    optional: {
-      current: 12,
-      max: 40,
-    }
+    mandatory: [],
+    optional: [],
+    complementary: [],
   },
 };

@@ -4,14 +4,14 @@ import { Wrapper, Title, Data, Atribute, Loading } from "./styles";
 
 export const StatusItem = ({
   title,
-  current,
-  max,
+  status,
 }: {
   title: string;
-  current: number;
-  max: number;
+  status: string[];
 }): ReactElement => {
   const { loading } = useExtractionContext();
+  const current = status[0] || "--";
+  const max = status[1] || "--";
 
   return (
     <Wrapper>
