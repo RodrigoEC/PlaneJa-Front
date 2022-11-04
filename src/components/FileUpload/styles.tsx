@@ -62,4 +62,8 @@ export const Send = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
+
+  @media screen and (max-width: 600px) {
+    padding: 0.65rem 0.8rem;
+  }
 `;
