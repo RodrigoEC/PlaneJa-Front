@@ -99,6 +99,7 @@ export const Body = styled.main`
   color: ${({ theme }) => theme.colors.primary};
 
   @media screen and (max-width: 700px) {
+    gap: 2rem;
     padding: 3rem 0rem 2rem;
   }
 `;

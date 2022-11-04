@@ -33,7 +33,7 @@ export const Title = styled.h2`
 
 export const InnerWrapper = styled("div")<{
   progress: number;
-  loading: boolean;
+  loading: number;
 }>`
   @keyframes loading {
     0% {
@@ -55,11 +55,12 @@ export const InnerWrapper = styled("div")<{
   align-items: center;
   justify-content: end;
   padding: 0 0.5rem;
-  min-width: ${({ loading }: { loading: any }) => (loading ? "1.5rem" : "1rem")};
-  width: ${({ progress }: { progress: any }) => progress}%;
+  min-width: ${({ loading }: { loading: number }) =>
+    loading ? "1.5rem" : "1rem"};
+  width: ${({ progress }: { progress: number }) => progress}%;
   transition: 0.3s;
-  ${({ loading }: { loading: any }) =>
-    loading && "animation: loading 1.5s infinite"};
+  ${({ loading }: { loading: number }) =>
+    loading ? "animation: loading 1.5s infinite" : undefined};
 
   @media screen and (max-width: 700px) {
     min-width: 0.75rem;

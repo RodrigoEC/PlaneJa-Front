@@ -15,8 +15,9 @@ export const Progress = ({ progress }: { progress: number }): ReactElement => {
     <Container>
       <Title>Cadeiras cursadas</Title>
       <Wrapper>
-        <InnerWrapper progress={progress * 100} loading={loading}>
-          <ProgressValue>{loading ? '??' : `${progress * 100}%`}</ProgressValue>
+        {/* loading ? 1 : 0 to prevent console error*/}
+        <InnerWrapper progress={progress * 100} loading={loading ? 1 : 0}>
+          <ProgressValue>{loading ? "??" : `${progress * 100}%`}</ProgressValue>
         </InnerWrapper>
       </Wrapper>
     </Container>
