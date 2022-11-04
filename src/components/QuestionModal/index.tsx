@@ -24,7 +24,7 @@ export const QuestionModal = ({ onClose }: { onClose: MouseEventHandler }): Reac
           src={academicControl}
           alt="Print do controle acadêmico com seta vermelha apontando para botão escrito 'historico' e circulo vermelho mostrando botão para baixar histórico do aluno"
         />
-        <Close onClick={onClose}>Fechar</Close>
+        <Close onClick={onClose}><strong>F</strong>echar</Close>
       </Wrapper>
     </Background>
   );

@@ -83,8 +83,7 @@ export const Close = styled.span`
   margin: 0 auto;
   cursor: pointer;
 
-  &:hover {
+  &:hover, strong {
     text-decoration: underline;
   }
-
 `

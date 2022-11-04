@@ -52,7 +52,7 @@ export const Send = styled.button`
   transition: 0.3s;
   font-weight: bold;
   border-radius: 5px;
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
 
   &:hover:not(:disabled) {
     opacity: 0.8;

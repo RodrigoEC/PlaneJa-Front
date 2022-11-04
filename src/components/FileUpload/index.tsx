@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
 import { FileInput } from "../FileInput";
 import { QuestionModal } from "../QuestionModal";
@@ -33,6 +33,17 @@ export const FileUpload = (): ReactElement => {
     }
   }, [file]);
 
+  const handleKeyPress = useCallback((event: any) => {
+    if (event.key === "Escape" || event.key.toLowerCase() === "f") {
+      setModalOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, [handleKeyPress]);
+
   return (
     <>
       <Wrapper>
@@ -40,7 +51,7 @@ export const FileUpload = (): ReactElement => {
           Turmas Ofertadas {classesSemester || "--"}
         </ClassesVersion>
         <UploadContainer>
-          <QuestionIcon onClick={() => setModalOpen(true)}/>
+          <QuestionIcon onClick={() => setModalOpen(true)} />
           <FileInput />
           <Send disabled={loading || !file} onClick={submitData}>
             Enviar
