@@ -15,7 +15,6 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
   transition: 0.3s;
 
-
   @media screen and (max-width: 700px) {
     height: 1.25rem;
   }
@@ -32,7 +31,23 @@ export const Title = styled.h2`
   }
 `;
 
-export const InnerWrapper = styled.div`
+export const InnerWrapper = styled("div")<{
+  progress: number;
+  loading: boolean;
+}>`
+  @keyframes loading {
+    0% {
+      width: 0%;
+    }
+    50% {
+      opacity: 100%;
+    }
+    100% {
+      width: 40%;
+      opacity: 0%;
+    }
+  }
+
   background-color: ${({ theme }) => theme.colors.primary};
   border-radius: inherit;
   height: inherit;
@@ -40,9 +55,11 @@ export const InnerWrapper = styled.div`
   align-items: center;
   justify-content: end;
   padding: 0 0.5rem;
-  min-width: 1rem;
-  width: ${({ progress }: { progress: number }) => progress}%;
+  min-width: ${({ loading }: { loading: any }) => (loading ? "1.5rem" : "1rem")};
+  width: ${({ progress }: { progress: any }) => progress}%;
   transition: 0.3s;
+  ${({ loading }: { loading: any }) =>
+    loading && "animation: loading 1.5s infinite"};
 
   @media screen and (max-width: 700px) {
     min-width: 0.75rem;

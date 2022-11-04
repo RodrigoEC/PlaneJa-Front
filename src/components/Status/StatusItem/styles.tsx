@@ -50,3 +50,25 @@ export const Atribute = styled.span`
     font-size: 0.7rem;
   }
 `;
+
+export const Loading = styled.span`
+  @keyframes fading {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  span {
+    animation: fading 1s infinite;
+  }
+
+  span:last-child {
+    animation-delay: 0.2s;
+  }
+`;
