@@ -14,7 +14,7 @@ export const Header = ({
     <Wrapper>
       <Logo color={theme.colors.primary} />
       <SideIcons>
-        <Github color={theme.colors.primary} />
+        <Github />
         <Switch handleSwitch={themeHandler} />
       </SideIcons>
     </Wrapper>

@@ -13,7 +13,7 @@ import { Header } from "./components/Header";
 import { Progress } from "./components/Progress";
 import { Status } from "./components/Status";
 import { FileUpload } from "./components/FileUpload";
-import { QuestionModal } from "./components/QuestionModal";
+import { Footer } from "./components/Footer";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -44,6 +44,7 @@ function App() {
               <FileUpload />
               <Divider />
             </Body>
+            <Footer></Footer>
           </InnerContainer>
         </Wrapper>
       </ThemeProvider>

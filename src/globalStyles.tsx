@@ -92,6 +92,7 @@ export const Body = styled.main`
   align-items: center;
   width: 100%;
   gap: 2.5rem;
+  flex-grow: 1;
 
   padding: 3rem 4rem 2rem;
   box-sizing: border-box;

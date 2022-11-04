@@ -16,7 +16,7 @@ export const Logo = styled(LogoPlaneJa)`
   @media screen and (max-width: 700px) {
     width: 9rem;
   }
-`
+`;
 
 export const SideIcons = styled.div`
   display: flex;
@@ -27,6 +27,7 @@ export const SideIcons = styled.div`
 
 export const Github = styled(GithubIcon)`
   cursor: pointer;
+  fill: ${({ theme }) => theme.colors.primary};
   &:hover {
     opacity: 0.7;
   }
