@@ -1,5 +1,6 @@
 import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
+import { useRestraintsContext } from "../../contexts/restraints";
 import { FileInput } from "../FileInput";
 import { QuestionModal } from "../QuestionModal";
 import {
@@ -14,6 +15,8 @@ import {
 export const FileUpload = (): ReactElement => {
   const { file, loading, extractData, setLoading, error } =
     useExtractionContext();
+
+  const { semester } = useRestraintsContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -49,7 +52,7 @@ export const FileUpload = (): ReactElement => {
   return (
     <>
       <Wrapper>
-        <ClassesVersion>Turmas Ofertadas {"2022.1" || "--"}</ClassesVersion>
+        <ClassesVersion>Turmas Ofertadas {semester || "--"}</ClassesVersion>
         <UploadContainer>
           <QuestionIcon onClick={() => setModalOpen(true)} />
           <FileInput />

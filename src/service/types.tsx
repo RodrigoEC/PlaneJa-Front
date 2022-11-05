@@ -32,3 +32,32 @@ export const defaultRecord: Record = {
   progress: '',
   classes: []
 };
+
+//
+
+export interface Semester {
+  name: string;
+  semester: string;
+  classes: Subject[];
+}
+
+export interface Subject {
+  id: number;
+  name: string;
+  class_num: number;
+  credits: number;
+  workload: number;
+  schedule: Schedule[];
+}
+
+export interface Schedule {
+  day: string;
+  init_time: string;
+  end_time: string;
+}
+
+export const defaultSemester: Semester = {
+  name: '',
+  semester: '',
+  classes: []
+}

@@ -1,22 +1,38 @@
-import { createContext, ReactElement, useContext, useState } from "react";
+import {
+  createContext,
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { getSemesterSubjects } from "../service/api";
+import { defaultSemester, Semester, Subject } from "../service/types";
 
 interface ExtratedContent {
-  numClasses: number;
-  setNumClasses: Function;
-  forcedClasses: any;
-  setForcedClasses: Function;
-  recommendedSubjects: any;
-  setRecommendedSubjects: Function;
+  restraintError: boolean,
+  setRestraintError: Function,
+  semester: string;
+  setSemester: Function;
+  numEssentialSubjects: number;
+  setNumEssentialSubjects: Function;
+  essentialSubjects: any;
+  setEssentialSubjects: Function;
+  subjects: Subject[];
+  setSubjects: Function;
 }
 
 const defaultFunction = () => {};
 const RestraintsContext = createContext<ExtratedContent>({
-  numClasses: 5,
-  setNumClasses: defaultFunction,
-  forcedClasses: [],
-  setForcedClasses: defaultFunction,
-  recommendedSubjects: [],
-  setRecommendedSubjects: defaultFunction,
+  restraintError: false,
+  setRestraintError: defaultFunction,
+  semester: '',
+  setSemester: defaultFunction,
+  numEssentialSubjects: 5,
+  setNumEssentialSubjects: defaultFunction,
+  essentialSubjects: [],
+  setEssentialSubjects: defaultFunction,
+  subjects: [],
+  setSubjects: defaultFunction,
 });
 
 export const RestraintsProvider = ({
@@ -24,17 +40,37 @@ export const RestraintsProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [numClasses, setNumClasses] = useState(5);
-  const [forcedClasses, setForcedClasses] = useState([])
-  const [recommendedSubjects, setRecommendedSubjects] = useState([])
+  const [restraintError, setRestraintError] = useState(false)
+  const [semester, setSemester] = useState("");
+  const [numEssentialSubjects, setNumEssentialSubjects] = useState(5);
+  const [essentialSubjects, setEssentialSubjects] = useState([]);
+  const [subjects, setSubjects] = useState(
+    defaultSemester.classes
+  );
+
+  useEffect(() => {
+    const getData = async () => {
+      const [data, status] = await getSemesterSubjects("Ciência da computação", "2022.1");
+      setSubjects(data.classes);
+      setSemester(data.semester);
+
+      if (status !== 201) setRestraintError(true)
+    };
+
+    getData();
+  }, []);
 
   const value = {
-    numClasses,
-    setNumClasses,
-    forcedClasses,
-    setForcedClasses,
-    recommendedSubjects,
-    setRecommendedSubjects
+    restraintError,
+    setRestraintError,
+    semester,
+    setSemester,
+    numEssentialSubjects,
+    setNumEssentialSubjects,
+    essentialSubjects,
+    setEssentialSubjects,
+    subjects,
+    setSubjects,
   };
 
   return (

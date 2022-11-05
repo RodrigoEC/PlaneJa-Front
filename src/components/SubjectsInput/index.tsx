@@ -3,15 +3,15 @@ import { useRestraintsContext } from "../../contexts/restraints";
 import { InputNumber, Text, Wrapper } from "./styles";
 
 export const SubjectInput = (): ReactElement => {
-  const { numClasses, setNumClasses } = useRestraintsContext();
+  const { numEssentialSubjects, setNumEssentialSubjects } = useRestraintsContext();
 
   return (
     <Wrapper>
       <Text>Qtd.:</Text>
       <InputNumber
         type="number"
-        defaultValue={numClasses}
-        onChange={(e) => setNumClasses(e.target.value)}
+        defaultValue={numEssentialSubjects}
+        onChange={(e) => setNumEssentialSubjects(e.target.value)}
       />
       <Text>cadeiras</Text>
     </Wrapper>
