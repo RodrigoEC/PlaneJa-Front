@@ -47,11 +47,12 @@ export const Label = styled.label`
   }
 
   @media screen and (max-width: 800px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     padding: 0.5rem 0.8rem;
 
     svg {
       max-width: 12px;
+      max-height: 1rem;
     }
   }
 `;
