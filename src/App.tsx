@@ -14,6 +14,8 @@ import { Progress } from "./components/Progress";
 import { Status } from "./components/Status";
 import { FileUpload } from "./components/FileUpload";
 import { Footer } from "./components/Footer";
+import { SelectClasses } from "./components/SelectClasses";
+import { SubjectInput } from "./components/SubjectsInput";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -43,6 +45,8 @@ function App() {
               <Divider />
               <FileUpload />
               <Divider />
+              <SelectClasses />
+              <SubjectInput />
             </Body>
             <Footer></Footer>
           </InnerContainer>

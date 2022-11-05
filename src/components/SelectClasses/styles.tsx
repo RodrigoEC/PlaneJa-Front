@@ -7,7 +7,8 @@ export const Select = styled.select`
   font-size: 0.9rem;
   font-weight: bold;
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
-  max-width: 9rem;
+  max-width: 10rem;
   height: 1.5rem;
   transition: 0.3s;
+  letter-spacing: 1px;
 `;

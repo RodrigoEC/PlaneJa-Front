@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const InputNumber = styled.input`
-  max-width: 3rem;
+  max-width: 2.5rem;
   background-color: ${({ theme }) => theme.colors.third}50;
   border-radius: 5px;
   border: none;
@@ -25,8 +25,5 @@ export const InputNumber = styled.input`
 
 export const Text = styled.span`
   font-size: 0.9rem;
-
-  @media screen and (max-width: 700px) {
-    font-size: 1rem;
-  }
+  font-weight: bold;
 `;
