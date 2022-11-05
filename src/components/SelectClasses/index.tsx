@@ -21,7 +21,7 @@ export const SelectClasses = (): ReactElement => {
       <option hidden value="volvo">
         Disciplinas fixas
       </option>
-      {subjects.map((subject: string, i: number) => (
+      {subjects?.map((subject: string, i: number) => (
         <option key={i} value={subject}>
           {subject}
         </option>
