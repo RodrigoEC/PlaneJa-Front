@@ -1,27 +1,17 @@
 import { ReactElement } from "react";
+import { useExtractionContext } from "../../contexts/extraction";
 import { StatusItem } from "./StatusItem";
 import { Wrapper } from "./styles";
 
-interface Progress {
-  mandatory: string[];
-  optional: string[];
-  complementary: string[];
-}
+export const Status = (): ReactElement => {
+  const { studentRecord } = useExtractionContext();
+  const { status } = studentRecord
 
-export const Status = ({ progress }: { progress: Progress }): ReactElement => {
   return (
     <Wrapper>
-      <StatusItem title="Obrigatórias" status={progress.mandatory} />
-      <StatusItem title="Optativas" status={progress.optional} />
-      <StatusItem title="Complementares" status={progress.complementary} />
+      <StatusItem title="Obrigatórias" status={status.mandatory} />
+      <StatusItem title="Optativas" status={status.optative} />
+      <StatusItem title="Complementares" status={status.complementary} />
     </Wrapper>
   );
-};
-
-Status.defaultProps = {
-  progress: {
-    mandatory: [],
-    optional: [],
-    complementary: [],
-  },
 };

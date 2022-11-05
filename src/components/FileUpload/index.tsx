@@ -12,17 +12,18 @@ import {
 } from "./styles";
 
 export const FileUpload = (): ReactElement => {
-  const { file, classesSemester, loading, setLoading } = useExtractionContext();
+  const { file, loading, extractData, setLoading } = useExtractionContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const submitData = async () => {
     setLoading(true);
+    await extractData(file);
 
     const interval = setInterval(() => {
       setLoading(false);
       clearInterval(interval);
-    }, 5000);
+    }, 1500);
   };
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export const FileUpload = (): ReactElement => {
     <>
       <Wrapper>
         <ClassesVersion>
-          Turmas Ofertadas {classesSemester || "--"}
+          Turmas Ofertadas {'2022.1' || "--"}
         </ClassesVersion>
         <UploadContainer>
           <QuestionIcon onClick={() => setModalOpen(true)} />

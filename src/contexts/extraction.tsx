@@ -1,28 +1,27 @@
 import { createContext, ReactElement, useContext, useState } from "react";
+import { extractRecord } from "../service/api";
+import { defaultRecord, Record } from "../service/types";
 
 interface ExtratedContent {
   loading: boolean;
   setLoading: Function;
   file: any;
   setFile: Function;
-  classesOffered: string;
-  setClassesOffered: Function;
-  classesSemester: string;
-  setClassesSemester: Function;
+  studentRecord: Record;
+  setStudentRecord: Function;
+  extractData: Function;
 }
 
-const defaultFunction = () => {}
+const defaultFunction = () => {};
 const ExtractionContext = createContext<ExtratedContent>({
   loading: false,
   setLoading: defaultFunction,
   file: null,
   setFile: defaultFunction,
-  classesOffered: '',
-  setClassesOffered: defaultFunction,
-  classesSemester: '',
-  setClassesSemester: defaultFunction
+  studentRecord: defaultRecord,
+  setStudentRecord: defaultFunction,
+  extractData: defaultFunction,
 });
-
 
 export const ExtractionProvider = ({
   children,
@@ -31,18 +30,29 @@ export const ExtractionProvider = ({
 }): ReactElement => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [classesOffered, setClassesOffered] = useState('');
-  const [classesSemester, setClassesSemester] = useState('');
+  const [studentRecord, setStudentRecord] = useState(
+    JSON.parse(
+      localStorage.getItem("@planeja/record") || JSON.stringify(defaultRecord)
+    )
+  );
+
+  const extractData = async (file: any) => {
+    const form = new FormData();
+    form.append("file", file);
+
+    const response = await extractRecord(form);
+    setStudentRecord(response);
+    localStorage.setItem("@planeja/record", JSON.stringify(response));
+   };
 
   const value = {
     loading,
     setLoading,
     file,
     setFile,
-    classesOffered,
-    setClassesOffered,
-    classesSemester,
-    setClassesSemester
+    studentRecord,
+    setStudentRecord,
+    extractData,
   };
 
   return (
@@ -53,5 +63,5 @@ export const ExtractionProvider = ({
 };
 
 export const useExtractionContext = () => {
-  return { ...useContext(ExtractionContext)};
+  return { ...useContext(ExtractionContext) };
 };
