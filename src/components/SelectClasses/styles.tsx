@@ -9,4 +9,5 @@ export const Select = styled.select`
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   max-width: 9rem;
   height: 1.5rem;
+  transition: 0.3s;
 `;

@@ -7,10 +7,8 @@ export const SelectClasses = (): ReactElement => {
 
   const addClass = (e: any) => {
     const newClass = e.target.value;
-    console.log(newClass);
 
     setEssentialSubjects((previous: string[]) => {
-      console.log(previous)
       if (previous.includes(newClass)) {
         return previous;
       }
@@ -23,8 +21,10 @@ export const SelectClasses = (): ReactElement => {
       <option hidden value="volvo">
         Disciplinas fixas
       </option>
-      {subjects.map((subject, i) => (
-        <option key={i} value={subject.name}>{subject.name}</option>
+      {subjects.map((subject: string, i: number) => (
+        <option key={i} value={subject}>
+          {subject}
+        </option>
       ))}
     </Select>
   );

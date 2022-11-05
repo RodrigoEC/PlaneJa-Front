@@ -6,18 +6,17 @@ import {
   useState,
 } from "react";
 import { getSemesterSubjects } from "../service/api";
-import { defaultSemester, Semester, Subject } from "../service/types";
 
 interface ExtratedContent {
-  restraintError: boolean,
-  setRestraintError: Function,
+  restraintError: boolean;
+  setRestraintError: Function;
   semester: string;
   setSemester: Function;
   numEssentialSubjects: number;
   setNumEssentialSubjects: Function;
   essentialSubjects: any;
   setEssentialSubjects: Function;
-  subjects: Subject[];
+  subjects: string[];
   setSubjects: Function;
 }
 
@@ -25,7 +24,7 @@ const defaultFunction = () => {};
 const RestraintsContext = createContext<ExtratedContent>({
   restraintError: false,
   setRestraintError: defaultFunction,
-  semester: '',
+  semester: "",
   setSemester: defaultFunction,
   numEssentialSubjects: 5,
   setNumEssentialSubjects: defaultFunction,
@@ -40,21 +39,19 @@ export const RestraintsProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [restraintError, setRestraintError] = useState(false)
+  const [restraintError, setRestraintError] = useState(false);
   const [semester, setSemester] = useState("");
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(5);
   const [essentialSubjects, setEssentialSubjects] = useState([]);
-  const [subjects, setSubjects] = useState(
-    defaultSemester.classes
-  );
+  const [subjects, setSubjects] = useState([] as string[]);
 
   useEffect(() => {
     const getData = async () => {
-      const [data, status] = await getSemesterSubjects("Ciência da computação", "2022.1");
+      const [data, status] = await getSemesterSubjects("Ciência da computação");
       setSubjects(data.classes);
       setSemester(data.semester);
 
-      if (status !== 201) setRestraintError(true)
+      if (status !== 201) setRestraintError(true);
     };
 
     getData();

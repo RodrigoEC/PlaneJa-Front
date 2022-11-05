@@ -61,3 +61,9 @@ export const defaultSemester: Semester = {
   semester: '',
   classes: []
 }
+
+
+export interface UniqueSubjects {
+  semester: string;
+  classes: string[];
+}

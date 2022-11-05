@@ -1,5 +1,10 @@
 import axios from "axios";
-import { defaultRecord, defaultSemester, Record, Semester } from "./types";
+import {
+  defaultRecord,
+  defaultSemester,
+  Record,
+  UniqueSubjects,
+} from "./types";
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -22,18 +27,15 @@ export const extractRecord = async (
 };
 
 export const getSemesterSubjects = async (
-  course: string,
-  semester?: string
-): Promise<[Semester, number]> => {
+  course: string
+): Promise<[UniqueSubjects, number]> => {
   try {
-    const response = await api.get("classes-offered", {
-      params: { name: course, semester},
+    const response = await api.get("unique-subjects", {
+      params: { name: course },
     });
-
-    console.log(response)
 
     return [response.data || defaultSemester, response.status];
   } catch (e: any) {
-    return [defaultSemester, e.response.status];
+    return [{ semester: "--", classes: [] }, e.response.status];
   }
 };
