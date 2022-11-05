@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 
 export const Label = styled.label`
   display: flex;
@@ -6,22 +6,39 @@ export const Label = styled.label`
 
   padding: 0.75rem 1rem;
   border-radius: 5px;
-  border: 2px solid ${({ theme }) => theme.colors.primary};
+  border: 2px solid
+    ${({ theme, error }: { theme: DefaultTheme; error: boolean }) =>
+      error ? theme.colors.alert : theme.colors.primary};
   box-sizing: border-box;
   transition: 0.3s;
-  
+  color: ${({ theme, error }: { theme: DefaultTheme; error: boolean }) =>
+    error ? theme.colors.alert : theme.colors.primary};
+  font-weight: bold;
+
   svg {
     transition: 0.3s;
-    fill: ${({ theme }) => theme.colors.primary};
+    fill: ${({ theme, error }: { theme: DefaultTheme; error: boolean }) =>
+      error ? theme.colors.alert : theme.colors.primary};
   }
-  
+
   &:hover:not(.disabled) {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.contrast};
+    background-color: ${({
+      theme,
+      error,
+    }: {
+      theme: DefaultTheme;
+      error: boolean;
+    }) => (error ? theme.colors.alert : theme.colors.primary)};
 
     & svg {
-      fill: ${({ theme }) => theme.colors.contrast} !important;
+      fill: ${({ theme, error }: { theme: DefaultTheme; error: boolean }) =>
+        error ? "#fff" : theme.colors.contrast};
+    }
+
+    & span {
+      color: ${({ theme, error }: { theme: DefaultTheme; error: boolean }) =>
+        error ? "#fff" : theme.colors.contrast};
     }
   }
 
@@ -44,4 +61,4 @@ export const Text = styled.div`
   align-items: center;
   gap: 0.75rem;
   font-style: italic;
-`
+`;

@@ -10,6 +10,8 @@ interface ExtratedContent {
   studentRecord: Record;
   setStudentRecord: Function;
   extractData: Function;
+  error: boolean;
+  setError: Function;
 }
 
 const defaultFunction = () => {};
@@ -21,6 +23,8 @@ const ExtractionContext = createContext<ExtratedContent>({
   studentRecord: defaultRecord,
   setStudentRecord: defaultFunction,
   extractData: defaultFunction,
+  error: false,
+  setError: defaultFunction,
 });
 
 export const ExtractionProvider = ({
@@ -30,6 +34,7 @@ export const ExtractionProvider = ({
 }): ReactElement => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [studentRecord, setStudentRecord] = useState(
     JSON.parse(
       localStorage.getItem("@planeja/record") || JSON.stringify(defaultRecord)
@@ -40,10 +45,13 @@ export const ExtractionProvider = ({
     const form = new FormData();
     form.append("file", file);
 
-    const response = await extractRecord(form);
+    const [response, statusCode] = await extractRecord(form);
+    if (statusCode !== 201) setError(true);
+    else setError(false);
+    
     setStudentRecord(response);
     localStorage.setItem("@planeja/record", JSON.stringify(response));
-   };
+  };
 
   const value = {
     loading,
@@ -53,6 +61,8 @@ export const ExtractionProvider = ({
     studentRecord,
     setStudentRecord,
     extractData,
+    error,
+    setError,
   };
 
   return (

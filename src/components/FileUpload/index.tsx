@@ -4,7 +4,7 @@ import { FileInput } from "../FileInput";
 import { QuestionModal } from "../QuestionModal";
 import {
   Wrapper,
-  FileName,
+  Message,
   ClassesVersion,
   UploadContainer,
   QuestionIcon,
@@ -12,7 +12,8 @@ import {
 } from "./styles";
 
 export const FileUpload = (): ReactElement => {
-  const { file, loading, extractData, setLoading } = useExtractionContext();
+  const { file, loading, extractData, setLoading, error } =
+    useExtractionContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -48,20 +49,24 @@ export const FileUpload = (): ReactElement => {
   return (
     <>
       <Wrapper>
-        <ClassesVersion>
-          Turmas Ofertadas {'2022.1' || "--"}
-        </ClassesVersion>
+        <ClassesVersion>Turmas Ofertadas {"2022.1" || "--"}</ClassesVersion>
         <UploadContainer>
           <QuestionIcon onClick={() => setModalOpen(true)} />
           <FileInput />
-          <Send disabled={loading || !file} onClick={submitData}>
+          <Send disabled={loading || !file || error} onClick={submitData}>
             Enviar
           </Send>
         </UploadContainer>
         {file?.name && (
-          <FileName title={file?.name}>
-            Arquivo <i>{fileName}</i> carregado
-          </FileName>
+          <Message error={error} title={`Arquivo: ${file?.name}`}>
+            {error ? (
+              <>Não foi possível extrair dados do arquivo submetido</>
+            ) : (
+              <>
+                Arquivo <i>{fileName}</i> carregado
+              </>
+            )}
+          </Message>
         )}
       </Wrapper>
       {modalOpen && <QuestionModal onClose={() => setModalOpen(false)} />}

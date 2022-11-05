@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 });
 
-export const extractRecord = async (formData: FormData): Promise<Record> => {
+export const extractRecord = async (formData: FormData): Promise<[Record, number]> => {
   try {
     const response = await api.post("/records", formData, {
       headers: {
@@ -13,9 +13,8 @@ export const extractRecord = async (formData: FormData): Promise<Record> => {
       },
     });
 
-    return response.data;
-  } catch (e) {
-    console.log(e)
-    return defaultRecord;
+    return [response.data, response.status];
+  } catch (e: any) {
+    return [defaultRecord, e.response.status];
   }
 };

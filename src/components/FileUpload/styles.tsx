@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 import { QuestionIcon as Question } from "../../assets/icons/Question";
 
 export const Wrapper = styled.nav`
@@ -17,8 +17,9 @@ export const ClassesVersion = styled.span`
   font-size: 0.85rem;
 `;
 
-export const FileName = styled.span`
-  color: ${({ theme }) => theme.colors.secondary};
+export const Message = styled.span`
+  color: ${({ theme, error }: { theme: DefaultTheme; error: boolean }) =>
+    error ? theme.colors.alert : theme.colors.secondary};
   font-weight: bold;
   font-size: 0.75rem;
 
@@ -63,7 +64,7 @@ export const Send = styled.button`
     opacity: 0.5;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     padding: 0.65rem 0.8rem;
   }
 `;

@@ -4,10 +4,18 @@ import { useExtractionContext } from "../../contexts/extraction";
 import { Label, Text } from "./styles";
 
 export const FileInput = (): ReactElement => {
-  const { setFile, loading } = useExtractionContext();
+  const { setFile, loading, error, setError } = useExtractionContext();
+
+  const onUpload = (e: any) => {
+    setFile(e.target.files[0]);
+
+    if (error) {
+      setError(false);
+    }
+  };
 
   return (
-    <Label className={loading ? "disabled" : ''}>
+    <Label error={error} className={loading ? "disabled" : ""}>
       <Text>
         {loading ? (
           <span>Extraindo dados...</span>
@@ -24,7 +32,7 @@ export const FileInput = (): ReactElement => {
         type="file"
         multiple={false}
         accept=".pdf"
-        onChange={(e: any) => setFile(e.target.files[0])}
+        onChange={onUpload}
       />
     </Label>
   );

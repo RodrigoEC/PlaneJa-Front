@@ -7,6 +7,7 @@ export const light: DefaultTheme = {
 		secondary: "#929da5",
 		third: "#C2CFD7",
 		contrast: "#FFFFFF",
+		alert: '#FF8787',
 	}
 };
 
@@ -17,5 +18,6 @@ export const dark: DefaultTheme = {
 		secondary: "#FFFFFF",
 		third: "#C2CFD7",
 		contrast: "#546D7D",
+		alert: '#FFAEAE',
 	}
 };
