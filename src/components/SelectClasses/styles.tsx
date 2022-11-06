@@ -8,7 +8,26 @@ export const Select = styled.select`
   font-weight: bold;
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   max-width: 10rem;
-  height: 1.5rem;
   transition: 0.3s;
   letter-spacing: 1px;
+  padding-bottom: 4px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.primary}80;
+    opacity: 0.6;
+    border-radius: 8px;
+  }
+
+  @media screen and (max-width: 700px) {
+    max-width: 9rem;
+    font-size: 0.8rem;
+  }
 `;

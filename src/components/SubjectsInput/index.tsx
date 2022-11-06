@@ -9,6 +9,8 @@ export const SubjectInput = (): ReactElement => {
     <Wrapper>
       <Text>Qtd.:</Text>
       <InputNumber
+        min="4"
+        max="7"
         type="number"
         defaultValue={numEssentialSubjects}
         onChange={(e) => setNumEssentialSubjects(e.target.value)}

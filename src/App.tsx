@@ -16,6 +16,7 @@ import { FileUpload } from "./components/FileUpload";
 import { Footer } from "./components/Footer";
 import { SelectClasses } from "./components/SelectClasses";
 import { SubjectInput } from "./components/SubjectsInput";
+import { Settings } from "./components/Settings";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -45,8 +46,7 @@ function App() {
               <Divider />
               <FileUpload />
               <Divider />
-              <SelectClasses />
-              <SubjectInput />
+              <Settings />
             </Body>
             <Footer></Footer>
           </InnerContainer>

@@ -16,6 +16,7 @@ declare module "styled-components" {
 }
 
 export const GlobalStyle = createGlobalStyle`
+
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -29,14 +30,17 @@ export const GlobalStyle = createGlobalStyle`
   figure, figcaption, footer, header, hgroup, 
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
-      margin: 0;
-      padding: 0;
-      border: 0;
-      font-size: 100%;
-      font: inherit;
-      vertical-align: baseline;
-      font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: 'Roboto Mono', monospace;
   }
+
+  
+
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, 
   footer, header, hgroup, menu, nav, section {
@@ -71,6 +75,8 @@ export const Wrapper = styled.div`
 
   transition: 0.3s;
   background-color: ${({ theme }) => theme.colors.contrast};
+
+  
 `;
 
 export const InnerContainer = styled.div`

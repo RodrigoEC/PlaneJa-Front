@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   padding-bottom: 3px;
   gap: 0.5rem;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 export const InputNumber = styled.input`
@@ -26,4 +26,10 @@ export const InputNumber = styled.input`
 export const Text = styled.span`
   font-size: 0.9rem;
   font-weight: bold;
+  padding-bottom: 4px;
+
+  @media screen and (max-width: 700px) {
+    max-width: 9rem;
+    font-size: 0.8rem;
+  }
 `;
