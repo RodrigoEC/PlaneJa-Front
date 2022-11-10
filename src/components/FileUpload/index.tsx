@@ -18,16 +18,16 @@ export const FileUpload = (): ReactElement => {
   const { file, loading, extractData, setLoading, error } =
     useExtractionContext();
 
-  const { semester, subjects, setSubjects } = useRestraintsContext();
+  const { semester, subjects, setStudentSubjects } = useRestraintsContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const submitData = async () => {
     setLoading(true);
     const record: Record = await extractData(file);
-    const subjectObj = subjects.reduce((acc: any, cur: string) => {
-      acc[cur] = 0;
-      return acc;
+    const subjectObj = subjects.reduce((object: any, subject: string) => {
+      object[subject] = 0;
+      return object;
     }, {});
 
     record?.classes.forEach(
@@ -40,7 +40,7 @@ export const FileUpload = (): ReactElement => {
         filteredSubjects = [...filteredSubjects, subject];
     });
 
-    setSubjects(filteredSubjects);
+    setStudentSubjects(filteredSubjects);
     setLoading(false);
   };
 

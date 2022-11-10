@@ -5,7 +5,7 @@ import { useRestraintsContext } from "../../contexts/restraints";
 import { AddButton, Input, List, Wrapper } from "./styles";
 
 export const SelectClasses = (): ReactElement => {
-  const { setEssentialSubjects, subjects } =
+  const { setEssentialSubjects, subjects, studentSubjects } =
     useRestraintsContext();
   const { studentRecord } = useExtractionContext();
   const [currentInput, setCurrentInput] = useState("");
@@ -32,7 +32,7 @@ export const SelectClasses = (): ReactElement => {
         list="subjects"
       />
       <List id="subjects">
-        {subjects?.map((subject: string, i: number) => (
+        {studentSubjects?.map((subject: string, i: number) => (
           <option key={i} value={subject}>
             {subject}
           </option>

@@ -18,6 +18,8 @@ interface ExtratedContent {
   setEssentialSubjects: Function;
   subjects: string[];
   setSubjects: Function;
+  studentSubjects: string[];
+  setStudentSubjects: Function;
 }
 
 const defaultFunction = () => {};
@@ -32,6 +34,8 @@ const RestraintsContext = createContext<ExtratedContent>({
   setEssentialSubjects: defaultFunction,
   subjects: [],
   setSubjects: defaultFunction,
+  studentSubjects: [],
+  setStudentSubjects: defaultFunction,
 });
 
 export const RestraintsProvider = ({
@@ -44,6 +48,7 @@ export const RestraintsProvider = ({
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(5);
   const [essentialSubjects, setEssentialSubjects] = useState([]);
   const [subjects, setSubjects] = useState([] as string[]);
+  const [studentSubjects, setStudentSubjects] = useState([] as string[]);
 
   useEffect(() => {
     const getData = async () => {
@@ -68,6 +73,8 @@ export const RestraintsProvider = ({
     setEssentialSubjects,
     subjects,
     setSubjects,
+    studentSubjects,
+    setStudentSubjects,
   };
 
   return (
