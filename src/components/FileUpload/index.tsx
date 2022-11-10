@@ -29,6 +29,7 @@ export const FileUpload = (): ReactElement => {
       object[subject] = 0;
       return object;
     }, {});
+    
 
     record?.classes.forEach(
       (subject) => (subjectObj[capitalize(subject.name)] = 1)
@@ -40,6 +41,7 @@ export const FileUpload = (): ReactElement => {
         filteredSubjects = [...filteredSubjects, subject];
     });
 
+    localStorage.setItem("@planeja/student_subjects", JSON.stringify(filteredSubjects));
     setStudentSubjects(filteredSubjects);
     setLoading(false);
   };

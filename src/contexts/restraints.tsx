@@ -48,7 +48,11 @@ export const RestraintsProvider = ({
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(5);
   const [essentialSubjects, setEssentialSubjects] = useState([]);
   const [subjects, setSubjects] = useState([] as string[]);
-  const [studentSubjects, setStudentSubjects] = useState([] as string[]);
+  const [studentSubjects, setStudentSubjects] = useState(
+    JSON.parse(
+      localStorage.getItem("@planeja/student_subjects") || JSON.stringify([])
+    )
+  );
 
   useEffect(() => {
     const getData = async () => {
