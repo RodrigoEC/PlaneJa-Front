@@ -22,6 +22,7 @@ export const Message = styled.span`
     error ? theme.colors.alert : theme.colors.secondary};
   font-weight: bold;
   font-size: 0.75rem;
+  text-align: center;
 
   i {
     font-style: italic;

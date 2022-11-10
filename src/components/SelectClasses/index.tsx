@@ -1,31 +1,49 @@
-import { ReactElement } from "react";
+import { ReactElement, SyntheticEvent, useState } from "react";
+import { Add } from "../../assets/icons/Add";
+import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { Select } from "./styles";
+import { AddButton, Input, List, Wrapper } from "./styles";
 
 export const SelectClasses = (): ReactElement => {
-  const { setEssentialSubjects, subjects } = useRestraintsContext();
+  const { setEssentialSubjects, subjects } =
+    useRestraintsContext();
+  const { studentRecord } = useExtractionContext();
+  const [currentInput, setCurrentInput] = useState("");
 
-  const addClass = (e: any) => {
-    const newClass = e.target.value;
+  const addClass = (event: SyntheticEvent) => {
+    event.preventDefault();
 
-    setEssentialSubjects((previous: string[]) => {
-      if (previous.includes(newClass)) {
-        return previous;
-      }
-      return [...previous, e.target.value];
-    });
+    if (subjects.includes(currentInput)) {
+      setEssentialSubjects((previous: string[]) => {
+        if (previous.includes(currentInput)) {
+          return previous;
+        }
+        return [...previous, currentInput];
+      });
+    }
   };
 
   return (
-    <Select value="volvo" name="cars" id="cars" onChange={addClass}>
-      <option hidden value="volvo">
-        Disciplinas fixas
-      </option>
-      {subjects?.map((subject: string, i: number) => (
-        <option key={i} value={subject}>
-          {subject}
-        </option>
-      ))}
-    </Select>
+    <Wrapper>
+      <Input
+        disabled={subjects.length === 0 || studentRecord?.classes.length === 0}
+        placeholder="Disciplinas fixas"
+        onChange={(event) => setCurrentInput(event.target.value)}
+        list="subjects"
+      />
+      <List id="subjects">
+        {subjects?.map((subject: string, i: number) => (
+          <option key={i} value={subject}>
+            {subject}
+          </option>
+        ))}
+      </List>
+      <AddButton
+        onClick={addClass}
+        disabled={subjects.length === 0 || studentRecord?.classes.length === 0}
+      >
+        <Add />
+      </AddButton>
+    </Wrapper>
   );
 };

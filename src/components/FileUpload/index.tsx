@@ -1,6 +1,8 @@
 import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
+import { Record } from "../../service/types";
+import { capitalize } from "../../util/util";
 import { FileInput } from "../FileInput";
 import { QuestionModal } from "../QuestionModal";
 import {
@@ -16,18 +18,30 @@ export const FileUpload = (): ReactElement => {
   const { file, loading, extractData, setLoading, error } =
     useExtractionContext();
 
-  const { semester } = useRestraintsContext();
+  const { semester, subjects, setSubjects } = useRestraintsContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const submitData = async () => {
     setLoading(true);
-    await extractData(file);
+    const record: Record = await extractData(file);
+    const subjectObj = subjects.reduce((acc: any, cur: string) => {
+      acc[cur] = 0;
+      return acc;
+    }, {});
 
-    const interval = setInterval(() => {
-      setLoading(false);
-      clearInterval(interval);
-    }, 1500);
+    record?.classes.forEach(
+      (subject) => (subjectObj[capitalize(subject.name)] = 1)
+    );
+
+    let filteredSubjects: string[] = [];
+    Object.keys(subjectObj).forEach((subject: string) => {
+      if (subjectObj[subject] !== 1)
+        filteredSubjects = [...filteredSubjects, subject];
+    });
+
+    setSubjects(filteredSubjects);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -38,8 +52,9 @@ export const FileUpload = (): ReactElement => {
     }
   }, [file]);
 
-  const handleKeyPress = useCallback((event: any) => {
-    if (event.key === "Escape" || event.key.toLowerCase() === "f") {
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    const keys = ["Escape", "f"];
+    if (keys.includes(event.key)) {
       setModalOpen(false);
     }
   }, []);

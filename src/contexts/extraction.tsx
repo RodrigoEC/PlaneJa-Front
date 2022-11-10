@@ -41,16 +41,17 @@ export const ExtractionProvider = ({
     )
   );
 
-  const extractData = async (file: any) => {
+  const extractData = async (file: File) => {
     const form = new FormData();
     form.append("file", file);
 
     const [response, statusCode] = await extractRecord(form);
     if (statusCode !== 201) setError(true);
     else setError(false);
-    
+
     setStudentRecord(response);
     localStorage.setItem("@planeja/record", JSON.stringify(response));
+    return response;
   };
 
   const value = {

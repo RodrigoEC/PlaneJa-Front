@@ -48,7 +48,6 @@ export const RestraintsProvider = ({
   useEffect(() => {
     const getData = async () => {
       const [data, status] = await getSemesterSubjects("Ciência da computação");
-      console.log(data)
       setSubjects(data.classes);
       setSemester(data.semester);
 
