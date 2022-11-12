@@ -12,6 +12,7 @@ export const SelectClasses = (): ReactElement => {
 
   const addClass = (event: SyntheticEvent) => {
     event.preventDefault();
+    setCurrentInput("");
 
     if (subjects.includes(currentInput)) {
       setEssentialSubjects((previous: string[]) => {
@@ -28,6 +29,8 @@ export const SelectClasses = (): ReactElement => {
       <Input
         disabled={subjects.length === 0 || studentRecord?.classes.length === 0}
         placeholder="Disciplinas fixas"
+        onFocus={(e) => (e.target.value = "")}
+        value={currentInput}
         onChange={(event) => setCurrentInput(event.target.value)}
         list="subjects"
       />

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
+  gap: 0.5rem;
+
 `;
 
 export const Input = styled.input`
@@ -52,6 +54,7 @@ export const AddButton = styled.button`
   border: none;
   cursor: pointer;
   transition: 0.3s;
+  padding: 0;
   
   &[disabled] {
     cursor: not-allowed;

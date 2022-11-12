@@ -5,6 +5,7 @@ export const Wrapper = styled.form`
   width: 100%;
   gap: 0.5rem;
   align-items: flex-end;
+  justify-content: center;
 
   @media screen and (max-width: 700px) {
     flex-flow: column-reverse;
