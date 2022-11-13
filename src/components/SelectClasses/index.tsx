@@ -1,14 +1,20 @@
-import { ReactElement, SyntheticEvent, useState } from "react";
+import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { Add } from "../../assets/icons/Add";
 import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { AddButton, Input, List, Wrapper } from "./styles";
 
 export const SelectClasses = (): ReactElement => {
-  const { setEssentialSubjects, subjects, studentSubjects } =
-    useRestraintsContext();
+  const {
+    numEssentialSubjects,
+    essentialSubjects,
+    setEssentialSubjects,
+    subjects,
+    studentSubjects,
+  } = useRestraintsContext();
   const { studentRecord } = useExtractionContext();
   const [currentInput, setCurrentInput] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const addClass = (event: SyntheticEvent) => {
     event.preventDefault();
@@ -24,10 +30,23 @@ export const SelectClasses = (): ReactElement => {
     }
   };
 
+  useEffect(() => {
+    setIsDisabled(
+      subjects.length === 0 ||
+        studentRecord?.classes.length === 0 ||
+        essentialSubjects.length === numEssentialSubjects
+    );
+  }, [
+    essentialSubjects.length,
+    numEssentialSubjects,
+    studentRecord?.classes.length,
+    subjects.length,
+  ]);
+
   return (
     <Wrapper>
       <Input
-        disabled={subjects.length === 0 || studentRecord?.classes.length === 0}
+        disabled={isDisabled}
         placeholder="Disciplinas fixas"
         onFocus={(e) => (e.target.value = "")}
         value={currentInput}
@@ -35,16 +54,13 @@ export const SelectClasses = (): ReactElement => {
         list="subjects"
       />
       <List id="subjects">
-        {studentSubjects?.map((subject: string, i: number) => (
-          <option key={i} value={subject}>
+        {studentSubjects?.map((subject: string, index: number) => (
+          <option key={index} value={subject}>
             {subject}
           </option>
         ))}
       </List>
-      <AddButton
-        onClick={addClass}
-        disabled={subjects.length === 0 || studentRecord?.classes.length === 0}
-      >
+      <AddButton onClick={addClass} disabled={isDisabled}>
         <Add />
       </AddButton>
     </Wrapper>

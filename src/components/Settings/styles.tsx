@@ -24,6 +24,11 @@ export const Divider = styled.div`
   border-left: 1px solid ${({ theme }) => theme.colors.primary}50;
 `;
 
+
+export const Submit = styled.input`
+  justify-self: flex-end;
+`;
+
 export const EssentialContainer = styled.div`
   flex-grow: 1;
   overflow-x: scroll;
@@ -31,14 +36,9 @@ export const EssentialContainer = styled.div`
   ::-webkit-scrollbar {
     height: 4px;
     width: 4px;
-    /* background-color: ${({ theme }) => theme.colors.primary}50; */
   }
 
   ::-webkit-scrollbar-track {
     background: transparent;
   }
-`;
-
-export const Submit = styled.input`
-  justify-self: flex-end;
 `;
