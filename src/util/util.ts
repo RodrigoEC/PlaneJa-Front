@@ -6,3 +6,7 @@ export const capitalize = (string: string): string => {
 
   return wordsCapitalized.join(" ");
 };
+
+export const getLocalStorage = (key: string, defaultValue: any) => {
+  return JSON.parse(localStorage.getItem(key) || JSON.stringify(defaultValue));
+};

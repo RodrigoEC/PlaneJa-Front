@@ -1,6 +1,7 @@
 import { createContext, ReactElement, useContext, useState } from "react";
 import { extractRecord } from "../service/api";
 import { defaultRecord, Record } from "../service/types";
+import { getLocalStorage } from "../util/util";
 
 interface ExtratedContent {
   loading: boolean;
@@ -36,9 +37,7 @@ export const ExtractionProvider = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [studentRecord, setStudentRecord] = useState(
-    JSON.parse(
-      localStorage.getItem("@planeja/record") || JSON.stringify(defaultRecord)
-    )
+    getLocalStorage("planeja@record", defaultRecord)
   );
 
   const extractData = async (file: File) => {
@@ -51,7 +50,7 @@ export const ExtractionProvider = ({
     else setError(false);
 
     setStudentRecord(response);
-    localStorage.setItem("@planeja/record", JSON.stringify(response));
+    localStorage.setItem("planeja@record", JSON.stringify(response));
     setLoading(false);
     return response;
   };

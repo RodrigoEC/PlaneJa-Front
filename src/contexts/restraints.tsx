@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { getSemesterSubjects } from "../service/api";
+import { getLocalStorage } from "../util/util";
 
 interface ExtratedContent {
   restraintError: boolean;
@@ -45,23 +46,19 @@ export const RestraintsProvider = ({
 }): ReactElement => {
   const [restraintError, setRestraintError] = useState(false);
   const [semester, setSemester] = useState(
-    JSON.parse(localStorage.getItem("planeja@semester") || JSON.stringify(""))
+    getLocalStorage("planeja@semester", "")
   );
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(
     Number(localStorage.getItem("planeja@num_subjects")) || 5
   );
   const [essentialSubjects, setEssentialSubjects] = useState(
-    JSON.parse(
-      localStorage.getItem("planeja@essential_subjects") || JSON.stringify([])
-    )
+    getLocalStorage("planeja@essential_subjects", [])
   );
   const [subjects, setSubjects] = useState(
-    JSON.parse(localStorage.getItem("planeja@subjects") || JSON.stringify([]))
+    getLocalStorage("planeja@subjects", [])
   );
   const [studentSubjects, setStudentSubjects] = useState(
-    JSON.parse(
-      localStorage.getItem("planeja@student_subjects") || JSON.stringify([])
-    )
+    getLocalStorage("planeja@student_subjects", [])
   );
 
   useEffect(() => {
