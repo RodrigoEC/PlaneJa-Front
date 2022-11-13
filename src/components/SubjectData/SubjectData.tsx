@@ -1,6 +1,12 @@
 import { ReactElement } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
-import { Wrapper, Title, Data, Atribute, Loading } from "./SubjectData.style";
+import {
+  Wrapper,
+  Title,
+  Data,
+  Atribute,
+  LoadingContainer,
+} from "./SubjectData.style";
 
 export const SubjectData = ({
   title,
@@ -17,22 +23,7 @@ export const SubjectData = ({
     <Wrapper>
       <Title>{title}</Title>
       <Data>
-        {loading ? (
-          <Loading>
-            <span>-</span>
-            <span>-</span>
-          </Loading>
-        ) : (
-          current
-        )}
-        /{loading ? (
-          <Loading>
-            <span>-</span>
-            <span>-</span>
-          </Loading>
-        ) : (
-          max
-        )}
+        {loading ? <Loading /> : current}/{loading ? <Loading /> : max}
       </Data>
       <Atribute>créditos</Atribute>
     </Wrapper>
@@ -42,4 +33,13 @@ export const SubjectData = ({
 SubjectData.defaultProps = {
   current: 0,
   max: "--",
+};
+
+const Loading = () => {
+  return (
+    <LoadingContainer>
+      <span>-</span>
+      <span>-</span>
+    </LoadingContainer>
+  );
 };

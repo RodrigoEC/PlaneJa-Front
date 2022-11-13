@@ -1,5 +1,4 @@
 import { MouseEventHandler, ReactElement } from "react";
-import { useTheme } from "styled-components";
 import { Switch } from "../Switch/Switch";
 import { Wrapper, Github, SideIcons, Logo } from "./Header.style";
 
@@ -8,11 +7,10 @@ export const Header = ({
 }: {
   themeHandler: MouseEventHandler;
 }): ReactElement => {
-  const theme = useTheme();
 
   return (
     <Wrapper>
-      <Logo color={theme.colors.primary} />
+      <Logo />
       <SideIcons>
         <Github />
         <Switch handleSwitch={themeHandler} />

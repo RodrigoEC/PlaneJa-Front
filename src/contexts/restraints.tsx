@@ -44,14 +44,20 @@ export const RestraintsProvider = ({
   children: ReactElement;
 }): ReactElement => {
   const [restraintError, setRestraintError] = useState(false);
-  const [semester, setSemester] = useState("");
-  const [numEssentialSubjects, setNumEssentialSubjects] = useState(5);
+  const [semester, setSemester] = useState(
+    JSON.parse(localStorage.getItem("planeja@semester") || JSON.stringify(""))
+  );
+  const [numEssentialSubjects, setNumEssentialSubjects] = useState(
+    Number(localStorage.getItem("planeja@num_subjects")) || 5
+  );
   const [essentialSubjects, setEssentialSubjects] = useState(
     JSON.parse(
       localStorage.getItem("planeja@essential_subjects") || JSON.stringify([])
     )
   );
-  const [subjects, setSubjects] = useState([] as string[]);
+  const [subjects, setSubjects] = useState(
+    JSON.parse(localStorage.getItem("planeja@subjects") || JSON.stringify([]))
+  );
   const [studentSubjects, setStudentSubjects] = useState(
     JSON.parse(
       localStorage.getItem("planeja@student_subjects") || JSON.stringify([])
@@ -61,7 +67,9 @@ export const RestraintsProvider = ({
   useEffect(() => {
     const getData = async () => {
       const [data, status] = await getSemesterSubjects("Ciência da computação");
+      localStorage.setItem("planeja@subjects", JSON.stringify(data.classes));
       setSubjects(data.classes);
+      localStorage.setItem("planeja@semester", data.semester);
       setSemester(data.semester);
 
       if (status !== 201) setRestraintError(true);
@@ -71,8 +79,11 @@ export const RestraintsProvider = ({
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("planeja@essential_subjects", JSON.stringify(essentialSubjects));
-  }, [essentialSubjects])
+    localStorage.setItem(
+      "planeja@essential_subjects",
+      JSON.stringify(essentialSubjects)
+    );
+  }, [essentialSubjects]);
 
   const value = {
     restraintError,

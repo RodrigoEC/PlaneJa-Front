@@ -6,8 +6,6 @@ import { Progress } from "./components/Progress/Progress";
 import { UploadSection } from "./components/UploadSection/UploadSection";
 import { Footer } from "./components/Footer/Footer";
 import { RestraintSection } from "./components/RestraintSection/RestraintSection";
-import { useRestraintsContext } from "./contexts/restraints";
-import { Subject } from "./components/Subject/Subject";
 import { useExtractionContext } from "./contexts/extraction";
 import { SubjectData } from "./components/SubjectData/SubjectData";
 import {
@@ -18,12 +16,10 @@ import {
   Body,
   Divider,
   SettingsContainer,
-  SubjectsContainer,
   SubjectsDataSection,
 } from "./globalStyles";
 
 function App() {
-  const { essentialSubjects } = useRestraintsContext();
   const { studentRecord } = useExtractionContext();
   const { status } = studentRecord
   const [theme, setTheme] = useState(
@@ -59,11 +55,6 @@ function App() {
               <Divider />
               <SettingsContainer>
                 <RestraintSection />
-                <SubjectsContainer>
-                  {essentialSubjects.map((subject: string) => (
-                    <Subject key={subject} title={subject} />
-                  ))}
-                </SubjectsContainer>
               </SettingsContainer>
             </Body>
             <Footer></Footer>

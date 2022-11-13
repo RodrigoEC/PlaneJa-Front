@@ -1,20 +1,27 @@
-import { ReactElement, useEffect } from "react";
+import { ChangeEvent, ReactElement, useEffect } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
 export const NumInput = (): ReactElement => {
-  const { numEssentialSubjects, setNumEssentialSubjects, setEssentialSubjects } = useRestraintsContext();
+  const {
+    numEssentialSubjects,
+    setNumEssentialSubjects,
+    setEssentialSubjects,
+  } = useRestraintsContext();
 
   useEffect(() => {
-    let numSubjects = numEssentialSubjects
-    if (numEssentialSubjects < 4) numSubjects = 4
-    else if (numEssentialSubjects > 7) numSubjects = 7
+    let numSubjects = numEssentialSubjects;
+    if (numEssentialSubjects < 4) numSubjects = 4;
+    else if (numEssentialSubjects > 7) numSubjects = 7;
 
-    setNumEssentialSubjects(numSubjects)
+    localStorage.setItem("planeja@num_subjects", String(numSubjects));
+    setNumEssentialSubjects(numSubjects);
+    setEssentialSubjects((previous: string[]) =>
+      previous.slice(0, numSubjects)
+    );
 
-    setEssentialSubjects((previous: string[]) => previous.slice(0, numSubjects))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numEssentialSubjects])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numEssentialSubjects]);
 
   return (
     <Wrapper>
@@ -23,8 +30,10 @@ export const NumInput = (): ReactElement => {
         min="4"
         max="7"
         type="number"
-        defaultValue={5}
-        onChange={(e) => setNumEssentialSubjects(e.target.value)}
+        defaultValue={numEssentialSubjects}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setNumEssentialSubjects(event.target.value)
+        }
       />
       <Text>cadeiras</Text>
     </Wrapper>

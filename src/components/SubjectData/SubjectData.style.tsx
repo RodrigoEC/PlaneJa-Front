@@ -51,7 +51,7 @@ export const Atribute = styled.span`
   }
 `;
 
-export const Loading = styled.span`
+export const LoadingContainer = styled.span`
   @keyframes fading {
     0% {
       opacity: 1;

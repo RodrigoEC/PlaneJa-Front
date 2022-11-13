@@ -2,15 +2,11 @@ import styled from "styled-components";
 
 export const Wrapper = styled.form`
   display: flex;
+  flex-flow: column;
   width: 100%;
   gap: 0.5rem;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-
-  @media screen and (max-width: 700px) {
-    flex-flow: column-reverse;
-    align-items: center;
-  }
 `;
 
 export const InputArea = styled.div`
@@ -42,3 +38,30 @@ export const EssentialContainer = styled.div`
     background: transparent;
   }
 `;
+
+
+export const SubjectsContainer = styled.div`
+  max-width: 100%;
+  display: flex;
+  margin: 0 auto;
+  gap: 1rem;
+  overflow-x: scroll;
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    margin-top: 1rem;
+    background-color: transparent;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.primary}80;
+    opacity: 0.6;
+    border-radius: 8px;
+  }
+`

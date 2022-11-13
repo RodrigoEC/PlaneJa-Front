@@ -26,7 +26,7 @@ export const InputNumber = styled.input`
 export const Text = styled.span`
   font-size: 0.9rem;
   font-weight: bold;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
 
   @media screen and (max-width: 700px) {
     max-width: 9rem;

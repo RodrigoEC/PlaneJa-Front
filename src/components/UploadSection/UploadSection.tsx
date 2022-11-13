@@ -15,14 +15,12 @@ import {
 } from "./UploadSection.style";
 
 export const UploadSection = (): ReactElement => {
-  const { file, loading, extractData, setLoading, error } =
-    useExtractionContext();
+  const { file, loading, extractData, error } = useExtractionContext();
   const { semester, subjects, setStudentSubjects } = useRestraintsContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const submitData = async () => {
-    setLoading(true);
     const record: Record = await extractData(file);
     const subjectObj = subjects.reduce((object: any, subject: string) => {
       object[subject] = 0;
@@ -44,7 +42,6 @@ export const UploadSection = (): ReactElement => {
       JSON.stringify(filteredSubjects)
     );
     setStudentSubjects(filteredSubjects);
-    setLoading(false);
   };
 
   useEffect(() => {

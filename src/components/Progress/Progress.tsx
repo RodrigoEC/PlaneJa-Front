@@ -10,18 +10,16 @@ import {
 
 export const Progress = (): ReactElement => {
   const { loading, studentRecord } = useExtractionContext();
-  const { progress: studentProg } = studentRecord;
+  const { progress } = studentRecord;
+  const studenProgress = Number(progress) * 100;
 
   return (
     <Container>
       <Title>Cadeiras cursadas</Title>
       <Wrapper>
         {/* loading ? 1 : 0 to prevent console error*/}
-        <InnerWrapper
-          progress={Number(studentProg) * 100}
-          loading={loading ? 1 : 0}
-        >
-          <ProgressValue>{loading ? "??" : `${Number(studentProg) * 100}%`}</ProgressValue>
+        <InnerWrapper progress={studenProgress} loading={loading ? 1 : 0}>
+          <ProgressValue>{loading ? "??" : `${studenProgress}%`}</ProgressValue>
         </InnerWrapper>
       </Wrapper>
     </Container>

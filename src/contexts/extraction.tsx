@@ -42,6 +42,7 @@ export const ExtractionProvider = ({
   );
 
   const extractData = async (file: File) => {
+    setLoading(true);
     const form = new FormData();
     form.append("file", file);
 
@@ -51,6 +52,7 @@ export const ExtractionProvider = ({
 
     setStudentRecord(response);
     localStorage.setItem("@planeja/record", JSON.stringify(response));
+    setLoading(false);
     return response;
   };
 
