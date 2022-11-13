@@ -136,10 +136,9 @@ export const Divider = styled.div`
 
 
 export const SubjectsContainer = styled.div`
-  max-width: 1200px;
-  width: 92vw;
+  max-width: 100%;
   display: flex;
-  justify-content: center;
+  margin: 0 auto;
   gap: 1rem;
   overflow-x: scroll;
   padding-bottom: 0.5rem;
@@ -166,4 +165,5 @@ export const SettingsContainer = styled.div`
   display: flex;
   flex-flow: column;
   gap: 0.5rem;
+  width: 100%;
 `
