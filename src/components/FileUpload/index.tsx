@@ -40,7 +40,7 @@ export const FileUpload = (): ReactElement => {
     });
 
     localStorage.setItem(
-      "@planeja/student_subjects",
+      "planeja@student_subjects",
       JSON.stringify(filteredSubjects)
     );
     setStudentSubjects(filteredSubjects);

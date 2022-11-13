@@ -133,3 +133,37 @@ export const Divider = styled.div`
   transition: 0.3s;
   width: 4rem;
 `;
+
+
+export const SubjectsContainer = styled.div`
+  max-width: 1200px;
+  width: 92vw;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  overflow-x: scroll;
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    margin-top: 1rem;
+    background-color: transparent;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.primary}80;
+    opacity: 0.6;
+    border-radius: 8px;
+  }
+`
+
+export const SettingsContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  gap: 0.5rem;
+`

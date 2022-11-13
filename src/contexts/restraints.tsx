@@ -46,11 +46,15 @@ export const RestraintsProvider = ({
   const [restraintError, setRestraintError] = useState(false);
   const [semester, setSemester] = useState("");
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(5);
-  const [essentialSubjects, setEssentialSubjects] = useState([]);
+  const [essentialSubjects, setEssentialSubjects] = useState(
+    JSON.parse(
+      localStorage.getItem("planeja@essential_subjects") || JSON.stringify([])
+    )
+  );
   const [subjects, setSubjects] = useState([] as string[]);
   const [studentSubjects, setStudentSubjects] = useState(
     JSON.parse(
-      localStorage.getItem("@planeja/student_subjects") || JSON.stringify([])
+      localStorage.getItem("planeja@student_subjects") || JSON.stringify([])
     )
   );
 
@@ -65,6 +69,10 @@ export const RestraintsProvider = ({
 
     getData();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("planeja@essential_subjects", JSON.stringify(essentialSubjects));
+  }, [essentialSubjects])
 
   const value = {
     restraintError,

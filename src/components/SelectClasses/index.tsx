@@ -20,7 +20,7 @@ export const SelectClasses = (): ReactElement => {
     event.preventDefault();
     setCurrentInput("");
 
-    if (subjects.includes(currentInput)) {
+    if (studentSubjects.includes(currentInput)) {
       setEssentialSubjects((previous: string[]) => {
         if (previous.includes(currentInput)) {
           return previous;
@@ -34,7 +34,7 @@ export const SelectClasses = (): ReactElement => {
     setIsDisabled(
       subjects.length === 0 ||
         studentRecord?.classes.length === 0 ||
-        essentialSubjects.length === numEssentialSubjects
+        essentialSubjects.length >= numEssentialSubjects
     );
   }, [
     essentialSubjects.length,

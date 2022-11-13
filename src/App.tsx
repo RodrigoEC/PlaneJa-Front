@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "./util/themes";
+import { Header } from "./components/Header";
+import { Progress } from "./components/Progress";
+import { Status } from "./components/Status";
+import { FileUpload } from "./components/FileUpload";
+import { Footer } from "./components/Footer";
+import { Settings } from "./components/Settings";
+import { useRestraintsContext } from "./contexts/restraints";
+import { Subject } from "./components/Subject/Subject";
 import {
   GlobalStyle,
   InnerContainer,
@@ -8,17 +16,12 @@ import {
   Title,
   Body,
   Divider,
+  SettingsContainer,
+  SubjectsContainer,
 } from "./globalStyles";
-import { Header } from "./components/Header";
-import { Progress } from "./components/Progress";
-import { Status } from "./components/Status";
-import { FileUpload } from "./components/FileUpload";
-import { Footer } from "./components/Footer";
-import { SelectClasses } from "./components/SelectClasses";
-import { SubjectInput } from "./components/SubjectsInput";
-import { Settings } from "./components/Settings";
 
 function App() {
+  const { essentialSubjects } = useRestraintsContext();
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
@@ -46,7 +49,14 @@ function App() {
               <Divider />
               <FileUpload />
               <Divider />
-              <Settings />
+              <SettingsContainer>
+                <Settings />
+                <SubjectsContainer>
+                  {essentialSubjects.map((subject: string) => (
+                    <Subject key={subject} title={subject} />
+                  ))}
+                </SubjectsContainer>
+              </SettingsContainer>
             </Body>
             <Footer></Footer>
           </InnerContainer>

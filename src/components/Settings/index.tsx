@@ -3,7 +3,6 @@ import { SelectClasses } from "../SelectClasses";
 import { SubjectInput } from "../SubjectsInput";
 import {
   Divider,
-  EssentialContainer,
   InputArea,
   Wrapper,
 } from "./styles";
@@ -17,7 +16,6 @@ export const Settings = (): ReactElement => {
         <Divider />
         <SelectClasses />
       </InputArea>
-      <EssentialContainer />
     </Wrapper>
   );
 };
