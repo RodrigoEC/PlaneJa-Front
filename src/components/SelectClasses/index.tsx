@@ -25,7 +25,7 @@ export const SelectClasses = (): ReactElement => {
         if (previous.includes(currentInput)) {
           return previous;
         }
-        return [...previous, currentInput];
+        return [currentInput, ...previous];
       });
     }
   };
