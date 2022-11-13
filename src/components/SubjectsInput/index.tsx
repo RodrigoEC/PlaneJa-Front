@@ -23,7 +23,7 @@ export const SubjectInput = (): ReactElement => {
         min="4"
         max="7"
         type="number"
-        value={numEssentialSubjects}
+        defaultValue={5}
         onChange={(e) => setNumEssentialSubjects(e.target.value)}
       />
       <Text>cadeiras</Text>
