@@ -1,5 +1,5 @@
 import { useRestraintsContext } from "../../contexts/restraints";
-import { Delete, Text, Wrapper } from "./SubjectStyles";
+import { Delete, Text, Wrapper } from "./Subject.style";
 
 export const Subject = ({ title }: { title: string }) => {
   const { setEssentialSubjects } = useRestraintsContext();

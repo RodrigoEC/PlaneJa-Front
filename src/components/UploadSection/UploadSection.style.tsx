@@ -1,7 +1,7 @@
 import styled, { DefaultTheme } from "styled-components";
 import { QuestionIcon as Question } from "../../assets/icons/Question";
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.section`
   display: flex;
   flex-flow: column;
   align-items: center;

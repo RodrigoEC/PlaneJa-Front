@@ -167,3 +167,13 @@ export const SettingsContainer = styled.div`
   gap: 0.5rem;
   width: 100%;
 `
+
+export const SubjectsDataSection = styled.section`
+  display: flex;
+  transition: 0.3s;
+  gap: 5rem;
+
+  @media screen and (max-width: 700px) {
+    gap: 2rem;
+  }
+`

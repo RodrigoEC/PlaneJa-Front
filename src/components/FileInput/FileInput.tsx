@@ -1,17 +1,15 @@
-import { ReactElement } from "react";
+import { ChangeEvent, ReactElement } from "react";
 import { UploadIcon } from "../../assets/icons/Upload";
 import { useExtractionContext } from "../../contexts/extraction";
-import { Label, Text } from "./styles";
+import { Label, Text } from "./FileInput.style";
 
 export const FileInput = (): ReactElement => {
   const { setFile, loading, error, setError } = useExtractionContext();
 
-  const onUpload = (e: any) => {
-    setFile(e.target.files[0]);
-
-    if (error) {
-      setError(false);
-    }
+  const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.currentTarget as HTMLInputElement;
+    if (target.files !==  null) setFile(target.files[0]);
+    if (error) setError(false);
   };
 
   return (

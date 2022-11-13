@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "./util/themes";
-import { Header } from "./components/Header";
-import { Progress } from "./components/Progress";
-import { Status } from "./components/Status";
-import { FileUpload } from "./components/FileUpload";
-import { Footer } from "./components/Footer";
-import { Settings } from "./components/Settings";
+import { Header } from "./components/Header/Header";
+import { Progress } from "./components/Progress/Progress";
+import { UploadSection } from "./components/UploadSection/UploadSection";
+import { Footer } from "./components/Footer/Footer";
+import { RestraintSection } from "./components/RestraintSection/RestraintSection";
 import { useRestraintsContext } from "./contexts/restraints";
 import { Subject } from "./components/Subject/Subject";
+import { useExtractionContext } from "./contexts/extraction";
+import { SubjectData } from "./components/SubjectData/SubjectData";
 import {
   GlobalStyle,
   InnerContainer,
@@ -18,10 +19,13 @@ import {
   Divider,
   SettingsContainer,
   SubjectsContainer,
+  SubjectsDataSection,
 } from "./globalStyles";
 
 function App() {
   const { essentialSubjects } = useRestraintsContext();
+  const { studentRecord } = useExtractionContext();
+  const { status } = studentRecord
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
@@ -45,12 +49,16 @@ function App() {
             <Body>
               <Title>Ciência da computação</Title>
               <Progress />
-              <Status />
+              <SubjectsDataSection>
+                <SubjectData title="Obrigatórias" status={status.mandatory} />
+                <SubjectData title="Optativas" status={status.optative} />
+                <SubjectData title="Complementares" status={status.complementary} />
+              </SubjectsDataSection>
               <Divider />
-              <FileUpload />
+              <UploadSection />
               <Divider />
               <SettingsContainer>
-                <Settings />
+                <RestraintSection />
                 <SubjectsContainer>
                   {essentialSubjects.map((subject: string) => (
                     <Subject key={subject} title={subject} />

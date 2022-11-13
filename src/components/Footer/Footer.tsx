@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Wrapper, Text, GithubIcon } from "./styles";
+import { Wrapper, Text, GithubIcon } from "./Footer.style";
 
 export const Footer = (): ReactElement => {
   return (

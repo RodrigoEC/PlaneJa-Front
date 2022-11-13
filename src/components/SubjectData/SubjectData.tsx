@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
-import { useExtractionContext } from "../../../contexts/extraction";
-import { Wrapper, Title, Data, Atribute, Loading } from "./styles";
+import { useExtractionContext } from "../../contexts/extraction";
+import { Wrapper, Title, Data, Atribute, Loading } from "./SubjectData.style";
 
-export const StatusItem = ({
+export const SubjectData = ({
   title,
   status,
 }: {
@@ -39,7 +39,7 @@ export const StatusItem = ({
   );
 };
 
-StatusItem.defaultProps = {
+SubjectData.defaultProps = {
   current: 0,
   max: "--",
 };

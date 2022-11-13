@@ -6,7 +6,7 @@ import {
   InnerWrapper,
   ProgressValue,
   Title,
-} from "./styles";
+} from "./Progress.style";
 
 export const Progress = (): ReactElement => {
   const { loading, studentRecord } = useExtractionContext();

@@ -3,8 +3,8 @@ import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { Record } from "../../service/types";
 import { capitalize } from "../../util/util";
-import { FileInput } from "../FileInput";
-import { QuestionModal } from "../QuestionModal";
+import { FileInput } from "../FileInput/FileInput";
+import { QuestionModal } from "../QuestionModal/QuestionModal";
 import {
   Wrapper,
   Message,
@@ -12,9 +12,9 @@ import {
   UploadContainer,
   QuestionIcon,
   Send,
-} from "./styles";
+} from "./UploadSection.style";
 
-export const FileUpload = (): ReactElement => {
+export const UploadSection = (): ReactElement => {
   const { file, loading, extractData, setLoading, error } =
     useExtractionContext();
   const { semester, subjects, setStudentSubjects } = useRestraintsContext();

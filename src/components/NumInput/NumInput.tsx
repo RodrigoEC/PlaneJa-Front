@@ -1,8 +1,8 @@
 import { ReactElement, useEffect } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { InputNumber, Text, Wrapper } from "./styles";
+import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
-export const SubjectInput = (): ReactElement => {
+export const NumInput = (): ReactElement => {
   const { numEssentialSubjects, setNumEssentialSubjects, setEssentialSubjects } = useRestraintsContext();
 
   useEffect(() => {

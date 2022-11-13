@@ -2,9 +2,9 @@ import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { Add } from "../../assets/icons/Add";
 import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { AddButton, Input, List, Wrapper } from "./styles";
+import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
-export const SelectClasses = (): ReactElement => {
+export const SubjectsInput = (): ReactElement => {
   const {
     numEssentialSubjects,
     essentialSubjects,

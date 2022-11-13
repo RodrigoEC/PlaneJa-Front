@@ -1,6 +1,6 @@
 import { MouseEventHandler, ReactElement } from "react";
 import academicControl from "../../assets/images/controle.png";
-import { Wrapper, Background, Text, Title, Link, Close } from "./styles";
+import { Wrapper, Background, Text, Title, Link, Close } from "./QuestionModal.style";
 
 export const QuestionModal = ({ onClose }: { onClose: MouseEventHandler }): ReactElement => {
   return (
