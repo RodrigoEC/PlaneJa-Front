@@ -20,16 +20,18 @@ export const SubjectsInput = (): ReactElement => {
   const addClass = (event: SyntheticEvent) => {
     event.preventDefault();
     setCurrentInput("");
-    setStudentSubjects((previous: string[]) =>
-      previous.filter((subject: string) => currentInput !== subject)
-    );
+    if (studentSubjects.includes(currentInput) && currentInput !== "") {
+      setStudentSubjects((previous: string[]) =>
+        previous.filter((subject: string) => currentInput !== subject)
+      );
 
-    setEssentialSubjects((previous: string[]) => {
-      if (previous.includes(currentInput)) {
-        return previous;
-      }
-      return [currentInput, ...previous];
-    });
+      setEssentialSubjects((previous: string[]) => {
+        if (previous.includes(currentInput)) {
+          return previous;
+        }
+        return [currentInput, ...previous];
+      });
+    }
   };
 
   useEffect(() => {

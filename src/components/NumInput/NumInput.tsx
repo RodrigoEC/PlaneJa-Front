@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactElement, useEffect } from "react";
+import { ChangeEvent, ReactElement, useCallback } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
@@ -9,7 +9,7 @@ export const NumInput = (): ReactElement => {
     setEssentialSubjects,
   } = useRestraintsContext();
 
-  useEffect(() => {
+  const onBlur = useCallback(() => {
     let numSubjects = numEssentialSubjects;
     if (numEssentialSubjects < 4) numSubjects = 4;
     else if (numEssentialSubjects > 7) numSubjects = 7;
@@ -30,7 +30,8 @@ export const NumInput = (): ReactElement => {
         min="4"
         max="7"
         type="number"
-        defaultValue={numEssentialSubjects}
+        value={numEssentialSubjects}
+        onBlur={onBlur}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setNumEssentialSubjects(event.target.value)
         }
