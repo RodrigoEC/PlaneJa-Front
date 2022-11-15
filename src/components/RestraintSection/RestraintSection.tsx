@@ -15,16 +15,16 @@ export const RestraintSection = (): ReactElement => {
 
   return (
     <Wrapper>
-      <InputArea>
-        <NumInput />
-        <Divider />
-        <SubjectsInput />
-      </InputArea>
       <SubjectsContainer>
         {essentialSubjects.map((subject: string) => (
           <Subject key={subject} title={subject} />
         ))}
       </SubjectsContainer>
+      <InputArea>
+        <NumInput />
+        <Divider />
+        <SubjectsInput />
+      </InputArea>
     </Wrapper>
   );
 };
