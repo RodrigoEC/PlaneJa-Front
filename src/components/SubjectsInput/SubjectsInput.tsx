@@ -11,6 +11,7 @@ export const SubjectsInput = (): ReactElement => {
     setEssentialSubjects,
     subjects,
     studentSubjects,
+    setStudentSubjects,
   } = useRestraintsContext();
   const { studentRecord } = useExtractionContext();
   const [currentInput, setCurrentInput] = useState("");
@@ -19,15 +20,16 @@ export const SubjectsInput = (): ReactElement => {
   const addClass = (event: SyntheticEvent) => {
     event.preventDefault();
     setCurrentInput("");
+    setStudentSubjects((previous: string[]) =>
+      previous.filter((subject: string) => currentInput !== subject)
+    );
 
-    if (studentSubjects.includes(currentInput)) {
-      setEssentialSubjects((previous: string[]) => {
-        if (previous.includes(currentInput)) {
-          return previous;
-        }
-        return [currentInput, ...previous];
-      });
-    }
+    setEssentialSubjects((previous: string[]) => {
+      if (previous.includes(currentInput)) {
+        return previous;
+      }
+      return [currentInput, ...previous];
+    });
   };
 
   useEffect(() => {
