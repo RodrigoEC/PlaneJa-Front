@@ -1,4 +1,10 @@
-import { ChangeEvent, ReactElement, useCallback } from "react";
+import {
+  ChangeEvent,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
@@ -8,6 +14,7 @@ export const NumInput = (): ReactElement => {
     setNumEssentialSubjects,
     setEssentialSubjects,
   } = useRestraintsContext();
+  const [invalidInput, setInvalidInput] = useState(false);
 
   const onBlur = useCallback(() => {
     let numSubjects = numEssentialSubjects;
@@ -23,8 +30,14 @@ export const NumInput = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numEssentialSubjects]);
 
+  useEffect(() => {
+    if (numEssentialSubjects > 7 || numEssentialSubjects < 4) {
+      setInvalidInput(true);
+    } else setInvalidInput(false);
+  }, [numEssentialSubjects]);
+
   return (
-    <Wrapper>
+    <Wrapper className={invalidInput ? "invalid" : ""}>
       <Text>Qtd.:</Text>
       <InputNumber
         min="4"
@@ -32,9 +45,9 @@ export const NumInput = (): ReactElement => {
         type="number"
         value={numEssentialSubjects}
         onBlur={onBlur}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          setNumEssentialSubjects(event.target.value)
-        }
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setNumEssentialSubjects(event.target.value);
+        }}
       />
       <Text>cadeiras</Text>
     </Wrapper>

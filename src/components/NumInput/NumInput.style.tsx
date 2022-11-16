@@ -6,6 +6,11 @@ export const Wrapper = styled.div`
   padding-bottom: 3px;
   gap: 0.5rem;
   align-items: flex-end;
+  transition: 0.3s;
+
+  &.invalid {
+    color: ${({ theme }) => theme.colors.alert};
+  }
 `;
 
 export const InputNumber = styled.input`
@@ -13,7 +18,7 @@ export const InputNumber = styled.input`
   background-color: ${({ theme }) => theme.colors.third}50;
   border-radius: 5px;
   border: none;
-  color: ${({ theme }) => theme.colors.primary};
+  color: inherit;
   text-align: center;
   height: 1.25rem;
   font-weight: bold;
