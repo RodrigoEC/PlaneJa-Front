@@ -16,9 +16,11 @@ export const SubjectsInput = (): ReactElement => {
   const { studentRecord } = useExtractionContext();
   const [currentInput, setCurrentInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const [invalidData, setInvalidData] = useState(false);
 
   const addClass = (event: SyntheticEvent) => {
     event.preventDefault();
+    event.stopPropagation();
     setCurrentInput("");
     if (studentSubjects.includes(currentInput) && currentInput !== "") {
       setStudentSubjects((previous: string[]) =>
@@ -47,8 +49,23 @@ export const SubjectsInput = (): ReactElement => {
     subjects.length,
   ]);
 
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (!studentSubjects.includes(currentInput) && currentInput !== "")
+        setInvalidData(true);
+      else setInvalidData(false);
+    }, 1000);
+
+    return () => clearTimeout(delay);
+  }, [currentInput, studentSubjects]);
+
+  useEffect(() => console.log(invalidData), [invalidData]);
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => setCurrentInput("")}
+      className={invalidData ? "invalid" : ""}
+    >
       <Input
         disabled={isDisabled}
         placeholder="Disciplinas fixas"
@@ -64,7 +81,7 @@ export const SubjectsInput = (): ReactElement => {
           </option>
         ))}
       </List>
-      <AddButton onClick={addClass} disabled={isDisabled}>
+      <AddButton onClick={addClass} disabled={isDisabled || invalidData}>
         <Add />
       </AddButton>
     </Wrapper>
