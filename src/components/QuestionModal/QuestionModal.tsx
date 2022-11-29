@@ -10,7 +10,7 @@ export const QuestionModal = ({ onClose }: { onClose: MouseEventHandler }): Reac
         <article>
           <Text>
             Você pode pegar seu histórico no site do controle acadêmico da UFCG
-            no link:{" "}
+            no link:
           </Text>
           <Link
             href="https://pre.ufcg.edu.br:8443/ControleAcademicoOnline/Controlador?command=AlunoDisciplinasOfertadas"

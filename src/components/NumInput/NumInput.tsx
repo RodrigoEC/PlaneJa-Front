@@ -40,6 +40,7 @@ export const NumInput = (): ReactElement => {
     <Wrapper className={invalidInput ? "invalid" : ""}>
       <Text>Qtd.:</Text>
       <InputNumber
+        aria-label="number input"
         min="4"
         max="7"
         type="number"

@@ -86,7 +86,7 @@ export const SubjectsInput = (): ReactElement => {
         ))}
       </List>
       <AddButton onClick={addClass} disabled={isDisabled || invalidData}>
-        <Add />
+        <Add aria-label="Cross icon" />
       </AddButton>
     </Wrapper>
   );

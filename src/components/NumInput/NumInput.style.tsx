@@ -15,8 +15,7 @@ export const Wrapper = styled.div`
 
 export const InputNumber = styled.input`
   max-width: 2.5rem;
-  background-color: ${({ theme }) => theme.colors.third}50;
-  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.third}00;  border-radius: 5px;
   border: none;
   color: inherit;
   text-align: center;

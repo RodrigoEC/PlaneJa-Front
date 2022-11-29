@@ -39,7 +39,6 @@ export const Data = styled.span`
 
 export const Atribute = styled.span`
   font-size: 0.85rem;
-  opacity: 0.8;
   font-weight: bold;
 
   @media screen and (max-width: 1000px) {

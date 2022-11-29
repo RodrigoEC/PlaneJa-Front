@@ -5,7 +5,7 @@ export const Footer = (): ReactElement => {
   return (
     <Wrapper>
       <Text>Contribua em:</Text>
-      <GithubIcon />
+      <GithubIcon aria-label="Github icon on the Footer area" />
     </Wrapper>
   );
 };

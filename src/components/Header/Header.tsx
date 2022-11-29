@@ -7,12 +7,11 @@ export const Header = ({
 }: {
   themeHandler: MouseEventHandler;
 }): ReactElement => {
-
   return (
     <Wrapper>
       <Logo />
       <SideIcons>
-        <Github />
+        <Github aria-label="Github icon on the header" />
         <Switch handleSwitch={themeHandler} />
       </SideIcons>
     </Wrapper>
