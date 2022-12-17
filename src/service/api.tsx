@@ -8,6 +8,7 @@ import {
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
+  headers: {'Cache-Control': 'no-cache'}
 });
 
 export const extractRecord = async (

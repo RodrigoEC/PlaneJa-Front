@@ -20,6 +20,7 @@ export const Background = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #00000070;
+  z-index: 1;
 
   animation-name: fadeIn;
   animation-duration: 0.2s;
