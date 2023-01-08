@@ -63,8 +63,6 @@ export const SubjectsInput = (): ReactElement => {
     return () => clearTimeout(delay);
   }, [currentInput, studentSubjects]);
 
-  useEffect(() => console.log(invalidData), [invalidData]);
-
   return (
     <Wrapper
       onClick={() => setCurrentInput("")}
