@@ -18,6 +18,7 @@ import {
   SettingsContainer,
   SubjectsDataSection,
 } from "./globalStyles";
+import { SubjectCard } from "./components/SubjectCard/SubjectCard";
 
 function App() {
   const { studentRecord } = useExtractionContext();
@@ -56,6 +57,7 @@ function App() {
               <SettingsContainer>
                 <RestraintSection />
               </SettingsContainer>
+              <SubjectCard colors={{ background: "#8EB26A80", border: '#789759' }} title={"Fundamentos de matemática para ciência da computação II"} locked={false} />
             </Body>
             <Footer></Footer>
           </InnerContainer>

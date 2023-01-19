@@ -76,7 +76,13 @@ export const Wrapper = styled.div`
   transition: 0.3s;
   background-color: ${({ theme }) => theme.colors.contrast};
 
-  
+  @keyframes pop {
+    from {
+      transform: scale(0.6);
+    } to {
+      transform: scale(1);
+    }
+  }
 `;
 
 export const InnerContainer = styled.div`

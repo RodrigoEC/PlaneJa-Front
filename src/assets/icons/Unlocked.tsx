@@ -10,10 +10,9 @@ export const Unlocked = ({ ...props }): ReactElement => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#clip0_162_1082)">
+      <g clipPath="url(#clip0_162_1082)">
         <path
           d="M12 10V6C12 2.687 9.313 0 6 0C2.687 0 0 2.687 0 6V9H2V6C2 3.794 3.794 2 6 2C8.206 2 10 3.794 10 6V10H6V24H24V10H12Z"
-          fill="white"
         />
       </g>
       <defs>
