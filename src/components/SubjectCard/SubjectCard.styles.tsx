@@ -3,23 +3,23 @@ import { Locked } from "../../assets/icons/Locked";
 import { Unlocked } from "../../assets/icons/Unlocked";
 
 export const LockedIcon = styled(Locked)`
-  width: 1.75rem;
+  width: 1rem;
   position: absolute;
   align-self: center;
   fill: transparent;
   transition: 0.3s;
-  left: calc(50% - 1rem);
+  left: calc(50% - 0.6rem);
   animation-name: pop;
   animation-duration: 0.2s;
 `;
 
 export const UnlockedIcon = styled(Unlocked)`
-  width: 1.75rem;
+  width: 1.25rem;
   position: absolute;
   align-self: center;
   fill: transparent;
   transition: 0.3s;
-  left: calc(50% - 1rem);
+  left: calc(50% - 0.6rem);
   animation-name: pop;
   animation-duration: 0.2s;
 `;
@@ -27,13 +27,14 @@ export const UnlockedIcon = styled(Unlocked)`
 export const Wrapper = styled.div`
   display: flex;
   position: relative;
+  justify-content: center;
   background-color: ${({
     colors,
   }: {
     colors: { background: string; border: string };
   }) => colors.background};
   cursor: pointer;
-  height: 4rem;
+  height: 3.5rem;
   align-items: center;
   padding: 0.5rem;
   width: 12.5rem;
@@ -43,6 +44,7 @@ export const Wrapper = styled.div`
     ${({ colors }: { colors: { background: string; border: string } }) =>
       colors.border};
   font-weight: bold;
+  font-size: 0.9rem;
   transition: 0.3s;
 
   &:hover {
