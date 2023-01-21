@@ -1,12 +1,13 @@
 import { ReactElement, useState } from "react";
+import { colors } from "../../util/colors";
 import { LockedIcon, UnlockedIcon, Wrapper } from "./SubjectCard.styles";
 
 export const SubjectCard = ({
-  colors,
+  variant,
   title,
   locked,
 }: {
-  colors: { background: string; border: string };
+  variant: string;
   title: string;
   locked: boolean;
 }): ReactElement => {
@@ -20,7 +21,7 @@ export const SubjectCard = ({
   };
 
   return (
-    <Wrapper onClick={onClick} colors={colors}>
+    <Wrapper onClick={onClick} variant={variant as keyof typeof colors}>
       {displayedTitle}
       {isLocked ? <LockedIcon /> : <UnlockedIcon />}
     </Wrapper>

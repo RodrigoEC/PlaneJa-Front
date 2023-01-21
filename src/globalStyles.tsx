@@ -7,6 +7,7 @@ declare module "styled-components" {
     third: string;
     contrast: string;
     alert: string;
+    stroke: string;
   }
 
   export interface DefaultTheme {

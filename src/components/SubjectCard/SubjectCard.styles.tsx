@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Locked } from "../../assets/icons/Locked";
 import { Unlocked } from "../../assets/icons/Unlocked";
+import { colors } from "../../util/colors";
 
 export const LockedIcon = styled(Locked)`
   width: 1rem;
@@ -28,11 +29,7 @@ export const Wrapper = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
-  background-color: ${({
-    colors,
-  }: {
-    colors: { background: string; border: string };
-  }) => colors.background};
+  background-color: ${({ variant }: { variant: keyof typeof colors }) => colors[variant]}80;
   cursor: pointer;
   height: 3.5rem;
   align-items: center;
@@ -40,9 +37,7 @@ export const Wrapper = styled.div`
   width: 12.5rem;
   box-sizing: border-box;
   border-radius: 3px;
-  border: 3px solid
-    ${({ colors }: { colors: { background: string; border: string } }) =>
-      colors.border};
+  border: 3px solid ${({ variant }: { variant: keyof typeof colors }) => colors[variant]};
   font-weight: bold;
   font-size: 0.9rem;
   transition: 0.3s;
@@ -53,8 +48,7 @@ export const Wrapper = styled.div`
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    color: ${({ colors }: { colors: { background: string; border: string } }) =>
-      colors.background};
+    color: ${({ variant }: { variant: keyof typeof colors }) => colors[variant]};
     ${LockedIcon}, ${UnlockedIcon} {
       fill: ${({ theme }) => theme.colors.primary};
     }

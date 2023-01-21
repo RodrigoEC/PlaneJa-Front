@@ -19,10 +19,11 @@ import {
   SubjectsDataSection,
 } from "./globalStyles";
 import { SubjectCard } from "./components/SubjectCard/SubjectCard";
+import { DailyColumn } from "./components/DailyColumn/DailyColumn";
 
 function App() {
   const { studentRecord } = useExtractionContext();
-  const { status } = studentRecord
+  const { status } = studentRecord;
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
@@ -49,7 +50,10 @@ function App() {
               <SubjectsDataSection>
                 <SubjectData title="Obrigatórias" status={status.mandatory} />
                 <SubjectData title="Optativas" status={status.optative} />
-                <SubjectData title="Complementares" status={status.complementary} />
+                <SubjectData
+                  title="Complementares"
+                  status={status.complementary}
+                />
               </SubjectsDataSection>
               <Divider />
               <UploadSection />
@@ -57,7 +61,7 @@ function App() {
               <SettingsContainer>
                 <RestraintSection />
               </SettingsContainer>
-              <SubjectCard colors={{ background: "#8EB26A80", border: '#789759' }} title={"Fundamentos de matemática para ciência da computação II"} locked={false} />
+              <DailyColumn id="seg" />
             </Body>
             <Footer></Footer>
           </InnerContainer>

@@ -8,6 +8,7 @@ export const light: DefaultTheme = {
     third: "#C2CFD7",
     contrast: "#FFFFFF",
     alert: "#FF8787",
+    stroke: "#000000",
   },
 };
 
@@ -19,5 +20,6 @@ export const dark: DefaultTheme = {
     third: "#C2CFD7",
     contrast: "#546D7D",
     alert: "#FFAEAE",
+    stroke: "#FFFFFF",
   },
 };
