@@ -9,7 +9,7 @@ export const LockedIcon = styled(Locked)`
   align-self: center;
   fill: transparent;
   transition: 0.3s;
-  left: calc(50% - 0.6rem);
+  left: calc(50% - 0.5rem);
   animation-name: pop;
   animation-duration: 0.2s;
 `;
@@ -20,7 +20,7 @@ export const UnlockedIcon = styled(Unlocked)`
   align-self: center;
   fill: transparent;
   transition: 0.3s;
-  left: calc(50% - 0.8rem);
+  left: calc(50% - 0.7rem);
   animation-name: pop;
   animation-duration: 0.2s;
 `;
