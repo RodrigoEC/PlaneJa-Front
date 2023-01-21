@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   padding: 2rem 1rem 1rem;
   background-color: ${({ theme }: { theme: DefaultTheme }) =>
-    theme.colors.primary}20;
+    theme.colors.primary}10;
   border: 2px solid
     ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}40;
   box-sizing: border-box;

@@ -23,6 +23,7 @@ import {
   useSubjectsTableContext,
   WeekSchedule,
 } from "./contexts/subjectsTable";
+import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
 
 function App() {
   const { studentRecord } = useExtractionContext();
@@ -65,8 +66,8 @@ function App() {
               <SettingsContainer>
                 <RestraintSection />
               </SettingsContainer>
-              <DailyColumn id={"seg"} />
             </Body>
+            <ScheduleTable />
             <Footer></Footer>
           </InnerContainer>
         </Wrapper>

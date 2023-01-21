@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   SubjectContent,
-  SubjectsTableContent,
   useSubjectsTableContext,
   WeekSchedule,
 } from "../../contexts/subjectsTable";

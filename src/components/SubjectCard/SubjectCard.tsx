@@ -21,7 +21,11 @@ export const SubjectCard = ({
   };
 
   return (
-    <Wrapper onClick={onClick} variant={variant as keyof typeof colors}>
+    <Wrapper
+      title={title}
+      onClick={onClick}
+      variant={variant as keyof typeof colors}
+    >
       {displayedTitle}
       {isLocked ? <LockedIcon /> : <UnlockedIcon />}
     </Wrapper>

@@ -96,6 +96,7 @@ export const InnerContainer = styled.div`
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
+  color: ${({ theme }) => theme.colors.primary};
 
   padding: 0 1rem;
 `;
@@ -111,7 +112,6 @@ export const Body = styled.main`
   padding: 3rem 4rem 2rem;
   box-sizing: border-box;
   flex-grow: 1;
-  color: ${({ theme }) => theme.colors.primary};
 
   @media screen and (max-width: 700px) {
     gap: 2rem;
