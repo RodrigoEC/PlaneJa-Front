@@ -7,7 +7,7 @@ export interface SubjectContent {
   locked: boolean;
 }
 
-export interface SubjectsTableContent {
+export interface WeekSchedule {
   seg: { name: string; subs: SubjectContent[] };
   ter: { name: string; subs: SubjectContent[] };
   quar: { name: string; subs: SubjectContent[] };
@@ -16,10 +16,58 @@ export interface SubjectsTableContent {
   sab: { name: string; subs: SubjectContent[] };
 }
 
+export interface SubjectsTableContent {
+  subjects: WeekSchedule;
+  setSubjects: Function;
+}
+
 const defaultSubjects = {
   seg: {
     name: "segunda-feira",
-    subs: [{ title: "Fundamentos de matemática para ciência da computação II", variant: 'cyan', position: 2, locked: true }],
+    subs: [
+      {
+        title: "Fundamentos de matemática para ciência da computação II",
+        variant: "cyan",
+        position: 2,
+        locked: true,
+      },
+      {
+        title: "Programação II",
+        variant: "green",
+        position: 0,
+        locked: false,
+      },
+      {
+        title: "laboratório de Organização e arquitetura de computadores",
+        variant: "blue",
+        position: 1,
+        locked: false,
+      },
+      {
+        title: "Organização e arquitetura de computadores",
+        variant: "maroom",
+        position: 3,
+        locked: false,
+      },
+      {
+        title: "Organização e arquitetura de computadores",
+        variant: "red",
+        position: 4,
+        locked: false,
+      },
+      {
+        title: "Organização e arquitetura de computadores",
+        variant: "darkOrange",
+        position: 5,
+        locked: false,
+      },
+      {
+        title: "Organização e arquitetura de computadores",
+        variant: "lightOrange",
+        position: 6,
+        locked: false,
+      },
+    ],
   },
   ter: { name: "terça-feira", subs: [] },
   quar: { name: "quarta-feira", subs: [] },
@@ -28,8 +76,10 @@ const defaultSubjects = {
   sab: { name: "sábado", subs: [] },
 };
 
-const SubjectsTableContext =
-  createContext<SubjectsTableContent>(defaultSubjects);
+const SubjectsTableContext = createContext<SubjectsTableContent>({
+  subjects: defaultSubjects,
+  setSubjects: () => {},
+});
 
 export const SubjectsTableProvider = ({
   children,
@@ -39,7 +89,7 @@ export const SubjectsTableProvider = ({
   const [subjects, setSubjects] = useState(defaultSubjects);
 
   const value = {
-    ...subjects,
+    subjects,
     setSubjects,
   };
 

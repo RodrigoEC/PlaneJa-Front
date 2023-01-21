@@ -18,12 +18,16 @@ import {
   SettingsContainer,
   SubjectsDataSection,
 } from "./globalStyles";
-import { SubjectCard } from "./components/SubjectCard/SubjectCard";
 import { DailyColumn } from "./components/DailyColumn/DailyColumn";
+import {
+  useSubjectsTableContext,
+  WeekSchedule,
+} from "./contexts/subjectsTable";
 
 function App() {
   const { studentRecord } = useExtractionContext();
   const { status } = studentRecord;
+  const { subjects } = useSubjectsTableContext();
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
@@ -61,7 +65,7 @@ function App() {
               <SettingsContainer>
                 <RestraintSection />
               </SettingsContainer>
-              <DailyColumn id="seg" />
+              <DailyColumn id={"seg"} />
             </Body>
             <Footer></Footer>
           </InnerContainer>

@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }: { theme: DefaultTheme }) =>
     theme.colors.primary}20;
   border: 2px solid
-    ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}80;
+    ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}40;
   box-sizing: border-box;
   border-radius: 5px;
   gap: 1.5rem;

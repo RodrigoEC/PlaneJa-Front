@@ -6,7 +6,7 @@ export const light: DefaultTheme = {
     primary: "#546D7D",
     secondary: "#929da5",
     third: "#C2CFD7",
-    contrast: "#FFFFFF",
+    contrast: "#fbfbfb",
     alert: "#FF8787",
     stroke: "#000000",
   },

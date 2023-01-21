@@ -3,6 +3,7 @@ import {
   SubjectContent,
   SubjectsTableContent,
   useSubjectsTableContext,
+  WeekSchedule,
 } from "../../contexts/subjectsTable";
 import { SubjectCard } from "../SubjectCard/SubjectCard";
 import {
@@ -13,10 +14,11 @@ import {
   EmptySubject,
 } from "./DailyColumn.style";
 
-export const DailyColumn = ({ id }: { id: keyof SubjectsTableContent }) => {
-  const subjects = useSubjectsTableContext();
+export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
+  const { subjects } = useSubjectsTableContext();
   const [schedule, setSchedule] = useState(new Array(8).fill(null));
 
+  console.log(id);
   useEffect(() => {
     const newSchedule = Array.from(schedule);
     subjects[id].subs.forEach((element: SubjectContent) => {

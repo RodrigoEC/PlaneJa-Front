@@ -48,7 +48,7 @@ export const Wrapper = styled.div`
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    color: ${({ variant }: { variant: keyof typeof colors }) => colors[variant]};
+    color: ${({ variant }: { variant: keyof typeof colors }) => colors[variant]}30;
     ${LockedIcon}, ${UnlockedIcon} {
       fill: ${({ theme }) => theme.colors.primary};
     }
