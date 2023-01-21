@@ -1,6 +1,5 @@
 import styled, { DefaultTheme } from "styled-components";
 
-
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -13,11 +12,20 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   gap: 1.5rem;
+
+  @media screen and (max-width: 700px) {
+    padding: 1.5rem 1rem 1rem;
+    gap: 1.25rem;
+  }
 `;
 
 export const Title = styled.span`
   font-size: 1.2rem;
   text-transform: capitalize;
+
+  @media screen and (max-width: 700px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Divider = styled.div`
@@ -32,10 +40,16 @@ export const SubjectsContainer = styled.div`
   gap: 1rem;
 `;
 
-
 export const EmptySubject = styled.div`
-  border: 2px dashed ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}50;
+  border: 2px dashed
+    ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}50;
   height: 3.5rem;
   width: 12.5rem;
   border-radius: 3px;
-`
+  box-sizing: border-box;
+
+  @media screen and (max-width: 700px) {
+    font-size: 0.8rem;
+    width: 11.5rem;
+  }
+`;

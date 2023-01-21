@@ -29,7 +29,8 @@ export const Wrapper = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
-  background-color: ${({ variant }: { variant: keyof typeof colors }) => colors[variant]}80;
+  background-color: ${({ variant }: { variant: keyof typeof colors }) =>
+    colors[variant]}80;
   cursor: pointer;
   height: 3.5rem;
   align-items: center;
@@ -37,10 +38,16 @@ export const Wrapper = styled.div`
   width: 12.5rem;
   box-sizing: border-box;
   border-radius: 3px;
-  border: 3px solid ${({ variant }: { variant: keyof typeof colors }) => colors[variant]};
+  border: 3px solid
+    ${({ variant }: { variant: keyof typeof colors }) => colors[variant]};
   font-weight: bold;
   font-size: 0.9rem;
   transition: 0.3s;
+
+  @media screen and (max-width: 700px) {
+    font-size: 0.8rem;
+    width: 11.5rem;
+  }
 
   &:hover {
     user-select: none; /* supported by Chrome and Opera */
@@ -48,7 +55,8 @@ export const Wrapper = styled.div`
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    color: ${({ variant }: { variant: keyof typeof colors }) => colors[variant]}30;
+    color: ${({ variant }: { variant: keyof typeof colors }) =>
+      colors[variant]}30;
     ${LockedIcon}, ${UnlockedIcon} {
       fill: ${({ theme }) => theme.colors.primary};
     }
