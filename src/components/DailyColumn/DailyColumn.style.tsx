@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }: { theme: DefaultTheme }) =>
     theme.colors.primary}10;
   border: 2px solid
-    ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}40;
+    ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}40;
   box-sizing: border-box;
   border-radius: 5px;
   gap: 1.5rem;
@@ -43,7 +43,7 @@ export const SubjectsContainer = styled.div`
 
 export const EmptySubject = styled.div`
   border: 2px dashed
-    ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}50;
+    ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}50;
   height: 3.5rem;
   width: 11.5rem;
   border-radius: 3px;
