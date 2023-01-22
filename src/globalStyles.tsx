@@ -93,7 +93,7 @@ export const InnerContainer = styled.div`
   justify-content: center;
 
   min-height: 100vh;
-  max-width: 1400px;
+  max-width: 1450px;
   width: 100%;
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.primary};

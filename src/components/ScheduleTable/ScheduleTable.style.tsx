@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const OutWrapper = styled.div`
+export const Wrapper = styled.div`
+  display: flex;
   width: 100%;
   padding-bottom: 6px;
   overflow-x: scroll;
@@ -20,7 +21,37 @@ export const OutWrapper = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Timing = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  margin-top: 6rem;
+  gap: 3.45rem;
+  margin-left: 1rem;
+
+  @media screen and (max-width: 700px) {
+    margin-top: 5rem;
+    gap: 3.55rem;
+  }
+`
+
+export const Time = styled.span`
+  display: flex;
+  gap: 0.25rem;
+  padding-right: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  opacity: 0.7;
+  &::after {
+    content: '-'
+  }
+
+  @media screen and (max-width: 700px) {
+    font-size: 0.75rem;
+  }
+`
+
+export const TableContent = styled.div`
   display: flex;
   gap: 0.75rem;
 `;

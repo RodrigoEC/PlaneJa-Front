@@ -3,18 +3,22 @@ import {
   WeekSchedule,
 } from "../../contexts/subjectsTable";
 import { DailyColumn } from "../DailyColumn/DailyColumn";
-import { OutWrapper, Wrapper } from "./ScheduleTable.style";
+import { TableContent, Wrapper, Timing, Time } from "./ScheduleTable.style";
 
 export const ScheduleTable = () => {
   const { subjects } = useSubjectsTableContext();
 
+  const time = []
   return (
-    <OutWrapper>
-      <Wrapper>
+    <Wrapper>
+      <Timing>
+        {Array(9).fill(2).map((value: number, i: number) => <Time>{value * i + 8}h</Time>)}
+      </Timing>
+      <TableContent>
         {Object.keys(subjects).map((value) => (
           <DailyColumn key={value} id={value as keyof WeekSchedule} />
         ))}
-      </Wrapper>
-    </OutWrapper>
+      </TableContent>
+    </Wrapper>
   );
 };
