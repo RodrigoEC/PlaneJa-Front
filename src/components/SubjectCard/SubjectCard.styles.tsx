@@ -43,10 +43,11 @@ export const Wrapper = styled.div`
   font-weight: bold;
   font-size: 0.9rem;
   transition: 0.3s;
+  text-align: center;
 
   @media screen and (max-width: 700px) {
-    font-size: 0.8rem;
-    width: 11.5rem;
+    font-size: 0.78rem;
+    width: 10rem;
   }
 
   &:hover {

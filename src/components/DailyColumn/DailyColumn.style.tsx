@@ -20,11 +20,12 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.span`
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
   text-transform: capitalize;
 
   @media screen and (max-width: 700px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -50,6 +51,6 @@ export const EmptySubject = styled.div`
 
   @media screen and (max-width: 700px) {
     font-size: 0.8rem;
-    width: 11.5rem;
+    width: 10rem;
   }
 `;
