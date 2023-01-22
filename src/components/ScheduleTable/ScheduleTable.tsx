@@ -5,6 +5,7 @@ import {
 import { DailyColumn } from "../DailyColumn/DailyColumn";
 import { TableContent, Wrapper, Timing, Time } from "./ScheduleTable.style";
 
+
 export const ScheduleTable = () => {
   const { subjects } = useSubjectsTableContext();
 

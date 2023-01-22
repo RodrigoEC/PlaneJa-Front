@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
+import Logo from "../../assets/images/Logo.svg";
+import LogoWhite from "../../assets/images/LogoWhite.svg";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -33,7 +35,7 @@ export const Timing = styled.div`
     margin-top: 5rem;
     gap: 3.55rem;
   }
-`
+`;
 
 export const Time = styled.span`
   display: flex;
@@ -43,15 +45,20 @@ export const Time = styled.span`
   font-weight: bold;
   opacity: 0.7;
   &::after {
-    content: '-'
+    content: "-";
   }
 
   @media screen and (max-width: 700px) {
     font-size: 0.75rem;
   }
-`
+`;
+
+export const LogoComponent = styled(Logo)``;
 
 export const TableContent = styled.div`
   display: flex;
   gap: 0.75rem;
+  background-image: url(${({ theme }) => theme.name === "light" ? Logo : LogoWhite});
+  background-repeat: no-repeat;
+  background-position: center;
 `;
