@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 2rem 1rem 1rem;
+  padding: 2rem 0.75rem 1rem;
   background-color: ${({ theme }: { theme: DefaultTheme }) =>
     theme.colors.primary}10;
   border: 2px solid
@@ -45,7 +45,7 @@ export const EmptySubject = styled.div`
   border: 2px dashed
     ${({ theme }: { theme: DefaultTheme }) => theme.colors.stroke}50;
   height: 3.5rem;
-  width: 12.5rem;
+  width: 11.5rem;
   border-radius: 3px;
   box-sizing: border-box;
 

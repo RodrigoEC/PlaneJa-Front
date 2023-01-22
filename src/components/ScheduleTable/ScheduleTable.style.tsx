@@ -4,8 +4,9 @@ export const OutWrapper = styled.div`
   width: 100%;
   padding-bottom: 6px;
   overflow-x: scroll;
+  margin-bottom: 1rem;
   &::-webkit-scrollbar {
-    height: 6px;
+    height: 8px;
   }
 
   &::-webkit-scrollbar-track {
@@ -17,10 +18,9 @@ export const OutWrapper = styled.div`
     opacity: 0.6;
     border-radius: 8px;
   }
-
 `;
 
 export const Wrapper = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
 `;

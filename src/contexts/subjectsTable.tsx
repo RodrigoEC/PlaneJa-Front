@@ -72,7 +72,12 @@ const defaultSubjects = {
   ter: { name: "terça-feira", subs: [] },
   quar: { name: "quarta-feira", subs: [] },
   qui: { name: "quinta-feira", subs: [] },
-  sex: { name: "sexta-feira", subs: [] },
+  sex: { name: "sexta-feira", subs: [{
+    title: "Organização e arquitetura de computadores",
+    variant: "lightOrange",
+    position: 4,
+    locked: false,
+  }] },
   sab: { name: "sábado", subs: [] },
 };
 

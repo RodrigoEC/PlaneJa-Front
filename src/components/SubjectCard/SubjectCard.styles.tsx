@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
   height: 3.5rem;
   align-items: center;
   padding: 0.5rem;
-  width: 12.5rem;
+  width: 11.5rem;
   box-sizing: border-box;
   border-radius: 3px;
   border: 3px solid

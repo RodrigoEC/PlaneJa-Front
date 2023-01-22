@@ -93,7 +93,7 @@ export const InnerContainer = styled.div`
   justify-content: center;
 
   min-height: 100vh;
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.primary};
@@ -109,7 +109,7 @@ export const Body = styled.main`
   gap: 2.5rem;
   flex-grow: 1;
 
-  padding: 3rem 4rem 2rem;
+  padding: 3rem 4rem 1rem;
   box-sizing: border-box;
   flex-grow: 1;
 
