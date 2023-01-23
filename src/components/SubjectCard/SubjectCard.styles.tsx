@@ -44,6 +44,8 @@ export const Wrapper = styled.div`
   font-size: 0.9rem;
   transition: 0.3s;
   text-align: center;
+  animation: appear 0.3s;
+
 
   @media screen and (max-width: 700px) {
     font-size: 0.78rem;

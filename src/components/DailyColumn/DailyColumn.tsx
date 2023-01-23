@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useCallback } from "react";
 import {
   SubjectContent,
   useSubjectsTableContext,
@@ -11,28 +11,34 @@ import {
   Divider,
   SubjectsContainer,
   EmptySubject,
+  LoadingSubject,
+  LoadingIcon,
 } from "./DailyColumn.style";
 
 export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
-  const { schedules, currentScheduleIndex, currentSchedule } =
+  const { loading, schedules, currentScheduleIndex, currentSchedule } =
     useSubjectsTableContext();
-  const [schedule, setSchedule] = useState(new Array(8).fill(null));
 
-  // useEffect(() => {
-  //   const newSchedule = Array.from(schedule);
-  //   schedules[currentScheduleIndex][id].subs.forEach((element: SubjectContent) => {
-  //     newSchedule[element.position] = element;
-  //   });
+  const getStates = useCallback(
+    (props: SubjectContent | null): ReactElement => {
+      if (loading === true) {
+        return (
+          <LoadingSubject>
+            <LoadingIcon />
+            <span>carregando</span>
+          </LoadingSubject>
+        );
+      }
 
-  //   // console.log(newSchedule)
-  //   console.log(schedules[currentScheduleIndex][id].subs)
-
-  //   setSchedule(newSchedule);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [schedules[currentScheduleIndex], currentScheduleIndex]);
-  // useEffect(() => {
-  //   console.log(currentSchedule)
-  // }, [currentSchedule])
+      if (props === null) {
+        return <EmptySubject />;
+      } else {
+        return <SubjectCard {...props} />;
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [loading, currentScheduleIndex]
+  );
 
   return (
     <Wrapper>
@@ -40,13 +46,7 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
       <Divider />
       <SubjectsContainer>
         {currentSchedule[id].subs.map(
-          (value: SubjectContent | null, index: number) => {
-            return value !== null ? (
-              <SubjectCard key={index} {...value} />
-            ) : (
-              <EmptySubject key={index} />
-            );
-          }
+          (value: SubjectContent | null, index: number) => getStates(value)
         )}
       </SubjectsContainer>
     </Wrapper>

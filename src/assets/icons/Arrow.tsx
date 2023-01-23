@@ -1,6 +1,6 @@
-import { ReactElement, SVGProps } from "react";
+import { ReactElement } from "react";
 
-export const Arrow = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>): ReactElement => {
+export const Arrow = (props: any): ReactElement => {
   return (
     <svg
       width="23"

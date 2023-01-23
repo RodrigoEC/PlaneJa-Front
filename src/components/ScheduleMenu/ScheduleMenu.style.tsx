@@ -35,9 +35,14 @@ export const Index = styled.span`
 export const RightArrow = styled(Arrow)`
   fill: ${({ theme }) => theme.colors.primary};
   opacity: ${({ blocked }: { blocked: string }) =>
-    blocked === "true" ? 0.8 : 1};
+    blocked === "T" ? 0.6 : 1};
   cursor: ${({ blocked }: { blocked: string }) =>
-    blocked === "true" ? "not-allowed" : "pointer"};
+    blocked === "T" ? "not-allowed" : "pointer"};
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export const LeftArrow = styled(RightArrow)`

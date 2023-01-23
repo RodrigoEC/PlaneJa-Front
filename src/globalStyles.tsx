@@ -84,6 +84,24 @@ export const Wrapper = styled.div`
       transform: scale(1);
     }
   }
+
+  @keyframes appear {
+    from {
+      transform: scale(0.95);
+      opacity: 0.7;
+    } to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes spinning {
+    from {
+      transform: rotate(0deg);
+    } to {
+      transform: rotate(-360deg);
+    }
+  }
 `;
 
 export const InnerContainer = styled.div`

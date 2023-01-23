@@ -9,7 +9,6 @@ import {
 export interface SubjectContent {
   title: string;
   variant: string;
-  position: number;
   locked: boolean;
 }
 
@@ -36,8 +35,37 @@ export interface SubjectsTableContent {
   changeSchedule: Function;
 }
 
+// const defaultSubjects = {
+//   seg: { name: "segunda-feira", subs: Array(8).fill(null) },
+//   ter: { name: "terça-feira", subs: Array(8).fill(null) },
+//   quar: { name: "quarta-feira", subs: Array(8).fill(null) },
+//   qui: { name: "quinta-feira", subs: Array(8).fill(null) },
+//   sex: { name: "sexta-feira", subs: Array(8).fill(null) },
+//   sab: { name: "sábado", subs: Array(8).fill(null) },
+// };
+
 const defaultSubjects = {
-  seg: { name: "segunda-feira", subs: Array(8).fill(null) },
+  seg: {
+    name: "segunda-feira",
+    subs: [
+      null,
+      {
+        title: "Fundamentos de matemática para ciência da computação II",
+        variant: "cyan",
+        locked: true,
+      },
+      null,
+      {
+        title: "Fundamentos de matemática para ciência da computação II",
+        variant: "lightOrange",
+        locked: true,
+      },
+      null,
+      null,
+      null,
+      null,
+    ],
+  },
   ter: { name: "terça-feira", subs: Array(8).fill(null) },
   quar: { name: "quarta-feira", subs: Array(8).fill(null) },
   qui: { name: "quinta-feira", subs: Array(8).fill(null) },
@@ -58,7 +86,12 @@ const u = {
       },
       null,
       null,
-      null,
+      {
+        title: "Fundamentos de matemática para ciência da computação II",
+        variant: "cyan",
+        position: 3,
+        locked: true,
+      },
       null,
       null,
       null,
@@ -100,16 +133,15 @@ export const SubjectsTableProvider = ({
 
   const changeSchedule = useCallback(
     (id: number) => {
-      setLoading(true);
       setCurrentScheduleIndex(id);
       const newSchedules: WeekSchedule = { ...defaultSubjects };
 
       Object.keys(schedules[id]).forEach((value: string) => {
         const subjects = new Array(8).fill(null);
         schedules[id][value as keyof WeekSchedule].subs.forEach(
-          (subElement: SubjectContent | null) => {
+          (subElement: SubjectContent | null, i: number) => {
             if (subElement !== null) {
-              subjects[subElement.position] = subElement;
+              subjects[i] = subElement;
             }
           }
         );
@@ -118,13 +150,13 @@ export const SubjectsTableProvider = ({
       });
 
       setCurrentSchedule(newSchedules);
-      setTimeout(() => setLoading(false), 1000);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentScheduleIndex]
   );
 
   const nextSchedule = () => {
-    if (currentScheduleIndex < schedules.length - 2) {
+    if (currentScheduleIndex < schedules.length - 1) {
       changeSchedule(currentScheduleIndex + 1);
     }
   };

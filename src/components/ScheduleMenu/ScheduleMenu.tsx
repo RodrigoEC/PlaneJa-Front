@@ -2,22 +2,32 @@ import { useSubjectsTableContext } from "../../contexts/subjectsTable";
 import { LeftArrow, RightArrow, Wrapper, Index } from "./ScheduleMenu.style";
 
 export const ScheduleMenu = () => {
-  const { schedules, currentScheduleIndex, changeSchedule } =
-    useSubjectsTableContext();
+  const {
+    schedules,
+    currentScheduleIndex,
+    changeSchedule,
+    nextSchedule,
+    previousSchedule,
+  } = useSubjectsTableContext();
+
+  console.log(schedules, currentScheduleIndex);
 
   return (
     <Wrapper>
-      <LeftArrow blocked={"false"} />
+      <LeftArrow
+        blocked={currentScheduleIndex === 0 && "T"}
+        onClick={previousSchedule}
+      />
       {schedules.map((_, i) => (
         <Index
           key={i}
           onClick={() => changeSchedule(i)}
-          selected={i === currentScheduleIndex ? 'T': 'F'}
+          selected={i === currentScheduleIndex ? "T" : "F"}
         >
           {i + 1}
         </Index>
       ))}
-      <RightArrow blocked={"false"} />
+      <RightArrow blocked={currentScheduleIndex + 1 === schedules.length && 'T'} onClick={nextSchedule} />
     </Wrapper>
   );
 };
