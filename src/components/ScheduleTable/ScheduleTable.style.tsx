@@ -27,7 +27,7 @@ export const Timing = styled.div`
   flex-flow: column;
   align-items: flex-end;
   margin-top: 6rem;
-  gap: 3.45rem;
+  gap: 3.2rem;
   margin-left: 0.25rem;
 
   @media screen and (max-width: 700px) {

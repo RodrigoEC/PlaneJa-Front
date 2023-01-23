@@ -4,7 +4,7 @@ import { Unlocked } from "../../assets/icons/Unlocked";
 import { colors } from "../../util/colors";
 
 export const LockedIcon = styled(Locked)`
-  width: 1rem;
+  width: 0.8rem;
   position: absolute;
   align-self: center;
   fill: transparent;
@@ -15,7 +15,7 @@ export const LockedIcon = styled(Locked)`
 `;
 
 export const UnlockedIcon = styled(Unlocked)`
-  width: 1.25rem;
+  width: 1rem;
   position: absolute;
   align-self: center;
   fill: transparent;
@@ -32,10 +32,10 @@ export const Wrapper = styled.div`
   background-color: ${({ variant }: { variant: keyof typeof colors }) =>
     colors[variant]}80;
   cursor: pointer;
-  height: 3.5rem;
+  height: 3.3rem;
   align-items: center;
   padding: 0.5rem;
-  width: 11.5rem;
+  width: 10.5rem;
   box-sizing: border-box;
   border-radius: 3px;
   border: 3px solid
@@ -46,10 +46,9 @@ export const Wrapper = styled.div`
   text-align: center;
   animation: appear 0.3s;
 
-
   @media screen and (max-width: 700px) {
     font-size: 0.78rem;
-    width: 10rem;
+    width: 9rem;
   }
 
   &:hover {

@@ -45,14 +45,14 @@ export const SubjectsContainer = styled.div`
 export const EmptySubject = styled.div`
   border: 2px dashed
     ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}50;
-  height: 3.5rem;
-  width: 11.5rem;
+  height: 3.3rem;
+  width: 10.5rem;
   border-radius: 3px;
   box-sizing: border-box;
 
   @media screen and (max-width: 700px) {
     font-size: 0.8rem;
-    width: 10rem;
+    width: 9rem;
   }
 `;
 

@@ -13,7 +13,7 @@ export const SubjectCard = ({
 }): ReactElement => {
   const [isLocked, setIsLocked] = useState(locked);
   const displayedTitle =
-    title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-4) : title;
+    title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
 
   // TODO: Add update formdata on unlock or lock feature
   const onClick = (): void => {
