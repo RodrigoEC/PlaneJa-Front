@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components";
+import styled from "styled-components";
 import Logo from "../../assets/images/Logo.svg";
 import LogoWhite from "../../assets/images/LogoWhite.svg";
 
@@ -52,8 +52,6 @@ export const Time = styled.span`
     font-size: 0.75rem;
   }
 `;
-
-export const LogoComponent = styled(Logo)``;
 
 export const TableContent = styled.div`
   display: flex;
