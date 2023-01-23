@@ -14,31 +14,40 @@ import {
 } from "./DailyColumn.style";
 
 export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
-  const { subjects, currentSchedule } = useSubjectsTableContext();
+  const { schedules, currentScheduleIndex, currentSchedule } =
+    useSubjectsTableContext();
   const [schedule, setSchedule] = useState(new Array(8).fill(null));
 
-  useEffect(() => {
-    const newSchedule = Array.from(schedule);
-    subjects[currentSchedule][id].subs.forEach((element: SubjectContent) => {
-      newSchedule[element.position] = element;
-    });
+  // useEffect(() => {
+  //   const newSchedule = Array.from(schedule);
+  //   schedules[currentScheduleIndex][id].subs.forEach((element: SubjectContent) => {
+  //     newSchedule[element.position] = element;
+  //   });
 
-    setSchedule(newSchedule);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjects[currentSchedule][id]]);
+  //   // console.log(newSchedule)
+  //   console.log(schedules[currentScheduleIndex][id].subs)
+
+  //   setSchedule(newSchedule);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [schedules[currentScheduleIndex], currentScheduleIndex]);
+  // useEffect(() => {
+  //   console.log(currentSchedule)
+  // }, [currentSchedule])
 
   return (
     <Wrapper>
-      <Title>{subjects[currentSchedule][id].name}</Title>
+      <Title>{schedules[currentScheduleIndex][id].name}</Title>
       <Divider />
       <SubjectsContainer>
-        {schedule.map((value: SubjectContent, index: number) => {
-          return schedule[index] !== null ? (
-            <SubjectCard {...value} />
-          ) : (
-            <EmptySubject key={index} />
-          );
-        })}
+        {currentSchedule[id].subs.map(
+          (value: SubjectContent | null, index: number) => {
+            return value !== null ? (
+              <SubjectCard key={index} {...value} />
+            ) : (
+              <EmptySubject key={index} />
+            );
+          }
+        )}
       </SubjectsContainer>
     </Wrapper>
   );

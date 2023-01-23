@@ -1,4 +1,10 @@
-import { createContext, ReactElement, useContext, useState } from "react";
+import {
+  createContext,
+  ReactElement,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
 
 export interface SubjectContent {
   title: string;
@@ -8,19 +14,21 @@ export interface SubjectContent {
 }
 
 export interface WeekSchedule {
-  seg: { name: string; subs: SubjectContent[] };
-  ter: { name: string; subs: SubjectContent[] };
-  quar: { name: string; subs: SubjectContent[] };
-  qui: { name: string; subs: SubjectContent[] };
-  sex: { name: string; subs: SubjectContent[] };
-  sab: { name: string; subs: SubjectContent[] };
+  seg: { name: string; subs: Array<SubjectContent | null> };
+  ter: { name: string; subs: Array<SubjectContent | null> };
+  quar: { name: string; subs: Array<SubjectContent | null> };
+  qui: { name: string; subs: Array<SubjectContent | null> };
+  sex: { name: string; subs: Array<SubjectContent | null> };
+  sab: { name: string; subs: Array<SubjectContent | null> };
 }
 
 export interface SubjectsTableContent {
-  subjects: WeekSchedule[];
-  setSubjects: Function;
-  currentSchedule: number;
+  schedules: WeekSchedule[];
+  setSchedules: Function;
+  currentSchedule: WeekSchedule;
   setCurrentSchedule: Function;
+  currentScheduleIndex: number;
+  setCurrentScheduleIndex: Function;
   loading: boolean;
   setLoading: Function;
   nextSchedule: Function;
@@ -29,38 +37,47 @@ export interface SubjectsTableContent {
 }
 
 const defaultSubjects = {
-  seg: { name: "segunda-feira", subs: [] },
-  ter: { name: "terça-feira", subs: [] },
-  quar: { name: "quarta-feira", subs: [] },
-  qui: { name: "quinta-feira", subs: [] },
-  sex: { name: "sexta-feira", subs: [] },
-  sab: { name: "sábado", subs: [] },
+  seg: { name: "segunda-feira", subs: Array(8).fill(null) },
+  ter: { name: "terça-feira", subs: Array(8).fill(null) },
+  quar: { name: "quarta-feira", subs: Array(8).fill(null) },
+  qui: { name: "quinta-feira", subs: Array(8).fill(null) },
+  sex: { name: "sexta-feira", subs: Array(8).fill(null) },
+  sab: { name: "sábado", subs: Array(8).fill(null) },
 };
 
 const u = {
-  seg: { name: "segunda-feira", subs: [] },
-  ter: {
-    name: "terça-feira",
+  seg: {
+    name: "segunda-feira",
     subs: [
+      null,
       {
-        title: "Organização e arquitetura de computadores",
-        variant: "lightOrange",
-        position: 4,
-        locked: false,
+        title: "Fundamentos de matemática para ciência da computação II",
+        variant: "cyan",
+        position: 2,
+        locked: true,
       },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
     ],
   },
-  quar: { name: "quarta-feira", subs: [] },
-  qui: { name: "quinta-feira", subs: [] },
-  sex: { name: "sexta-feira", subs: [] },
-  sab: { name: "sábado", subs: [] },
+  ter: { name: "terça-feira", subs: Array(8).fill(null) },
+  quar: { name: "quarta-feira", subs: Array(8).fill(null) },
+  qui: { name: "quinta-feira", subs: Array(8).fill(null) },
+  sex: { name: "sexta-feira", subs: Array(8).fill(null) },
+  sab: { name: "sábado", subs: Array(8).fill(null) },
 };
 
 const SubjectsTableContext = createContext<SubjectsTableContent>({
-  subjects: [defaultSubjects],
-  setSubjects: () => {},
-  currentSchedule: 0,
+  schedules: [],
+  setSchedules: () => {},
+  currentSchedule: defaultSubjects,
   setCurrentSchedule: () => {},
+  currentScheduleIndex: 0,
+  setCurrentScheduleIndex: () => {},
   loading: false,
   setLoading: () => {},
   nextSchedule: () => {},
@@ -73,35 +90,60 @@ export const SubjectsTableProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [subjects, setSubjects] = useState([defaultSubjects, u]);
+  const [schedules, setSchedules] = useState([
+    JSON.parse(JSON.stringify(defaultSubjects)),
+    u,
+  ]);
   const [loading, setLoading] = useState(false);
-  const [currentSchedule, setCurrentSchedule] = useState(0);
+  const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
+  const [currentSchedule, setCurrentSchedule] = useState(defaultSubjects);
 
-  const changeSchedule = (id: number) => {
-    setLoading(true);
-    setCurrentSchedule(id);
-    setTimeout(() => setLoading(false), 1000);
-  };
+  const changeSchedule = useCallback(
+    (id: number) => {
+      setLoading(true);
+      setCurrentScheduleIndex(id);
+      const newSchedules: WeekSchedule = { ...defaultSubjects };
+
+      Object.keys(schedules[id]).forEach((value: string) => {
+        const subjects = new Array(8).fill(null);
+        schedules[id][value as keyof WeekSchedule].subs.forEach(
+          (subElement: SubjectContent | null) => {
+            if (subElement !== null) {
+              subjects[subElement.position] = subElement;
+            }
+          }
+        );
+
+        newSchedules[value as keyof WeekSchedule].subs = subjects;
+      });
+
+      setCurrentSchedule(newSchedules);
+      setTimeout(() => setLoading(false), 1000);
+    },
+    [currentScheduleIndex]
+  );
 
   const nextSchedule = () => {
-    if (currentSchedule < subjects.length - 2) {
-      changeSchedule(currentSchedule + 1);
+    if (currentScheduleIndex < schedules.length - 2) {
+      changeSchedule(currentScheduleIndex + 1);
     }
   };
 
   const previousSchedule = () => {
-    if (currentSchedule > 0) {
-      changeSchedule(currentSchedule - 1);
+    if (currentScheduleIndex > 0) {
+      changeSchedule(currentScheduleIndex - 1);
     }
   };
 
   const value = {
-    subjects,
-    setSubjects,
+    schedules,
+    setSchedules,
     loading,
     setLoading,
     currentSchedule,
     setCurrentSchedule,
+    currentScheduleIndex,
+    setCurrentScheduleIndex,
     nextSchedule,
     previousSchedule,
     changeSchedule,

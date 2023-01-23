@@ -24,11 +24,12 @@ import {
   WeekSchedule,
 } from "./contexts/subjectsTable";
 import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
+import { Dots } from "./assets/icons/Dots";
+import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 
 function App() {
   const { studentRecord } = useExtractionContext();
   const { status } = studentRecord;
-  const { subjects } = useSubjectsTableContext();
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
@@ -66,8 +67,10 @@ function App() {
               <SettingsContainer>
                 <RestraintSection />
               </SettingsContainer>
+              <ScheduleTable />
+              <Dots />
+              <ScheduleMenu />
             </Body>
-            <ScheduleTable />
             <Footer></Footer>
           </InnerContainer>
         </Wrapper>

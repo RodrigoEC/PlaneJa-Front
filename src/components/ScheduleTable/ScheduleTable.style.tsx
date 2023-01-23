@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
   width: 100%;
   padding-bottom: 6px;
   overflow-x: scroll;
-  margin-bottom: 1rem;
   &::-webkit-scrollbar {
     height: 8px;
   }

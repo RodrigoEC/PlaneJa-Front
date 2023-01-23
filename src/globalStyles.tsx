@@ -106,15 +106,14 @@ export const Body = styled.main`
   flex-flow: column;
   align-items: center;
   width: 100%;
-  gap: 2.5rem;
+  gap: 2rem;
   flex-grow: 1;
 
-  padding: 3rem 4rem 1rem;
+  padding: 3rem 0rem 1rem;
   box-sizing: border-box;
   flex-grow: 1;
 
   @media screen and (max-width: 700px) {
-    gap: 2rem;
     padding: 3rem 0rem 2rem;
   }
 `;
