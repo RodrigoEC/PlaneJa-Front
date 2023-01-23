@@ -20,10 +20,10 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
     useSubjectsTableContext();
 
   const getStates = useCallback(
-    (props: SubjectContent | null): ReactElement => {
+    (props: SubjectContent | null, key: number): ReactElement => {
       if (loading === true) {
         return (
-          <LoadingSubject>
+          <LoadingSubject key={key}>
             <LoadingIcon />
             <span>carregando</span>
           </LoadingSubject>
@@ -31,13 +31,13 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
       }
 
       if (props === null) {
-        return <EmptySubject />;
+        return <EmptySubject key={key} />;
       } else {
-        return <SubjectCard {...props} />;
+        return <SubjectCard {...props} key={key} />;
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [loading, currentScheduleIndex]
+    [currentScheduleIndex]
   );
 
   return (
@@ -46,7 +46,8 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
       <Divider />
       <SubjectsContainer>
         {currentSchedule[id].subs.map(
-          (value: SubjectContent | null, index: number) => getStates(value)
+          (value: SubjectContent | null, index: number) =>
+            getStates(value, index)
         )}
       </SubjectsContainer>
     </Wrapper>

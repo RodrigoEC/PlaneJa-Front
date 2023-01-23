@@ -18,7 +18,7 @@ export const ScheduleTable = () => {
           ))}
       </Timing> 
       <TableContent>
-        {Object.keys(currentSchedule)?.map((value) => (
+        {Object.keys(currentSchedule).map((value) => (
           <DailyColumn key={value} id={value as keyof WeekSchedule} />
         ))}
       </TableContent>

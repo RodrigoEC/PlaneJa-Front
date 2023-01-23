@@ -10,12 +10,10 @@ export const ScheduleMenu = () => {
     previousSchedule,
   } = useSubjectsTableContext();
 
-  console.log(schedules, currentScheduleIndex);
-
   return (
     <Wrapper>
       <LeftArrow
-        blocked={currentScheduleIndex === 0 && "T"}
+        blocked={currentScheduleIndex === 0 ? "T" : undefined}
         onClick={previousSchedule}
       />
       {schedules.map((_, i) => (
@@ -27,7 +25,12 @@ export const ScheduleMenu = () => {
           {i + 1}
         </Index>
       ))}
-      <RightArrow blocked={currentScheduleIndex + 1 === schedules.length && 'T'} onClick={nextSchedule} />
+      <RightArrow
+        blocked={
+          currentScheduleIndex + 1 === schedules.length ? "T" : undefined
+        }
+        onClick={nextSchedule}
+      />
     </Wrapper>
   );
 };
