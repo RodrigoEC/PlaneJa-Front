@@ -15,7 +15,6 @@ import {
   Title,
   Body,
   Divider,
-  SettingsContainer,
   SubjectsDataSection,
   ScheduleContainer,
 } from "./globalStyles";

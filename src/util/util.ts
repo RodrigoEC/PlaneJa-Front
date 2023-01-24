@@ -10,3 +10,5 @@ export const capitalize = (string: string): string => {
 export const getLocalStorage = (key: string, defaultValue: any) => {
   return JSON.parse(localStorage.getItem(key) || JSON.stringify(defaultValue));
 };
+
+export const defaultFunction = () => {};

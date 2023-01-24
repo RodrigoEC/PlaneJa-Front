@@ -16,8 +16,13 @@ import {
 } from "./DailyColumn.style";
 
 export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
-  const { loading, schedules, currentScheduleIndex, currentSchedule } =
-    useSubjectsTableContext();
+  const {
+    loading,
+    schedules,
+    currentScheduleIndex,
+    getSchedulesData,
+    currentSchedule,
+  } = useSubjectsTableContext();
 
   const getStates = useCallback(
     (props: SubjectContent | null, key: number): ReactElement => {
@@ -31,7 +36,7 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
       }
 
       if (props === null) {
-        return <EmptySubject key={key} />;
+        return <EmptySubject key={key} onClick={(e) => getSchedulesData()} />;
       } else {
         return <SubjectCard {...props} key={key} />;
       }

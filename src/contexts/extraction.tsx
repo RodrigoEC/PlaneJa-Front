@@ -1,7 +1,7 @@
 import { createContext, ReactElement, useContext, useState } from "react";
 import { extractRecord } from "../service/api";
 import { defaultRecord, Record } from "../service/types";
-import { getLocalStorage } from "../util/util";
+import { defaultFunction, getLocalStorage } from "../util/util";
 
 interface ExtratedContent {
   loading: boolean;
@@ -15,7 +15,6 @@ interface ExtratedContent {
   setError: Function;
 }
 
-const defaultFunction = () => {};
 const ExtractionContext = createContext<ExtratedContent>({
   loading: false,
   setLoading: defaultFunction,

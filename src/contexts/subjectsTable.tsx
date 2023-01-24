@@ -3,12 +3,17 @@ import {
   ReactElement,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
+import { calculateSchedules } from "../service/api";
+import { defaultSchedule, defaultSchedules } from "../util/constants";
+import { defaultFunction } from "../util/util";
 
 export interface SubjectContent {
   title: string;
   variant: string;
+  position: number;
   locked: boolean;
 }
 
@@ -33,89 +38,22 @@ export interface SubjectsTableContent {
   nextSchedule: Function;
   previousSchedule: Function;
   changeSchedule: Function;
+  getSchedulesData: Function;
 }
-
-// const defaultSubjects = {
-//   seg: { name: "segunda-feira", subs: Array(8).fill(null) },
-//   ter: { name: "terça-feira", subs: Array(8).fill(null) },
-//   quar: { name: "quarta-feira", subs: Array(8).fill(null) },
-//   qui: { name: "quinta-feira", subs: Array(8).fill(null) },
-//   sex: { name: "sexta-feira", subs: Array(8).fill(null) },
-//   sab: { name: "sábado", subs: Array(8).fill(null) },
-// };
-
-const defaultSubjects = {
-  seg: {
-    name: "segunda-feira",
-    subs: [
-      null,
-      {
-        title: "Fundamentos de matemática para ciência da computação II",
-        variant: "cyan",
-        locked: true,
-      },
-      null,
-      {
-        title: "Fundamentos de matemática para ciência da computação II",
-        variant: "lightOrange",
-        locked: true,
-      },
-      null,
-      null,
-      null,
-      null,
-    ],
-  },
-  ter: { name: "terça-feira", subs: Array(8).fill(null) },
-  quar: { name: "quarta-feira", subs: Array(8).fill(null) },
-  qui: { name: "quinta-feira", subs: Array(8).fill(null) },
-  sex: { name: "sexta-feira", subs: Array(8).fill(null) },
-  sab: { name: "sábado", subs: Array(8).fill(null) },
-};
-
-const u = {
-  seg: {
-    name: "segunda-feira",
-    subs: [
-      null,
-      {
-        title: "Fundamentos de matemática para ciência da computação II",
-        variant: "cyan",
-        position: 2,
-        locked: true,
-      },
-      null,
-      null,
-      {
-        title: "Fundamentos de matemática para ciência da computação II",
-        variant: "cyan",
-        position: 3,
-        locked: true,
-      },
-      null,
-      null,
-      null,
-    ],
-  },
-  ter: { name: "terça-feira", subs: Array(8).fill(null) },
-  quar: { name: "quarta-feira", subs: Array(8).fill(null) },
-  qui: { name: "quinta-feira", subs: Array(8).fill(null) },
-  sex: { name: "sexta-feira", subs: Array(8).fill(null) },
-  sab: { name: "sábado", subs: Array(8).fill(null) },
-};
 
 const SubjectsTableContext = createContext<SubjectsTableContent>({
   schedules: [],
-  setSchedules: () => {},
-  currentSchedule: defaultSubjects,
-  setCurrentSchedule: () => {},
+  setSchedules: defaultFunction,
+  currentSchedule: defaultSchedule,
+  setCurrentSchedule: defaultFunction,
   currentScheduleIndex: 0,
-  setCurrentScheduleIndex: () => {},
+  setCurrentScheduleIndex: defaultFunction,
   loading: false,
-  setLoading: () => {},
-  nextSchedule: () => {},
-  previousSchedule: () => {},
-  changeSchedule: () => {},
+  setLoading: defaultFunction,
+  nextSchedule: defaultFunction,
+  previousSchedule: defaultFunction,
+  changeSchedule: defaultFunction,
+  getSchedulesData: defaultFunction,
 });
 
 export const SubjectsTableProvider = ({
@@ -123,36 +61,38 @@ export const SubjectsTableProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [schedules, setSchedules] = useState([
-    JSON.parse(JSON.stringify(defaultSubjects)),
-    u,
-  ]);
+  const [schedules, setSchedules] = useState(
+    JSON.parse(
+      localStorage.getItem("planeja@schedules") ||
+        JSON.stringify(defaultSchedules)
+    )
+  );
   const [loading, setLoading] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
-  const [currentSchedule, setCurrentSchedule] = useState(defaultSubjects);
+  const [currentSchedule, setCurrentSchedule] = useState(defaultSchedule);
 
   const changeSchedule = useCallback(
     (id: number) => {
       setCurrentScheduleIndex(id);
-      const newSchedules: WeekSchedule = { ...defaultSubjects };
+      const newSchedule = JSON.parse(JSON.stringify(defaultSchedule));
 
       Object.keys(schedules[id]).forEach((value: string) => {
         const subjects = new Array(8).fill(null);
         schedules[id][value as keyof WeekSchedule].subs.forEach(
           (subElement: SubjectContent | null, i: number) => {
             if (subElement !== null) {
-              subjects[i] = subElement;
+              subjects[subElement.position] = subElement;
             }
           }
         );
 
-        newSchedules[value as keyof WeekSchedule].subs = subjects;
+        newSchedule[value as keyof WeekSchedule].subs = subjects;
       });
 
-      setCurrentSchedule(newSchedules);
+      setCurrentSchedule(newSchedule);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentScheduleIndex]
+    [schedules, currentScheduleIndex]
   );
 
   const nextSchedule = () => {
@@ -167,6 +107,19 @@ export const SubjectsTableProvider = ({
     }
   };
 
+  const getSchedulesData = useCallback( async() => {
+    const [data, status] = await calculateSchedules({ oi: "oi" });
+    if (data.length > 0 && status === 200) {
+      // localStorage.setItem("planeja@schedules", JSON.stringify(data));
+      setSchedules(data);
+
+    }
+  }, []);
+
+  useEffect(() => {
+    changeSchedule(currentScheduleIndex);
+  }, [changeSchedule, currentScheduleIndex, schedules]);
+
   const value = {
     schedules,
     setSchedules,
@@ -179,6 +132,7 @@ export const SubjectsTableProvider = ({
     nextSchedule,
     previousSchedule,
     changeSchedule,
+    getSchedulesData,
   };
 
   return (
