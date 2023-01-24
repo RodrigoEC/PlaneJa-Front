@@ -101,17 +101,20 @@ const subjects = [
   },
 ];
 
-export const calculateSchedules = async (
+export const calculateSchedules = (
   data: any
-): Promise<[WeekSchedule[], number]> => {
+): [WeekSchedule[], number] => {
   try {
-    const response = await api.get("unique-subjects", {
-      params: { name: "Ciência da computação" },
-    });
+    // ): Promise<[WeekSchedule[], number]> => {
+    //   try {
+    // const response = await api.get("unique-subjects", {
+    //   params: { name: "Ciência da computação" },
+    // });
 
-    response.data = subjects;
+    // response.data = subjects;
+    // return [response.data, response.status]
 
-    return [response.data, 200];
+    return [subjects, 200];
   } catch (e: any) {
     return [[], 400];
   }
