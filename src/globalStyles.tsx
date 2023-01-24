@@ -111,7 +111,7 @@ export const InnerContainer = styled.div`
   justify-content: center;
 
   min-height: 100vh;
-  max-width: 1450px;
+  max-width: 1320px;
   width: 100%;
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.primary};
@@ -156,6 +156,7 @@ export const ScheduleContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   gap: 1.2rem;
 `

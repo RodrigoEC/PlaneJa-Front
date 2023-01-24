@@ -54,8 +54,13 @@ export const Time = styled.span`
 
 export const TableContent = styled.div`
   display: flex;
-  gap: 0.75rem;
-  background-image: url(${({ theme }) => theme.name === "light" ? Logo : LogoWhite});
+  gap: 0.65rem;
+  background-image: url(${({ theme }) =>
+    theme.name === "light" ? Logo : LogoWhite});
   background-repeat: no-repeat;
   background-position: center;
+
+  @media screen and (max-width: 700px) {
+    gap: 0.5rem;
+  }
 `;
