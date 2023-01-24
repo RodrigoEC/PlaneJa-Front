@@ -14,7 +14,6 @@ export interface SubjectContent {
   title: string;
   variant: string;
   position: number;
-  locked: boolean;
 }
 
 export interface WeekSchedule {

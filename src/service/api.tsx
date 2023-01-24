@@ -59,7 +59,7 @@ const subjects = [
       name: "terça-feira",
       subs: [
         {
-          title: "Fundamentos de matemática para ciência da computação II",
+          title: "Banco De Dados Ii",
           variant: "lightOrange",
           position: 4,
           locked: true,

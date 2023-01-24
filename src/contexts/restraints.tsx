@@ -15,7 +15,7 @@ interface ExtratedContent {
   setSemester: Function;
   numEssentialSubjects: number;
   setNumEssentialSubjects: Function;
-  essentialSubjects: any;
+  essentialSubjects: string[];
   setEssentialSubjects: Function;
   subjects: string[];
   setSubjects: Function;

@@ -1,24 +1,37 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useCallback, useEffect } from "react";
+import { useRestraintsContext } from "../../contexts/restraints";
 import { colors } from "../../util/colors";
 import { LockedIcon, UnlockedIcon, Wrapper } from "./SubjectCard.styles";
 
 export const SubjectCard = ({
   variant,
   title,
-  locked,
 }: {
   variant: string;
   title: string;
-  locked: boolean;
 }): ReactElement => {
-  const [isLocked, setIsLocked] = useState(locked);
+  const {
+    essentialSubjects,
+    setEssentialSubjects,
+    studentSubjects,
+    setStudentSubjects,
+  } = useRestraintsContext();
   const displayedTitle =
     title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
 
-  // TODO: Add update formdata on unlock or lock feature
-  const onClick = (): void => {
-    setIsLocked((previous) => !previous);
-  };
+  const onClick = useCallback((): void => {
+    if (essentialSubjects.includes(title)) {
+      setEssentialSubjects((previous: string[]) =>
+        previous.filter((subject) => subject !== title)
+      );
+      setStudentSubjects((previous: string[]) => [...previous, title].sort());
+    } else {
+      setEssentialSubjects((previous: string[]) => [...previous, title]);
+      setStudentSubjects((previous: string[]) =>
+        previous.filter((subject) => subject !== title)
+      );
+    }
+  }, [essentialSubjects, setEssentialSubjects, setStudentSubjects, title]);
 
   return (
     <Wrapper
@@ -27,7 +40,7 @@ export const SubjectCard = ({
       variant={variant as keyof typeof colors}
     >
       {displayedTitle}
-      {isLocked ? <LockedIcon /> : <UnlockedIcon />}
+      {essentialSubjects.includes(title) ? <LockedIcon /> : <UnlockedIcon />}
     </Wrapper>
   );
 };
