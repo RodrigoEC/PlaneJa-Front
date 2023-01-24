@@ -17,12 +17,8 @@ import {
   Divider,
   SettingsContainer,
   SubjectsDataSection,
+  ScheduleContainer,
 } from "./globalStyles";
-import { DailyColumn } from "./components/DailyColumn/DailyColumn";
-import {
-  useSubjectsTableContext,
-  WeekSchedule,
-} from "./contexts/subjectsTable";
 import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
 import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
@@ -67,9 +63,11 @@ function App() {
               <SettingsContainer>
                 <RestraintSection />
               </SettingsContainer>
-              <ScheduleTable />
-              <Dots />
-              <ScheduleMenu />
+              <ScheduleContainer>
+                <ScheduleTable />
+                <Dots />
+                <ScheduleMenu />
+              </ScheduleContainer>
             </Body>
             <Footer></Footer>
           </InnerContainer>

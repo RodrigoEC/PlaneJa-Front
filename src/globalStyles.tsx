@@ -152,6 +152,14 @@ export const Title = styled.h1`
   }
 `;
 
+export const ScheduleContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  gap: 1.2rem;
+`
+
 export const Divider = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.primary};
   transition: 0.3s;
