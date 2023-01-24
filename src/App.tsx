@@ -61,9 +61,7 @@ function App() {
               <UploadSection />
               <Divider />
               <ScheduleContainer>
-                <SettingsContainer>
-                  <RestraintSection />
-                </SettingsContainer>
+                <RestraintSection />
                 <ScheduleTable />
                 <Dots />
                 <ScheduleMenu />

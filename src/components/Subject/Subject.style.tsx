@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   transition: 0.3s;
+  margin-bottom: 1rem;
 
   &:hover {
     opacity: 0.6;

@@ -4,7 +4,6 @@ export const Wrapper = styled.form`
   display: flex;
   flex-flow: column;
   width: 100%;
-  gap: 0.5rem;
   align-items: center;
   justify-content: center;
 `;
@@ -46,7 +45,6 @@ export const SubjectsContainer = styled.div`
   box-sizing: border-box;
   flex-wrap: wrap;
   justify-content: center;
-  padding-bottom: 1rem;
 
   @media screen and (max-width: 500px) {
     overflow-x: scroll;
