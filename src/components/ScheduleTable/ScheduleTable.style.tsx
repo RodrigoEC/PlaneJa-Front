@@ -55,8 +55,7 @@ export const Time = styled.span`
 export const TableContent = styled.div`
   display: flex;
   gap: 0.65rem;
-  background-image: url(${({ theme }) =>
-    theme.name === "light" ? Logo : LogoWhite});
+  background-image: url(${({ theme }) => theme.name === "light" ? Logo : LogoWhite});
   background-repeat: no-repeat;
   background-position: center;
 
