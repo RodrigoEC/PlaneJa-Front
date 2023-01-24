@@ -49,8 +49,8 @@ const subjects = [
       subs: [
         {
           title: "Fundamentos de matemática para ciência da computação II",
-          variant: "lightOrange",
-          position: 6,
+          variant: "cyan",
+          position: 2,
           locked: true,
         },
       ],
