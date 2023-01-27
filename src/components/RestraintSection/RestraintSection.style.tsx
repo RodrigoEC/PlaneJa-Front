@@ -86,11 +86,11 @@ export const Button = styled.button`
   font-size: 0.9rem;
   transition: 0.3s;
   cursor: ${({ disable }: { disable: string }) => disable === "T" ? "not-allowed" : "pointer"};
-  opacity: ${({ disable }: { disable: string }) => disable === "T" ? "0.6" : "1"};
+  opacity: ${({ disable }: { disable: string }) => disable === "T" ? "0.7" : "1"};
   border-bottom: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary};
   padding: 0;
 
   &:hover {
-    opacity: 0.6;
+    opacity: 0.7;
   }
 `

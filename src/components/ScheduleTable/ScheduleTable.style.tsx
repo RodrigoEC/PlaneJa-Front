@@ -42,7 +42,7 @@ export const Time = styled.span`
   padding-right: 0.25rem;
   font-size: 0.9rem;
   font-weight: bold;
-  opacity: 0.7;
+  opacity: 0.9;
   &::after {
     content: "-";
   }
