@@ -13,7 +13,6 @@ export const SubjectCard = ({
   const {
     essentialSubjects,
     setEssentialSubjects,
-    studentSubjects,
     setStudentSubjects,
   } = useRestraintsContext();
   const displayedTitle =

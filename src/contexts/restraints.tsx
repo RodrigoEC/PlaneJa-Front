@@ -17,6 +17,8 @@ interface ExtratedContent {
   setNumEssentialSubjects: Function;
   essentialSubjects: string[];
   setEssentialSubjects: Function;
+  essentialSubjectsBackup: string[];
+  setEssentialSubjectsBackup: Function;
   subjects: string[];
   setSubjects: Function;
   studentSubjects: string[];
@@ -33,6 +35,8 @@ const RestraintsContext = createContext<ExtratedContent>({
   setNumEssentialSubjects: defaultFunction,
   essentialSubjects: [],
   setEssentialSubjects: defaultFunction,
+  essentialSubjectsBackup: [],
+  setEssentialSubjectsBackup: defaultFunction,
   subjects: [],
   setSubjects: defaultFunction,
   studentSubjects: [],
@@ -50,6 +54,9 @@ export const RestraintsProvider = ({
   );
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(
     Number(localStorage.getItem("planeja@num_subjects")) || 5
+  );
+  const [essentialSubjectsBackup, setEssentialSubjectsBackup] = useState(
+    getLocalStorage("planeja@essential_subjects", [])
   );
   const [essentialSubjects, setEssentialSubjects] = useState(
     getLocalStorage("planeja@essential_subjects", [])
@@ -78,9 +85,9 @@ export const RestraintsProvider = ({
   useEffect(() => {
     localStorage.setItem(
       "planeja@essential_subjects",
-      JSON.stringify(essentialSubjects)
+      JSON.stringify(essentialSubjectsBackup)
     );
-  }, [essentialSubjects]);
+  }, [essentialSubjectsBackup]);
 
   const value = {
     restraintError,
@@ -91,6 +98,8 @@ export const RestraintsProvider = ({
     setNumEssentialSubjects,
     essentialSubjects,
     setEssentialSubjects,
+    essentialSubjectsBackup,
+    setEssentialSubjectsBackup,
     subjects,
     setSubjects,
     studentSubjects,
