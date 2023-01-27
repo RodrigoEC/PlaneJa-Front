@@ -47,7 +47,7 @@ export const RestraintSection = (): ReactElement => {
         >
           Salvar
         </Button>{" "}
-        |{" "}
+        <Divider />
         <Button
           disable={
             essentialSubjectsBackup.toString() === essentialSubjects.toString()
