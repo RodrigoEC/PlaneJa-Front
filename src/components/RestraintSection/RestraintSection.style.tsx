@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 
 export const Wrapper = styled.form`
   display: flex;
@@ -6,6 +6,7 @@ export const Wrapper = styled.form`
   width: 100%;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 `;
 
 export const InputArea = styled.div`
@@ -16,7 +17,7 @@ export const InputArea = styled.div`
 
 export const Divider = styled.div`
   height: 1.5rem;
-  border-left: 1px solid ${({ theme }) => theme.colors.primary}50;
+  border-left: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}50;
 `;
 
 export const Submit = styled.input`
@@ -41,7 +42,7 @@ export const SubjectsContainer = styled.div`
   max-width: 100%;
   display: flex;
   margin: 0 auto;
-  gap: 0.5rem 1rem;
+  gap: 0 1rem;
   box-sizing: border-box;
   flex-wrap: wrap;
   justify-content: center;
@@ -68,3 +69,28 @@ export const SubjectsContainer = styled.div`
     }
   }
 `;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: ${({ theme }) => theme.colors.primary}70;
+`
+
+export const Button = styled.button`
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary};
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: 0.3s;
+  cursor: ${({ disable }: { disable: string }) => disable === "T" ? "not-allowed" : "pointer"};
+  opacity: ${({ disable }: { disable: string }) => disable === "T" ? "0.6" : "1"};
+  border-bottom: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary};
+  padding: 0;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`

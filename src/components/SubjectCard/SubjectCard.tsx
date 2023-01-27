@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect } from "react";
+import { ReactElement, useCallback } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { colors } from "../../util/colors";
 import { LockedIcon, UnlockedIcon, Wrapper } from "./SubjectCard.styles";
