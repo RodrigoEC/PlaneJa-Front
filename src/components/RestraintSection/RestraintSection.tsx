@@ -13,7 +13,7 @@ import {
 import { useRestraintsContext } from "../../contexts/restraints";
 
 export const RestraintSection = (): ReactElement => {
-  const { setEssentialSubjects, essentialSubjects, essentialSubjectsBackup, setEssentialSubjectsBackup } =
+   const { setEssentialSubjects, essentialSubjects, essentialSubjectsBackup, setEssentialSubjectsBackup } =
     useRestraintsContext();
 
   // TODO: Adicionar envio de dados para back
@@ -21,7 +21,7 @@ export const RestraintSection = (): ReactElement => {
     async (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       localStorage.setItem("planeja@essential_subjects", JSON.stringify(essentialSubjects))
-      setEssentialSubjectsBackup(essentialSubjects);
+      setEssentialSubjectsBackup(essentialSubjects.sort());
     },
     [essentialSubjects, setEssentialSubjectsBackup]
   )
@@ -29,7 +29,7 @@ export const RestraintSection = (): ReactElement => {
   const cleanData = useCallback(
     async (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      setEssentialSubjects(essentialSubjectsBackup);
+      setEssentialSubjects(essentialSubjectsBackup.sort());
     },
     [essentialSubjectsBackup, setEssentialSubjects]
   );

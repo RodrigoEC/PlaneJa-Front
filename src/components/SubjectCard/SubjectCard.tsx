@@ -25,7 +25,7 @@ export const SubjectCard = ({
       );
       setStudentSubjects((previous: string[]) => [...previous, title].sort());
     } else {
-      setEssentialSubjects((previous: string[]) => [...previous, title]);
+      setEssentialSubjects((previous: string[]) => [...previous, title].sort());
       setStudentSubjects((previous: string[]) =>
         previous.filter((subject) => subject !== title)
       );
