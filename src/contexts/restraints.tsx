@@ -50,7 +50,7 @@ export const RestraintsProvider = ({
 }): ReactElement => {
   const [restraintError, setRestraintError] = useState(false);
   const [semester, setSemester] = useState(
-    getLocalStorage("planeja@semester", "")
+    localStorage.getItem("planeja@semester") || ""
   );
   const [numEssentialSubjects, setNumEssentialSubjects] = useState(
     Number(localStorage.getItem("planeja@num_subjects")) || 5
