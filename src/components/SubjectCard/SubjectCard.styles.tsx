@@ -25,13 +25,19 @@ export const UnlockedIcon = styled(Unlocked)`
   animation-duration: 0.2s;
 `;
 
-export const Wrapper = styled.div`
+type WrapperType = {
+  variant: keyof typeof colors;
+  blocked: string;
+}
+
+export const Wrapper = styled.div<WrapperType>`
   display: flex;
   position: relative;
   justify-content: center;
   background-color: ${({ variant }: { variant: keyof typeof colors }) =>
     colors[variant]}80;
-  cursor: pointer;
+  cursor: ${({ blocked }: { blocked: string }) =>
+    blocked === "T" ? "not-allowed" : "pointer"};
   height: 3.3rem;
   align-items: center;
   padding: 0.5rem;
@@ -45,6 +51,11 @@ export const Wrapper = styled.div`
   transition: 0.3s;
   text-align: center;
   animation: appear 0.3s;
+
+  & svg {
+    opacity: ${({ blocked }: { blocked: string }) =>
+    blocked === "T" ? "0.6" : "1"};;
+  }
 
   @media screen and (max-width: 700px) {
     font-size: 0.78rem;

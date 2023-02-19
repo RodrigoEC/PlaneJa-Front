@@ -14,6 +14,7 @@ export const SubjectCard = ({
     essentialSubjects,
     setEssentialSubjects,
     setStudentSubjects,
+    numEssentialSubjects,
   } = useRestraintsContext();
   const displayedTitle =
     title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
@@ -24,7 +25,7 @@ export const SubjectCard = ({
         previous.filter((subject) => subject !== title)
       );
       setStudentSubjects((previous: string[]) => [...previous, title].sort());
-    } else {
+    } else if (essentialSubjects.length < numEssentialSubjects) {
       setEssentialSubjects((previous: string[]) => [...previous, title].sort());
       setStudentSubjects((previous: string[]) =>
         previous.filter((subject) => subject !== title)
@@ -37,6 +38,12 @@ export const SubjectCard = ({
       title={title}
       onClick={onClick}
       variant={variant as keyof typeof colors}
+      blocked={
+        essentialSubjects.length === numEssentialSubjects &&
+        !essentialSubjects.includes(title)
+          ? "T"
+          : "F"
+      }
     >
       {displayedTitle}
       {essentialSubjects.includes(title) ? <LockedIcon /> : <UnlockedIcon />}

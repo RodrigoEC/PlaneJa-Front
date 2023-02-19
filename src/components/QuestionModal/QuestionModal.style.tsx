@@ -11,10 +11,10 @@ export const Background = styled.div`
 
   display: flex;
   padding: 1rem;
+  position: fixed;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  position: absolute;
   left: 0;
   top: 0;
   width: 100vw;
