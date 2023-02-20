@@ -33,12 +33,13 @@ export const getSemesterSubjects = async (
 ): Promise<[UniqueSubjects, number]> => {
   try {
     const response = await api.get("unique-subjects", {
-      params: { name: course },
+      params: { name: course.toLocaleLowerCase() },
     });
 
+    console.log(response)
     return [response.data || defaultSemester, response.status];
   } catch (e: any) {
-    return [{ semester: "--", classes: [] }, e.response.status];
+    return [{ semester: "--", subjects: [] }, e.response.status];
   }
 };
 

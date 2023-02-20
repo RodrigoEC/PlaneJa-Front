@@ -23,7 +23,7 @@ export const SubjectsInput = (): ReactElement => {
     event.preventDefault();
     event.stopPropagation();
     setCurrentInput("");
-    if (studentSubjects.includes(capitalize(currentInput)) && currentInput !== "") {
+    if (studentSubjects.includes(currentInput.toUpperCase()) && currentInput !== "") {
       setStudentSubjects((previous: string[]) =>
         previous.filter((subject: string) => currentInput !== subject)
       );
@@ -53,7 +53,7 @@ export const SubjectsInput = (): ReactElement => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (
-        !studentSubjects.includes(capitalize(currentInput)) &&
+        !studentSubjects.includes(currentInput.toUpperCase()) &&
         currentInput !== ""
       )
         setInvalidData(true);

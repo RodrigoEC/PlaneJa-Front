@@ -71,8 +71,8 @@ export const RestraintsProvider = ({
   useEffect(() => {
     const getData = async () => {
       const [data, status] = await getSemesterSubjects("Ciência da computação");
-      localStorage.setItem("planeja@subjects", JSON.stringify(data.classes));
-      setSubjects(data.classes);
+      localStorage.setItem("planeja@subjects", JSON.stringify(data.subjects));
+      setSubjects(data.subjects);
       localStorage.setItem("planeja@semester", data.semester);
       setSemester(data.semester);
 
