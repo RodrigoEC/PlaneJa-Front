@@ -58,6 +58,7 @@ export const InnerWrapper = styled("div")<{
   min-width: ${({ loading }: { loading: number }) =>
     loading ? "1.5rem" : "1rem"};
   width: ${({ progress }: { progress: number }) => progress}%;
+  box-sizing: border-box;
   transition: 0.3s;
   ${({ loading }: { loading: number }) =>
     loading ? "animation: loading 1.5s infinite" : undefined};
