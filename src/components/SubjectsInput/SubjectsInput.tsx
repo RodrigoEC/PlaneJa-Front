@@ -40,13 +40,13 @@ export const SubjectsInput = (): ReactElement => {
   useEffect(() => {
     setIsDisabled(
       subjects.length === 0 ||
-        studentRecord?.classes.length === 0 ||
+        studentRecord?.subjects.length === 0 ||
         essentialSubjects.length >= numEssentialSubjects
     );
   }, [
     essentialSubjects.length,
     numEssentialSubjects,
-    studentRecord?.classes.length,
+    studentRecord?.subjects.length,
     subjects.length,
   ]);
 

@@ -56,7 +56,7 @@ export const InnerWrapper = styled("div")<{
   justify-content: end;
   padding: 0 0.5rem;
   min-width: ${({ loading }: { loading: number }) =>
-    loading ? "1.5rem" : "1rem"};
+    loading ? "1.5rem" : "2rem"};
   width: ${({ progress }: { progress: number }) => progress}%;
   box-sizing: border-box;
   transition: 0.3s;

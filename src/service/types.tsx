@@ -4,7 +4,7 @@ export interface Record {
   course: string;
   status: Status;
   progress: string;
-  classes: GradRecord[];
+  subjects: GradRecord[];
 }
 
 export interface Status {
@@ -30,7 +30,7 @@ export const defaultRecord: Record = {
   course: "",
   status: { mandatory: [], optative: [], complementary: [] },
   progress: '',
-  classes: []
+  subjects: []
 };
 
 //
@@ -38,7 +38,7 @@ export const defaultRecord: Record = {
 export interface Semester {
   name: string;
   semester: string;
-  classes: Subject[];
+  subjects: Subject[];
 }
 
 export interface Subject {
@@ -59,7 +59,7 @@ export interface Schedule {
 export const defaultSemester: Semester = {
   name: '',
   semester: '',
-  classes: []
+  subjects: []
 }
 
 

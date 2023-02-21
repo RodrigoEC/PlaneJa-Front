@@ -27,7 +27,7 @@ export const UploadSection = (): ReactElement => {
       return object;
     }, {});
 
-    record?.classes.forEach(
+    record?.subjects.forEach(
       (subject) => (subjectObj[capitalize(subject.name)] = 1)
     );
 
