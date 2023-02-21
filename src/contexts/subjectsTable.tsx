@@ -106,12 +106,11 @@ export const SubjectsTableProvider = ({
     }
   };
 
-  const getSchedulesData = useCallback( async() => {
-    const [data, status] = await calculateSchedules({ oi: "oi" });
-    if (data.length > 0 && status === 200) {
+  const getSchedulesData = useCallback(async(studentSubjects: any, requiresSubjects: any) => {
+    const [data, status] = await calculateSchedules(studentSubjects, requiresSubjects);
+    if (data.length > 0 && status !== 400) {
       localStorage.setItem("planeja@schedules", JSON.stringify(data));
       setSchedules(data);
-
     }
   }, []);
 

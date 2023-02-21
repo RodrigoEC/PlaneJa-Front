@@ -36,7 +36,6 @@ export const getSemesterSubjects = async (
       params: { name: course.toLocaleLowerCase() },
     });
 
-    console.log(response)
     return [response.data || defaultSemester, response.status];
   } catch (e: any) {
     return [{ semester: "--", subjects: [] }, e.response.status];
@@ -102,20 +101,18 @@ const subjects = [
   },
 ];
 
-export const calculateSchedules = (
-  data: any
-): [WeekSchedule[], number] => {
+export const calculateSchedules = async (
+  student_subjects: any,
+  required_subjects: string[]
+): Promise<[WeekSchedule[], number]> => {
   try {
-    // ): Promise<[WeekSchedule[], number]> => {
-    //   try {
-    // const response = await api.get("unique-subjects", {
-    //   params: { name: "Ciência da computação" },
-    // });
+    const response = await api.post("/recommend", {
+      student_subjects,
+      required_subjects,
+    });
 
-    // response.data = subjects;
-    // return [response.data, response.status]
-
-    return [subjects, 200];
+    response.data = subjects;
+    return [response.data, response.status]
   } catch (e: any) {
     return [[], 400];
   }

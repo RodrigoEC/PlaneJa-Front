@@ -11,20 +11,34 @@ import {
   Button,
 } from "./RestraintSection.style";
 import { useRestraintsContext } from "../../contexts/restraints";
+import { useSubjectsTableContext } from "../../contexts/subjectsTable";
+import { useExtractionContext } from "../../contexts/extraction";
 
 export const RestraintSection = (): ReactElement => {
-   const { setEssentialSubjects, essentialSubjects, essentialSubjectsBackup, setEssentialSubjectsBackup } =
-    useRestraintsContext();
+  const {
+    setEssentialSubjects,
+    essentialSubjects,
+    essentialSubjectsBackup,
+    setEssentialSubjectsBackup,
+  } = useRestraintsContext();
+
+  const {studentRecord } = useExtractionContext()
+
+  const { getSchedulesData } = useSubjectsTableContext();
 
   // TODO: Adicionar envio de dados para back
   const SubmitData = useCallback(
     async (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      localStorage.setItem("planeja@essential_subjects", JSON.stringify(essentialSubjects))
+      localStorage.setItem(
+        "planeja@essential_subjects",
+        JSON.stringify(essentialSubjects)
+      );
       setEssentialSubjectsBackup(essentialSubjects.sort());
+      getSchedulesData(studentRecord.subjects, essentialSubjects)
     },
     [essentialSubjects, setEssentialSubjectsBackup]
-  )
+  );
 
   const cleanData = useCallback(
     async (e: MouseEvent<HTMLButtonElement>) => {

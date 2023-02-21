@@ -20,7 +20,6 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
     loading,
     schedules,
     currentScheduleIndex,
-    getSchedulesData,
     currentSchedule,
   } = useSubjectsTableContext();
 
@@ -36,7 +35,7 @@ export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
       }
 
       if (props === null) {
-        return <EmptySubject key={key} onClick={(e) => getSchedulesData()} />;
+        return <EmptySubject key={key} />;
       } else {
         return <SubjectCard {...props} key={key} />;
       }
