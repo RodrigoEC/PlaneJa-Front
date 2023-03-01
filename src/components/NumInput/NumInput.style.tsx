@@ -7,7 +7,13 @@ export const Wrapper = styled.div`
   gap: 0.5rem;
   align-items: flex-end;
   transition: 0.3s;
-
+  border-radius: 3px;
+  padding: 5px;
+  &:focus-within {
+    outline: solid;
+    outline-width: 2px;
+    outline-color: white;
+  }
   &.invalid {
     color: ${({ theme }) => theme.colors.alert};
   }
@@ -15,12 +21,14 @@ export const Wrapper = styled.div`
 
 export const InputNumber = styled.input`
   max-width: 2.5rem;
-  background-color: ${({ theme }) => theme.colors.third}00;  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.third}00;
+  border-radius: 5px;
   border: none;
   color: inherit;
   text-align: center;
   height: 1.25rem;
   font-weight: bold;
+  outline: none;
 
   @media screen and (max-width: 700px) {
     height: 1.5rem;

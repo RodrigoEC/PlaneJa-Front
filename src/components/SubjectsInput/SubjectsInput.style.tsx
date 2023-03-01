@@ -3,6 +3,14 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   gap: 0.5rem;
+  
+  padding: 5px 5px 0 5px;
+  border-radius: 3px;
+  &:focus-within {
+    outline: solid;
+    outline-width: 2px;
+    outline-color: white;
+  }
 
   &.invalid {
     color: ${({ theme }) => theme.colors.alert} !important;
@@ -28,6 +36,7 @@ export const Input = styled.input`
   transition: 0.3s;
   letter-spacing: 1px;
   padding-bottom: 4px;
+  outline: none;
 
   &[disabled] {
     cursor: not-allowed;

@@ -1,8 +1,13 @@
-import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
+import {
+  ReactElement,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Add } from "../../assets/icons/Add";
 import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { capitalize } from "../../util/util";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
 export const SubjectsInput = (): ReactElement => {
@@ -23,7 +28,10 @@ export const SubjectsInput = (): ReactElement => {
     event.preventDefault();
     event.stopPropagation();
     setCurrentInput("");
-    if (studentSubjects.includes(currentInput.toUpperCase()) && currentInput !== "") {
+    if (
+      studentSubjects.includes(currentInput.toUpperCase()) &&
+      currentInput !== ""
+    ) {
       setStudentSubjects((previous: string[]) =>
         previous.filter((subject: string) => currentInput !== subject)
       );
