@@ -24,7 +24,7 @@ import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 
 function App() {
   const { studentRecord } = useExtractionContext();
-  const { status } = studentRecord;
+  const { status, course } = studentRecord;
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")
@@ -46,7 +46,7 @@ function App() {
           <InnerContainer>
             <Header themeHandler={swapTheme} />
             <Body>
-              <Title>Ciência da computação</Title>
+              <Title disabled={course}>{course || 'planejá-UFCG'}</Title>
               <Progress />
               <SubjectsDataSection>
                 <SubjectData title="Obrigatórias" status={status.mandatory} />

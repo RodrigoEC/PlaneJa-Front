@@ -80,7 +80,8 @@ export const Wrapper = styled.div`
   @keyframes pop {
     from {
       transform: scale(0.6);
-    } to {
+    }
+    to {
       transform: scale(1);
     }
   }
@@ -89,7 +90,8 @@ export const Wrapper = styled.div`
     from {
       transform: scale(0.95);
       opacity: 0.7;
-    } to {
+    }
+    to {
       transform: scale(1);
       opacity: 1;
     }
@@ -98,7 +100,8 @@ export const Wrapper = styled.div`
   @keyframes spinning {
     from {
       transform: rotate(0deg);
-    } to {
+    }
+    to {
       transform: rotate(-360deg);
     }
   }
@@ -145,6 +148,8 @@ export const Title = styled.h1`
   letter-spacing: 0.4rem;
   line-height: 1.25;
   transition: 0.3s;
+  opacity: ${({ disabled }: { disabled: string }) =>
+    disabled === "" ? "0.6" : "1"};
 
   @media screen and (max-width: 700px) {
     font-size: 1.2rem;
@@ -159,7 +164,7 @@ export const ScheduleContainer = styled.div`
   justify-content: center;
   width: 100%;
   gap: 1.2rem;
-`
+`;
 
 export const Divider = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.primary};
@@ -172,7 +177,7 @@ export const SettingsContainer = styled.div`
   flex-flow: column;
   gap: 0.5rem;
   width: 100%;
-`
+`;
 
 export const SubjectsDataSection = styled.section`
   display: flex;
@@ -182,4 +187,4 @@ export const SubjectsDataSection = styled.section`
   @media screen and (max-width: 700px) {
     gap: 2rem;
   }
-`
+`;
