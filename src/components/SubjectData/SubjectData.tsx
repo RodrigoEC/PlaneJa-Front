@@ -35,7 +35,7 @@ SubjectData.defaultProps = {
   max: "--",
 };
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <LoadingContainer>
       <span>-</span>

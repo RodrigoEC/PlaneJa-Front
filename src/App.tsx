@@ -7,7 +7,7 @@ import { UploadSection } from "./components/UploadSection/UploadSection";
 import { Footer } from "./components/Footer/Footer";
 import { RestraintSection } from "./components/RestraintSection/RestraintSection";
 import { useExtractionContext } from "./contexts/extraction";
-import { SubjectData } from "./components/SubjectData/SubjectData";
+import { Loading, SubjectData } from "./components/SubjectData/SubjectData";
 import {
   GlobalStyle,
   InnerContainer,
@@ -23,7 +23,7 @@ import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 
 function App() {
-  const { studentRecord } = useExtractionContext();
+  const { studentRecord, loading } = useExtractionContext();
   const { status, course } = studentRecord;
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
@@ -46,7 +46,13 @@ function App() {
           <InnerContainer>
             <Header themeHandler={swapTheme} />
             <Body>
-              <Title disabled={course}>{course || 'planejá-UFCG'}</Title>
+              {loading ? (
+                <Title disabled={true.toString()}>
+                  <Loading />
+                </Title>
+              ) : (
+                <Title disabled={course}>{course || "planejá-UFCG"}</Title>
+              )}
               <Progress />
               <SubjectsDataSection>
                 <SubjectData title="Obrigatórias" status={status.mandatory} />
