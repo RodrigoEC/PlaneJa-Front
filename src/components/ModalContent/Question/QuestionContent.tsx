@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
-import academicControl from "../../assets/images/controle.png";
-import { Text, Link } from "./QuestionContent.style";
+import academicControl from "../../../assets/images/controle.png";
+import { Link } from "./QuestionContent.style";
 
 export const QuestionContent = (): ReactElement => {
   return (
     <>
       <article>
-        <Text>
+        <p>
           Você pode pegar seu histórico no site do controle acadêmico da UFCG no
           link:
-        </Text>
+        </p>
         <Link
           href="https://pre.ufcg.edu.br:8443/ControleAcademicoOnline/Controlador?command=AlunoDisciplinasOfertadas"
           target="_blank"

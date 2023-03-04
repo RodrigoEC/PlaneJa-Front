@@ -1,4 +1,4 @@
-import { QuestionContent } from "../components/QuestionContent/QuestionContent";
+import { QuestionContent } from "../components/ModalContent/Question/QuestionContent";
 
 export const contentMap = {
   question: {
