@@ -1,7 +1,7 @@
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import { useExtractionContext } from "../../contexts/extraction";
+import { useStudentRecordContext } from "../../contexts/studentRecord";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { Record } from "../../service/types";
+import { Record } from "../../util/interfaces";
 import { capitalize } from "../../util/util";
 import { FileInput } from "../FileInput/FileInput";
 import { QuestionModal } from "../QuestionModal/QuestionModal";
@@ -15,7 +15,7 @@ import {
 } from "./UploadSection.style";
 
 export const UploadSection = (): ReactElement => {
-  const { file, loading, extractData, error } = useExtractionContext();
+  const { file, loading, extractData, error } = useStudentRecordContext();
   const { semester, subjects, setStudentSubjects } = useRestraintsContext();
   const [fileName, setFileName] = useState("");
   const [modalOpen, setModalOpen] = useState(false);

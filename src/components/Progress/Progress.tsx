@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { useExtractionContext } from "../../contexts/extraction";
+import { useStudentRecordContext } from "../../contexts/studentRecord";
 import {
   Container,
   Wrapper,
@@ -9,7 +9,7 @@ import {
 } from "./Progress.style";
 
 export const Progress = (): ReactElement => {
-  const { loading, studentRecord } = useExtractionContext();
+  const { loading, studentRecord } = useStudentRecordContext();
   const { progress } = studentRecord;
   const studenProgress = Number(progress) * 100;
 

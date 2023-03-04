@@ -1,11 +1,11 @@
-import { useSubjectsTableContext } from "../../contexts/subjectsTable";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { LeftArrow, RightArrow, Wrapper, Index } from "./ScheduleMenu.style";
 
 export const ScheduleMenu = () => {
   const {
-    schedules,
+    scheduleList,
     currentScheduleIndex,
-    changeSchedule,
+    updateSchedule,
     nextSchedule,
     previousSchedule,
   } = useSubjectsTableContext();
@@ -16,10 +16,10 @@ export const ScheduleMenu = () => {
         blocked={currentScheduleIndex === 0 ? "T" : undefined}
         onClick={previousSchedule}
       />
-      {schedules.map((_, i) => (
+      {scheduleList.map((_, i) => (
         <Index
           key={i}
-          onClick={() => changeSchedule(i)}
+          onClick={() => updateSchedule(i)}
           selected={i === currentScheduleIndex ? "T" : "F"}
         >
           {i + 1}
@@ -27,7 +27,7 @@ export const ScheduleMenu = () => {
       ))}
       <RightArrow
         blocked={
-          currentScheduleIndex + 1 === schedules.length ? "T" : undefined
+          currentScheduleIndex + 1 === scheduleList.length ? "T" : undefined
         }
         onClick={nextSchedule}
       />

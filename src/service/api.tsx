@@ -1,11 +1,11 @@
 import axios from "axios";
-import { WeekSchedule } from "../contexts/subjectsTable";
 import {
   defaultRecord,
   defaultSemester,
   Record,
   UniqueSubjects,
-} from "./types";
+  WeekSchedule,
+} from "../util/interfaces";
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,

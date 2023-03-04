@@ -1,4 +1,4 @@
-export const defaultSchedules = [{
+export const defaultScheduleList = [{
   seg: { name: "segunda-feira", subs: []},
   ter: { name: "terça-feira", subs: [] },
   quar: { name: "quarta-feira", subs: [] },

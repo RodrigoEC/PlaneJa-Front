@@ -85,8 +85,8 @@ export const Button = styled.button`
   font-weight: bold;
   font-size: 0.9rem;
   transition: 0.3s;
-  cursor: ${({ disable }: { disable: string }) => disable === "T" ? "not-allowed" : "pointer"};
-  opacity: ${({ disable }: { disable: string }) => disable === "T" ? "0.7" : "1"};
+  cursor: ${({ disable }: { disable: string }) => disable === "true" ? "not-allowed" : "pointer"};
+  opacity: ${({ disable }: { disable: string }) => disable === "true" ? "0.7" : "1"};
   border-bottom: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary};
   padding: 0;
 

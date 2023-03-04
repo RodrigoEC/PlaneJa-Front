@@ -11,8 +11,8 @@ import {
   Button,
 } from "./RestraintSection.style";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { useSubjectsTableContext } from "../../contexts/subjectsTable";
-import { useExtractionContext } from "../../contexts/extraction";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
+import { useStudentRecordContext } from "../../contexts/studentRecord";
 
 export const RestraintSection = (): ReactElement => {
   const {
@@ -22,7 +22,7 @@ export const RestraintSection = (): ReactElement => {
     setEssentialSubjectsBackup,
   } = useRestraintsContext();
 
-  const {studentRecord } = useExtractionContext()
+  const { studentRecord } = useStudentRecordContext();
 
   const { getSchedulesData } = useSubjectsTableContext();
 
@@ -35,7 +35,7 @@ export const RestraintSection = (): ReactElement => {
         JSON.stringify(essentialSubjects)
       );
       setEssentialSubjectsBackup(essentialSubjects.sort());
-      getSchedulesData(studentRecord.subjects, essentialSubjects)
+      getSchedulesData(studentRecord.subjects, essentialSubjects);
     },
     [essentialSubjects, setEssentialSubjectsBackup]
   );
@@ -53,21 +53,17 @@ export const RestraintSection = (): ReactElement => {
       <ButtonsContainer>
         <Button
           onClick={SubmitData}
-          disable={
+          disable={(
             essentialSubjectsBackup.toString() === essentialSubjects.toString()
-              ? "T"
-              : "F"
-          }
+          ).toString()}
         >
           Salvar
         </Button>{" "}
         <Divider />
         <Button
-          disable={
+          disable={(
             essentialSubjectsBackup.toString() === essentialSubjects.toString()
-              ? "T"
-              : "F"
-          }
+          ).toString()}
           onClick={cleanData}
         >
           Restaurar
@@ -76,7 +72,10 @@ export const RestraintSection = (): ReactElement => {
       {essentialSubjects?.length > 0 && (
         <SubjectsContainer>
           {essentialSubjects.map((subject: string) => (
-            <Subject key={subject} title={subject} />
+            <Subject
+              key={subject}
+              title={subject}
+            />
           ))}
         </SubjectsContainer>
       )}

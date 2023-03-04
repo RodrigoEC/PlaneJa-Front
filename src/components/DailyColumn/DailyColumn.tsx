@@ -1,57 +1,40 @@
 import { ReactElement, useCallback } from "react";
 import {
-  SubjectContent,
   useSubjectsTableContext,
-  WeekSchedule,
-} from "../../contexts/subjectsTable";
+} from "../../contexts/weeklySchedule";
+import { SubjectContent, WeekSchedule } from "../../util/interfaces";
 import { SubjectCard } from "../SubjectCard/SubjectCard";
+import { Loading } from "../SubjectData/SubjectData";
 import {
   Wrapper,
   Title,
   Divider,
   SubjectsContainer,
   EmptySubject,
-  LoadingSubject,
-  LoadingIcon,
 } from "./DailyColumn.style";
 
-export const DailyColumn = ({ id }: { id: keyof WeekSchedule }) => {
-  const {
-    loading,
-    schedules,
-    currentScheduleIndex,
-    currentSchedule,
-  } = useSubjectsTableContext();
+export const DailyColumn = ({ index }: { index: keyof WeekSchedule }) => {
+  const { loading, scheduleList, currentScheduleIndex, currentSchedule } =
+    useSubjectsTableContext();
 
-  const getStates = useCallback(
-    (props: SubjectContent | null, key: number): ReactElement => {
-      if (loading === true) {
-        return (
-          <LoadingSubject key={key}>
-            <LoadingIcon />
-            <span>carregando</span>
-          </LoadingSubject>
-        );
-      }
-
-      if (props === null) {
-        return <EmptySubject key={key} />;
-      } else {
-        return <SubjectCard {...props} key={key} />;
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const formatSubjectCard = useCallback(
+    (props: SubjectContent | null, key: number): ReactElement =>
+      props === null || loading ? (
+        <EmptySubject key={key}>{loading && <Loading />}</EmptySubject>
+      ) : (
+        <SubjectCard {...props} key={key} />
+      ),
     [currentScheduleIndex]
   );
 
   return (
     <Wrapper>
-      <Title>{schedules[currentScheduleIndex][id].name}</Title>
+      <Title>{scheduleList[currentScheduleIndex][index].name}</Title>
       <Divider />
       <SubjectsContainer>
-        {currentSchedule[id].subs.map(
+        {currentSchedule[index].subs.map(
           (value: SubjectContent | null, index: number) =>
-            getStates(value, index)
+            formatSubjectCard(value, index)
         )}
       </SubjectsContainer>
     </Wrapper>

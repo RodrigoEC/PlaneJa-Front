@@ -1,7 +1,7 @@
 import {
   useSubjectsTableContext,
-  WeekSchedule,
-} from "../../contexts/subjectsTable";
+} from "../../contexts/weeklySchedule";
+import { WeekSchedule } from "../../util/interfaces";
 import { DailyColumn } from "../DailyColumn/DailyColumn";
 import { TableContent, Wrapper, Timing, Time } from "./ScheduleTable.style";
 
@@ -16,10 +16,10 @@ export const ScheduleTable = () => {
           .map((value: number, i: number) => (
             <Time key={`${value * i + 8}-hours`}>{value * i + 8}h</Time>
           ))}
-      </Timing> 
+      </Timing>
       <TableContent>
         {Object.keys(currentSchedule).map((value) => (
-          <DailyColumn key={value} id={value as keyof WeekSchedule} />
+          <DailyColumn key={value} index={value as keyof WeekSchedule} />
         ))}
       </TableContent>
     </Wrapper>

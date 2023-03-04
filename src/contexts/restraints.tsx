@@ -48,20 +48,20 @@ export const RestraintsProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [restraintError, setRestraintError] = useState(false);
-  const [semester, setSemester] = useState(
-    localStorage.getItem("planeja@semester") || ""
+  const [restraintError, setRestraintError] = useState<boolean>(false);
+  const [semester, setSemester] = useState<string>(
+    getLocalStorage("planeja@semester", "")
   );
-  const [numEssentialSubjects, setNumEssentialSubjects] = useState(
+  const [numEssentialSubjects, setNumEssentialSubjects] = useState<number>(
     Number(localStorage.getItem("planeja@num_subjects")) || 5
   );
-  const [essentialSubjectsBackup, setEssentialSubjectsBackup] = useState(
+  const [essentialSubjectsBackup, setEssentialSubjectsBackup] = useState<string[]>(
     getLocalStorage("planeja@essential_subjects", [])
   );
-  const [essentialSubjects, setEssentialSubjects] = useState(
+  const [essentialSubjects, setEssentialSubjects] = useState<string[]>(
     getLocalStorage("planeja@essential_subjects", [])
   );
-  const [subjects, setSubjects] = useState(
+  const [subjects, setSubjects] = useState<string[]>(
     getLocalStorage("planeja@subjects", [])
   );
   const [studentSubjects, setStudentSubjects] = useState(

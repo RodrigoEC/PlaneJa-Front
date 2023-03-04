@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { useExtractionContext } from "../../contexts/extraction";
+import { useStudentRecordContext } from "../../contexts/studentRecord";
 import {
   Wrapper,
   Title,
@@ -15,7 +15,7 @@ export const SubjectData = ({
   title: string;
   status: string[];
 }): ReactElement => {
-  const { loading } = useExtractionContext();
+  const { loading } = useStudentRecordContext();
   const current = status[0] || "--";
   const max = status[1] || "--";
 

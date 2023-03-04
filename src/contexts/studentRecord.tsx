@@ -1,6 +1,6 @@
 import { createContext, ReactElement, useContext, useState } from "react";
 import { extractRecord } from "../service/api";
-import { defaultRecord, Record } from "../service/types";
+import { defaultRecord, Record } from "../util/interfaces";
 import { defaultFunction, getLocalStorage } from "../util/util";
 
 interface ExtratedContent {
@@ -27,31 +27,30 @@ const ExtractionContext = createContext<ExtratedContent>({
   setError: defaultFunction,
 });
 
-export const ExtractionProvider = ({
+export const StudentRecordProvider = ({
   children,
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [studentRecord, setStudentRecord] = useState(
+  const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [studentRecord, setStudentRecord] = useState<Record>(
     getLocalStorage("planeja@record", defaultRecord)
   );
 
-  const extractData = async (file: File) => {
+  const extractData = async (file: File): Promise<Record> => {
     setLoading(true);
     const form = new FormData();
     form.append("file", file);
 
-    const [response, statusCode] = await extractRecord(form);
-    if (statusCode !== 201) setError(true);
-    else setError(false);
+    const [studentRecord, statusCode] = await extractRecord(form);
+    setError(statusCode !== 201);
 
-    setStudentRecord(response);
-    localStorage.setItem("planeja@record", JSON.stringify(response));
+    setStudentRecord(studentRecord);
+    localStorage.setItem("planeja@record", JSON.stringify(studentRecord));
     setLoading(false);
-    return response;
+    return studentRecord;
   };
 
   const value = {
@@ -72,7 +71,6 @@ export const ExtractionProvider = ({
     </ExtractionContext.Provider>
   );
 };
-
-export const useExtractionContext = () => {
+export const useStudentRecordContext = () => {
   return { ...useContext(ExtractionContext) };
 };

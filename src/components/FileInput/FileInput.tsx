@@ -1,10 +1,10 @@
 import { ChangeEvent, ReactElement } from "react";
 import { UploadIcon } from "../../assets/icons/Upload";
-import { useExtractionContext } from "../../contexts/extraction";
+import { useStudentRecordContext } from "../../contexts/studentRecord";
 import { Label, Text } from "./FileInput.style";
 
 export const FileInput = (): ReactElement => {
-  const { setFile, loading, error, setError } = useExtractionContext();
+  const { setFile, loading, error, setError } = useStudentRecordContext();
 
   const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget as HTMLInputElement;

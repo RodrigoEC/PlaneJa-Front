@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { Add } from "../../assets/icons/Add";
-import { useExtractionContext } from "../../contexts/extraction";
+import { useStudentRecordContext } from "../../contexts/studentRecord";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
@@ -19,7 +19,7 @@ export const SubjectsInput = (): ReactElement => {
     studentSubjects,
     setStudentSubjects,
   } = useRestraintsContext();
-  const { studentRecord } = useExtractionContext();
+  const { studentRecord } = useStudentRecordContext();
   const [currentInput, setCurrentInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [invalidData, setInvalidData] = useState(false);

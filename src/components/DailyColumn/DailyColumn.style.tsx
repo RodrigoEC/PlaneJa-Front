@@ -43,36 +43,19 @@ export const SubjectsContainer = styled.div`
 `;
 
 export const EmptySubject = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px dashed
     ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}50;
   height: 3.3rem;
   width: 10.5rem;
   border-radius: 3px;
   box-sizing: border-box;
+  font-size: 1.2rem;
 
   @media screen and (max-width: 700px) {
     font-size: 0.8rem;
     width: 9rem;
-  }
-`;
-
-export const LoadingIcon = styled(Reload)`
-  fill: ${({ theme }) => theme.colors.primary};
-  animation: spinning 0.8s infinite;
-  animation-timing-function: linear;
-  opacity: 0.7;
-`;
-
-export const LoadingSubject = styled(EmptySubject)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column;
-  gap: 0.4rem;
-
-  color: ${({ theme }) => theme.colors.primary}80;
-
-  span {
-    font-size: 0.7rem;
   }
 `;

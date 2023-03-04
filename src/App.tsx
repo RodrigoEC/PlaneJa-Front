@@ -6,7 +6,7 @@ import { Progress } from "./components/Progress/Progress";
 import { UploadSection } from "./components/UploadSection/UploadSection";
 import { Footer } from "./components/Footer/Footer";
 import { RestraintSection } from "./components/RestraintSection/RestraintSection";
-import { useExtractionContext } from "./contexts/extraction";
+import { useStudentRecordContext } from "./contexts/studentRecord";
 import { Loading, SubjectData } from "./components/SubjectData/SubjectData";
 import {
   GlobalStyle,
@@ -23,7 +23,7 @@ import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 
 function App() {
-  const { studentRecord, loading } = useExtractionContext();
+  const { studentRecord, loading } = useStudentRecordContext();
   const { status, course } = studentRecord;
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
@@ -47,7 +47,7 @@ function App() {
             <Header themeHandler={swapTheme} />
             <Body>
               {loading ? (
-                <Title disabled={true.toString()}>
+                <Title disabled={'disabled'}>
                   <Loading />
                 </Title>
               ) : (
