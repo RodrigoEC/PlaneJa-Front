@@ -13,7 +13,7 @@ root.render(
     <StudentRecordProvider>
       <RestraintsProvider>
         <SubjectsTableProvider>
-          <App />
+            <App />
         </SubjectsTableProvider>
       </RestraintsProvider>
     </StudentRecordProvider>

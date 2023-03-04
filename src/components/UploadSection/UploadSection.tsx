@@ -4,7 +4,6 @@ import { useRestraintsContext } from "../../contexts/restraints";
 import { Record } from "../../util/interfaces";
 import { capitalize } from "../../util/util";
 import { FileInput } from "../FileInput/FileInput";
-import { QuestionModal } from "../QuestionModal/QuestionModal";
 import {
   Wrapper,
   Message,
@@ -13,12 +12,13 @@ import {
   QuestionIcon,
   Send,
 } from "./UploadSection.style";
+import { useModalContext } from "../../contexts/modal";
 
 export const UploadSection = (): ReactElement => {
   const { file, loading, extractData, error } = useStudentRecordContext();
   const { semester, subjects, setStudentSubjects } = useRestraintsContext();
+  const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
 
   const submitData = async () => {
     const record: Record = await extractData(file);
@@ -52,24 +52,12 @@ export const UploadSection = (): ReactElement => {
     }
   }, [file]);
 
-  const handleKeyPress = useCallback((event: KeyboardEvent) => {
-    const keys = ["Escape", "f"];
-    if (keys.includes(event.key)) {
-      setModalOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
-    return () => document.removeEventListener("keydown", handleKeyPress);
-  }, [handleKeyPress]);
-
   return (
     <>
       <Wrapper>
         <ClassesVersion>Turmas Ofertadas {semester || "--"}</ClassesVersion>
         <UploadContainer>
-          <QuestionIcon onClick={() => setModalOpen(true)} />
+          <QuestionIcon onClick={() => handleChangeContent('question')} />
           <FileInput />
           <Send disabled={loading || !file || error} onClick={submitData}>
             Enviar
@@ -87,7 +75,6 @@ export const UploadSection = (): ReactElement => {
           </Message>
         )}
       </Wrapper>
-      {modalOpen && <QuestionModal onClose={() => setModalOpen(false)} />}
     </>
   );
 };

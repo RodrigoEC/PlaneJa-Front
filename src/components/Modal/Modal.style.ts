@@ -4,7 +4,8 @@ export const Background = styled.div`
   @keyframes fadeIn {
     from {
       opacity: 0;
-    } to {
+    }
+    to {
       opacity: 1;
     }
   }
@@ -38,6 +39,21 @@ export const Wrapper = styled.div`
   padding: 1.25rem 1rem;
   box-sizing: border-box;
   gap: 1rem;
+
+  animation-name: translateDown;
+  animation-duration: 0.2s;
+  transform: ${({ closed }: { closed: string }) =>
+    closed === "true" && "translateY(-4rem) rotateX(90deg);"};
+  transition: 0.2s;
+
+  @keyframes translateDown {
+    from {
+      transform: translateY(-4rem);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 
   article {
     display: flex;
@@ -84,7 +100,8 @@ export const Close = styled.span`
   margin: 0 auto;
   cursor: pointer;
 
-  &:hover, strong {
+  &:hover,
+  strong {
     text-decoration: underline;
   }
-`
+`;

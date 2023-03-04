@@ -21,6 +21,7 @@ import {
 import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
 import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
+import { ModalProvider } from "./contexts/modal";
 
 function App() {
   const { studentRecord, loading } = useStudentRecordContext();
@@ -44,35 +45,42 @@ function App() {
       <ThemeProvider theme={theme}>
         <Wrapper>
           <InnerContainer>
-            <Header themeHandler={swapTheme} />
-            <Body>
-              {loading ? (
-                <Title disabled={'disabled'}>
-                  <Loading />
-                </Title>
-              ) : (
-                <Title disabled={course}>{course || "planejá-UFCG"}</Title>
-              )}
-              <Progress />
-              <SubjectsDataSection>
-                <SubjectData title="Obrigatórias" status={status.mandatory} />
-                <SubjectData title="Optativas" status={status.optative} />
-                <SubjectData
-                  title="Complementares"
-                  status={status.complementary}
-                />
-              </SubjectsDataSection>
-              <Divider />
-              <UploadSection />
-              <Divider />
-              <ScheduleContainer>
-                <RestraintSection />
-                <ScheduleTable />
-                <Dots />
-                <ScheduleMenu />
-              </ScheduleContainer>
-            </Body>
-            <Footer></Footer>
+            <ModalProvider>
+              <>
+                <Header themeHandler={swapTheme} />
+                <Body>
+                  {loading ? (
+                    <Title disabled={"disabled"}>
+                      <Loading />
+                    </Title>
+                  ) : (
+                    <Title disabled={course}>{course || "planejá-UFCG"}</Title>
+                  )}
+                  <Progress />
+                  <SubjectsDataSection>
+                    <SubjectData
+                      title="Obrigatórias"
+                      status={status.mandatory}
+                    />
+                    <SubjectData title="Optativas" status={status.optative} />
+                    <SubjectData
+                      title="Complementares"
+                      status={status.complementary}
+                    />
+                  </SubjectsDataSection>
+                  <Divider />
+                  <UploadSection />
+                  <Divider />
+                  <ScheduleContainer>
+                    <RestraintSection />
+                    <ScheduleTable />
+                    <Dots />
+                    <ScheduleMenu />
+                  </ScheduleContainer>
+                </Body>
+                <Footer></Footer>
+              </>
+            </ModalProvider>
           </InnerContainer>
         </Wrapper>
       </ThemeProvider>
