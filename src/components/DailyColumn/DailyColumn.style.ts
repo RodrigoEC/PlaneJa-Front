@@ -1,5 +1,4 @@
 import styled, { DefaultTheme } from "styled-components";
-import { Reload } from "../../assets/icons/Reload";
 
 export const Wrapper = styled.div`
   display: flex;
