@@ -68,19 +68,19 @@ export const RestraintsProvider = ({
     getLocalStorage("planeja@student_subjects", [])
   );
 
-  useEffect(() => {
-    const getData = async () => {
-      const [data, status] = await getSemesterSubjects("Ciência da computação");
-      localStorage.setItem("planeja@subjects", JSON.stringify(data.subjects));
-      setSubjects(data.subjects);
-      localStorage.setItem("planeja@semester", data.semester);
-      setSemester(data.semester);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const [data, status] = await getSemesterSubjects("Ciência da computação");
+  //     localStorage.setItem("planeja@subjects", JSON.stringify(data.subjects));
+  //     setSubjects(data.subjects);
+  //     localStorage.setItem("planeja@semester", data.semester);
+  //     setSemester(data.semester);
 
-      if (status !== 201) setRestraintError(true);
-    };
+  //     if (status !== 201) setRestraintError(true);
+  //   };
 
-    getData();
-  }, []);
+  //   getData();
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem(

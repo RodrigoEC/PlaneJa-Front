@@ -27,6 +27,18 @@ export const SideIcons = styled.div`
   align-items: center;
 `;
 
+export const Name = styled.span`
+  font-weight: bold;
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.75rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    display: None;
+  }
+`
+
 export const Github = styled(GithubIcon)`
   cursor: pointer;
   fill: ${({ theme }) => theme.colors.primary};

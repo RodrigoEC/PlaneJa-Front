@@ -6,7 +6,6 @@ import { Progress } from "./components/Progress/Progress";
 import { UploadSection } from "./components/UploadSection/UploadSection";
 import { Footer } from "./components/Footer/Footer";
 import { RestraintSection } from "./components/RestraintSection/RestraintSection";
-import { useStudentRecordContext } from "./contexts/studentRecord";
 import { Loading, SubjectData } from "./components/SubjectData/SubjectData";
 import {
   GlobalStyle,
@@ -22,9 +21,10 @@ import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
 import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 import { ModalProvider } from "./contexts/modal";
+import { useRecordContext } from "./contexts/recordExtraction";
 
 function App() {
-  const { studentRecord, loading } = useStudentRecordContext();
+  const { studentRecord, loading } = useRecordContext();
   const { status, course } = studentRecord;
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")

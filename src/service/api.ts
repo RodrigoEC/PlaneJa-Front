@@ -1,7 +1,9 @@
 import axios from "axios";
 import {
   defaultRecord,
+  defaultRecordsResponse,
   defaultSemester,
+  enrollmentInfo,
   Record,
   UniqueSubjects,
   WeekSchedule,
@@ -14,9 +16,9 @@ const api = axios.create({
 
 export const extractRecord = async (
   formData: FormData
-): Promise<[Record, number]> => {
+): Promise<[{ record: Record, enrollment_info: enrollmentInfo  }, number]> => {
   try {
-    const response = await api.post("/records", formData, {
+    const response = await api.post("/records?recommend", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -24,7 +26,7 @@ export const extractRecord = async (
 
     return [response.data, response.status];
   } catch (e: any) {
-    return [defaultRecord, e.response.status];
+    return [defaultRecordsResponse, e.response.status];
   }
 };
 
@@ -112,7 +114,7 @@ export const calculateSchedules = async (
     });
 
     response.data = subjects;
-    return [response.data, response.status]
+    return [response.data, response.status];
   } catch (e: any) {
     return [[], 400];
   }

@@ -7,6 +7,12 @@ export interface Record {
   subjects: GradRecord[];
 }
 
+export interface enrollmentInfo {
+  enrollments: string[][];
+  subjects_available: string[];
+  semester: Semester;
+}
+
 export interface Status {
   mandatory: string[];
   optative: string[];
@@ -24,20 +30,15 @@ export interface GradRecord {
   semester: string;
 }
 
-export const defaultRecord: Record = {
-  name: "",
-  enrollment_number: "",
-  course: "",
-  status: { mandatory: [], optative: [], complementary: [] },
-  progress: '',
-  subjects: []
-};
+
 
 //
 
 export interface Semester {
+  _id?: string;
   name: string;
   semester: string;
+  subjects_entries?: number;
   subjects: Subject[];
 }
 
@@ -56,19 +57,13 @@ export interface Schedule {
   end_time: string;
 }
 
-export const defaultSemester: Semester = {
-  name: '',
-  semester: '',
-  subjects: []
-}
-
 
 export interface UniqueSubjects {
   semester: string;
   subjects: string[];
 }
 
-// SubjectsTable 
+// SubjectsTable
 
 export interface SubjectContent {
   title: string;
@@ -85,3 +80,30 @@ export interface WeekSchedule {
   sab: { name: string; subs: Array<SubjectContent | null> };
 }
 
+export const defaultSemester: Semester = {
+  _id: '',
+  name: "",
+  semester: "",
+  subjects_entries: 0,
+  subjects: [],
+};
+
+export const defaultRecord: Record = {
+  name: "",
+  enrollment_number: "",
+  course: "",
+  status: { mandatory: [], optative: [], complementary: [] },
+  progress: "",
+  subjects: [],
+};
+
+export const enrollmentInfo: enrollmentInfo = {
+  enrollments: [],
+  subjects_available: [],
+  semester: defaultSemester,
+}
+
+export const defaultRecordsResponse = {
+  record: defaultRecord,
+  enrollment_info: enrollmentInfo,
+}

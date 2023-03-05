@@ -12,7 +12,7 @@ import {
 } from "./RestraintSection.style";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
-import { useStudentRecordContext } from "../../contexts/studentRecord";
+import { useRecordContext } from "../../contexts/recordExtraction";
 
 export const RestraintSection = (): ReactElement => {
   const {
@@ -22,7 +22,7 @@ export const RestraintSection = (): ReactElement => {
     setEssentialSubjectsBackup,
   } = useRestraintsContext();
 
-  const { studentRecord } = useStudentRecordContext();
+  const { studentRecord } = useRecordContext();
 
   const { getSchedulesData } = useSubjectsTableContext();
 

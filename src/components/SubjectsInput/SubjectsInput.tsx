@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { Add } from "../../assets/icons/Add";
-import { useStudentRecordContext } from "../../contexts/studentRecord";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
@@ -19,7 +18,6 @@ export const SubjectsInput = (): ReactElement => {
     studentSubjects,
     setStudentSubjects,
   } = useRestraintsContext();
-  const { studentRecord } = useStudentRecordContext();
   const [currentInput, setCurrentInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [invalidData, setInvalidData] = useState(false);
@@ -45,18 +43,18 @@ export const SubjectsInput = (): ReactElement => {
     }
   };
 
-  useEffect(() => {
-    setIsDisabled(
-      subjects.length === 0 ||
-        studentRecord?.subjects.length === 0 ||
-        essentialSubjects.length >= numEssentialSubjects
-    );
-  }, [
-    essentialSubjects.length,
-    numEssentialSubjects,
-    studentRecord?.subjects.length,
-    subjects.length,
-  ]);
+  // useEffect(() => {
+  //   setIsDisabled(
+  //     subjects.length === 0 ||
+  //       studentRecord?.subjects.length === 0 ||
+  //       essentialSubjects.length >= numEssentialSubjects
+  //   );
+  // }, [
+  //   essentialSubjects.length,
+  //   numEssentialSubjects,
+  //   studentRecord?.subjects.length,
+  //   subjects.length,
+  // ]);
 
   useEffect(() => {
     const delay = setTimeout(() => {
