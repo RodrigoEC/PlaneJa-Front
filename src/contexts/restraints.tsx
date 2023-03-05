@@ -5,42 +5,26 @@ import {
   useEffect,
   useState,
 } from "react";
-import { getSemesterSubjects } from "../service/api";
-import { getLocalStorage } from "../util/util";
+import { getLocalStorage, setLocalStorage } from "../util/util";
+import { useRecordExtractionContext } from "./recordExtraction";
 
 interface ExtratedContent {
-  restraintError: boolean;
-  setRestraintError: Function;
-  semester: string;
-  setSemester: Function;
   numEssentialSubjects: number;
   setNumEssentialSubjects: Function;
   essentialSubjects: string[];
   setEssentialSubjects: Function;
-  essentialSubjectsBackup: string[];
-  setEssentialSubjectsBackup: Function;
-  subjects: string[];
-  setSubjects: Function;
-  studentSubjects: string[];
-  setStudentSubjects: Function;
+  subjectsBackup: string[];
+  setSubjectsBackup: Function;
 }
 
 const defaultFunction = () => {};
 const RestraintsContext = createContext<ExtratedContent>({
-  restraintError: false,
-  setRestraintError: defaultFunction,
-  semester: "",
-  setSemester: defaultFunction,
   numEssentialSubjects: 5,
   setNumEssentialSubjects: defaultFunction,
   essentialSubjects: [],
   setEssentialSubjects: defaultFunction,
-  essentialSubjectsBackup: [],
-  setEssentialSubjectsBackup: defaultFunction,
-  subjects: [],
-  setSubjects: defaultFunction,
-  studentSubjects: [],
-  setStudentSubjects: defaultFunction,
+  subjectsBackup: [],
+  setSubjectsBackup: defaultFunction,
 });
 
 export const RestraintsProvider = ({
@@ -48,62 +32,29 @@ export const RestraintsProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [restraintError, setRestraintError] = useState<boolean>(false);
-  const [semester, setSemester] = useState<string>(
-    getLocalStorage("planeja@semester", "")
-  );
   const [numEssentialSubjects, setNumEssentialSubjects] = useState<number>(
     Number(localStorage.getItem("planeja@num_subjects")) || 5
   );
-  const [essentialSubjectsBackup, setEssentialSubjectsBackup] = useState<string[]>(
-    getLocalStorage("planeja@essential_subjects", [])
-  );
+
   const [essentialSubjects, setEssentialSubjects] = useState<string[]>(
     getLocalStorage("planeja@essential_subjects", [])
   );
-  const [subjects, setSubjects] = useState<string[]>(
-    getLocalStorage("planeja@subjects", [])
+
+  const [subjectsBackup, setSubjectsBackup] = useState<string[]>(
+    getLocalStorage("planeja@essential_subjects", [])
   );
-  const [studentSubjects, setStudentSubjects] = useState(
-    getLocalStorage("planeja@student_subjects", [])
-  );
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const [data, status] = await getSemesterSubjects("Ciência da computação");
-  //     localStorage.setItem("planeja@subjects", JSON.stringify(data.subjects));
-  //     setSubjects(data.subjects);
-  //     localStorage.setItem("planeja@semester", data.semester);
-  //     setSemester(data.semester);
-
-  //     if (status !== 201) setRestraintError(true);
-  //   };
-
-  //   getData();
-  // }, []);
 
   useEffect(() => {
-    localStorage.setItem(
-      "planeja@essential_subjects",
-      JSON.stringify(essentialSubjectsBackup)
-    );
-  }, [essentialSubjectsBackup]);
+    setLocalStorage("planeja@essential_subjects", subjectsBackup);
+  }, [subjectsBackup]);
 
   const value = {
-    restraintError,
-    setRestraintError,
-    semester,
-    setSemester,
     numEssentialSubjects,
     setNumEssentialSubjects,
     essentialSubjects,
     setEssentialSubjects,
-    essentialSubjectsBackup,
-    setEssentialSubjectsBackup,
-    subjects,
-    setSubjects,
-    studentSubjects,
-    setStudentSubjects,
+    subjectsBackup,
+    setSubjectsBackup,
   };
 
   return (

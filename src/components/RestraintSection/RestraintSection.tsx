@@ -12,17 +12,17 @@ import {
 } from "./RestraintSection.style";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
-import { useRecordContext } from "../../contexts/recordExtraction";
+import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 
 export const RestraintSection = (): ReactElement => {
   const {
     setEssentialSubjects,
     essentialSubjects,
-    essentialSubjectsBackup,
-    setEssentialSubjectsBackup,
+    subjectsBackup,
+    setSubjectsBackup,
   } = useRestraintsContext();
 
-  const { studentRecord } = useRecordContext();
+  const { studentRecord } = useRecordExtractionContext();
 
   const { getSchedulesData } = useSubjectsTableContext();
 
@@ -34,18 +34,18 @@ export const RestraintSection = (): ReactElement => {
         "planeja@essential_subjects",
         JSON.stringify(essentialSubjects)
       );
-      setEssentialSubjectsBackup(essentialSubjects.sort());
+      setSubjectsBackup(essentialSubjects.sort());
       getSchedulesData(studentRecord.subjects, essentialSubjects);
     },
-    [essentialSubjects, setEssentialSubjectsBackup]
+    [essentialSubjects, setSubjectsBackup]
   );
 
   const cleanData = useCallback(
     async (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      setEssentialSubjects(essentialSubjectsBackup.sort());
+      setEssentialSubjects(subjectsBackup.sort());
     },
-    [essentialSubjectsBackup, setEssentialSubjects]
+    [subjectsBackup, setEssentialSubjects]
   );
 
   return (
@@ -54,7 +54,7 @@ export const RestraintSection = (): ReactElement => {
         <Button
           onClick={SubmitData}
           disable={(
-            essentialSubjectsBackup.toString() === essentialSubjects.toString()
+            subjectsBackup.toString() === essentialSubjects.toString()
           ).toString()}
         >
           Salvar
@@ -62,7 +62,7 @@ export const RestraintSection = (): ReactElement => {
         <Divider />
         <Button
           disable={(
-            essentialSubjectsBackup.toString() === essentialSubjects.toString()
+            subjectsBackup.toString() === essentialSubjects.toString()
           ).toString()}
           onClick={cleanData}
         >

@@ -1,23 +1,13 @@
-import {
-  ReactElement,
-  SyntheticEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { Add } from "../../assets/icons/Add";
+import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
 export const SubjectsInput = (): ReactElement => {
-  const {
-    numEssentialSubjects,
-    essentialSubjects,
-    setEssentialSubjects,
-    subjects,
-    studentSubjects,
-    setStudentSubjects,
-  } = useRestraintsContext();
+  const { numEssentialSubjects, essentialSubjects, setEssentialSubjects } =
+    useRestraintsContext();
+  const { studentRecord, availableSubjects } = useRecordExtractionContext();
   const [currentInput, setCurrentInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [invalidData, setInvalidData] = useState(false);
@@ -25,15 +15,12 @@ export const SubjectsInput = (): ReactElement => {
   const addClass = (event: SyntheticEvent) => {
     event.preventDefault();
     event.stopPropagation();
+
     setCurrentInput("");
     if (
-      studentSubjects.includes(currentInput.toUpperCase()) &&
+      availableSubjects.includes(currentInput.toUpperCase()) &&
       currentInput !== ""
     ) {
-      setStudentSubjects((previous: string[]) =>
-        previous.filter((subject: string) => currentInput !== subject)
-      );
-
       setEssentialSubjects((previous: string[]) => {
         if (previous.includes(currentInput)) {
           return previous;
@@ -43,31 +30,29 @@ export const SubjectsInput = (): ReactElement => {
     }
   };
 
-  // useEffect(() => {
-  //   setIsDisabled(
-  //     subjects.length === 0 ||
-  //       studentRecord?.subjects.length === 0 ||
-  //       essentialSubjects.length >= numEssentialSubjects
-  //   );
-  // }, [
-  //   essentialSubjects.length,
-  //   numEssentialSubjects,
-  //   studentRecord?.subjects.length,
-  //   subjects.length,
-  // ]);
+  useEffect(() => {
+    setIsDisabled(
+      studentRecord.subjects.length === 0 ||
+        essentialSubjects.length >= numEssentialSubjects
+    );
+  }, [
+    essentialSubjects.length,
+    numEssentialSubjects,
+    studentRecord?.subjects.length,
+  ]);
 
   useEffect(() => {
     const delay = setTimeout(() => {
       if (
-        !studentSubjects.includes(currentInput.toUpperCase()) &&
+        !availableSubjects.includes(currentInput.toUpperCase()) &&
         currentInput !== ""
       )
         setInvalidData(true);
       else setInvalidData(false);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(delay);
-  }, [currentInput, studentSubjects]);
+  }, [currentInput, availableSubjects]);
 
   return (
     <Wrapper
@@ -83,11 +68,13 @@ export const SubjectsInput = (): ReactElement => {
         list="subjects"
       />
       <List id="subjects">
-        {studentSubjects?.map((subject: string, index: number) => (
-          <option key={index} value={subject}>
-            {subject}
-          </option>
-        ))}
+        {availableSubjects
+          .filter((subject) => !essentialSubjects.includes(subject))
+          .map((subject: string, index: number) => (
+            <option key={index} value={subject}>
+              {subject}
+            </option>
+          ))}
       </List>
       <AddButton onClick={addClass} disabled={isDisabled || invalidData}>
         <Add aria-label="Cross icon" />

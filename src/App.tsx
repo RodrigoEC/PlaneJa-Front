@@ -21,10 +21,11 @@ import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
 import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 import { ModalProvider } from "./contexts/modal";
-import { useRecordContext } from "./contexts/recordExtraction";
+import { useRecordExtractionContext } from "./contexts/recordExtraction";
+import { SubjectsTableProvider } from "./contexts/weeklySchedule";
 
 function App() {
-  const { studentRecord, loading } = useRecordContext();
+  const { studentRecord, loading } = useRecordExtractionContext();
   const { status, course } = studentRecord;
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
@@ -71,12 +72,15 @@ function App() {
                   <Divider />
                   <UploadSection />
                   <Divider />
-                  <ScheduleContainer>
-                    <RestraintSection />
-                    <ScheduleTable />
-                    <Dots />
-                    <ScheduleMenu />
-                  </ScheduleContainer>
+
+                  <SubjectsTableProvider>
+                    <ScheduleContainer>
+                      <RestraintSection />
+                      <ScheduleTable />
+                      <Dots />
+                      <ScheduleMenu />
+                    </ScheduleContainer>
+                  </SubjectsTableProvider>
                 </Body>
                 <Footer></Footer>
               </>

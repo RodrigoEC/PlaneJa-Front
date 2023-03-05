@@ -12,11 +12,17 @@ import {
   Send,
 } from "./UploadSection.style";
 import { useModalContext } from "../../contexts/modal";
-import { useRecordContext } from "../../contexts/recordExtraction";
+import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 
 export const UploadSection = (): ReactElement => {
-  const { file, loading, extractData, error } = useRecordContext();
-  const { semester } = useRestraintsContext();
+  const {
+    file,
+    loading,
+    extractData,
+    error,
+    semester: studentSemester,
+  } = useRecordExtractionContext();
+  const { semester } = studentSemester;
   const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
 
@@ -57,7 +63,7 @@ export const UploadSection = (): ReactElement => {
       <Wrapper>
         <ClassesVersion>Turmas Ofertadas {semester || "--"}</ClassesVersion>
         <UploadContainer>
-          <QuestionIcon onClick={() => handleChangeContent('question')} />
+          <QuestionIcon onClick={() => handleChangeContent("question")} />
           <FileInput />
           <Send disabled={loading || !file || error.error} onClick={submitData}>
             Enviar

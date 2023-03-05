@@ -6,7 +6,12 @@ import {
   Record,
   Semester,
 } from "../util/interfaces";
-import { defaultFunction, getLocalStorage } from "../util/util";
+import {
+  defaultFunction,
+  getLocalStorage,
+  handleLocalStorageStateUpdate,
+  setLocalStorage,
+} from "../util/util";
 
 interface ExtratedContent {
   loading: boolean;
@@ -58,9 +63,15 @@ export const RecordExtractionProvider = ({
     getLocalStorage("planeja@record", defaultRecord)
   );
 
-  const [enrollments, setEnrollments] = useState<string[][]>([]);
-  const [availableSubjects, setAvailableSubjects] = useState<string[]>([]);
-  const [semester, setSemester] = useState<Semester>(defaultSemester);
+  const [enrollments, setEnrollments] = useState<string[][]>(
+    getLocalStorage("planeja@enrollments", [])
+  );
+  const [availableSubjects, setAvailableSubjects] = useState<string[]>(
+    getLocalStorage("planeja@available_subjects", [])
+  );
+  const [semester, setSemester] = useState<Semester>(
+    getLocalStorage("planeja@semester", defaultSemester)
+  );
 
   const extractData = async (file: File): Promise<{ record: Record }> => {
     setLoading(true);
@@ -73,17 +84,32 @@ export const RecordExtractionProvider = ({
       error: statusCode !== 200 && statusCode !== 206,
     });
 
-    setStudentRecord(studentInfo.record);
-    const {
-      enrollments,
-      subjects_available,
-      semester: classesOffered,
-    } = studentInfo.enrollment_info;
-    setEnrollments(enrollments);
-    setAvailableSubjects(subjects_available);
-    setSemester(classesOffered);
+    handleLocalStorageStateUpdate(
+      "planeja@record",
+      setStudentRecord,
+      studentInfo.record
+    );
 
-    localStorage.setItem("planeja@record", JSON.stringify(studentInfo.record));
+    const enrollmentData = studentInfo.enrollment_info;
+
+    handleLocalStorageStateUpdate(
+      "planeja@semester",
+      setSemester,
+      enrollmentData.semester
+    );
+
+    handleLocalStorageStateUpdate(
+      "planeja@enrollments",
+      setEnrollments,
+      enrollmentData.enrollments
+    );
+
+    handleLocalStorageStateUpdate(
+      "planeja@available_subjects",
+      setAvailableSubjects,
+      enrollmentData.subjects_available
+    );
+
     setLoading(false);
     return studentInfo;
   };
@@ -112,6 +138,6 @@ export const RecordExtractionProvider = ({
     </ExtractionContext.Provider>
   );
 };
-export const useRecordContext = () => {
+export const useRecordExtractionContext = () => {
   return { ...useContext(ExtractionContext) };
 };

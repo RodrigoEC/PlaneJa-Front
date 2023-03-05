@@ -1,4 +1,5 @@
 import { ReactElement, useCallback } from "react";
+import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { colors } from "../../util/colors";
 import { LockedIcon, UnlockedIcon, Wrapper } from "./SubjectCard.styles";
@@ -10,28 +11,22 @@ export const SubjectCard = ({
   variant: string;
   title: string;
 }): ReactElement => {
+  const { availableSubjects, setAvailableSubjects } = useRecordExtractionContext()
   const {
-    essentialSubjects,
-    setEssentialSubjects,
-    setStudentSubjects,
     numEssentialSubjects,
   } = useRestraintsContext();
   const displayedTitle =
     title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
 
   const onClick = useCallback((): void => {
-    if (essentialSubjects.includes(title)) {
-      setEssentialSubjects((previous: string[]) =>
+    if (availableSubjects.includes(title)) {
+      setAvailableSubjects((previous: string[]) =>
         previous.filter((subject) => subject !== title)
       );
-      setStudentSubjects((previous: string[]) => [...previous, title].sort());
-    } else if (essentialSubjects.length < numEssentialSubjects) {
-      setEssentialSubjects((previous: string[]) => [...previous, title].sort());
-      setStudentSubjects((previous: string[]) =>
-        previous.filter((subject) => subject !== title)
-      );
+    } else if (availableSubjects.length < numEssentialSubjects) {
+      setAvailableSubjects((previous: string[]) => [...previous, title].sort());
     }
-  }, [essentialSubjects, setEssentialSubjects, setStudentSubjects, title]);
+  }, [availableSubjects, setAvailableSubjects, title]);
 
   return (
     <Wrapper
@@ -39,14 +34,14 @@ export const SubjectCard = ({
       onClick={onClick}
       variant={variant as keyof typeof colors}
       blocked={
-        essentialSubjects.length === numEssentialSubjects &&
-        !essentialSubjects.includes(title)
+        availableSubjects.length === numEssentialSubjects &&
+        !availableSubjects.includes(title)
           ? "T"
           : "F"
       }
     >
       {displayedTitle}
-      {essentialSubjects.includes(title) ? <LockedIcon /> : <UnlockedIcon />}
+      {availableSubjects.includes(title) ? <LockedIcon /> : <UnlockedIcon />}
     </Wrapper>
   );
 };

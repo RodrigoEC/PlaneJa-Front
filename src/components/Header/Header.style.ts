@@ -29,6 +29,7 @@ export const SideIcons = styled.div`
 
 export const Name = styled.span`
   font-weight: bold;
+  opacity: 0.8;
 
   @media screen and (max-width: 600px) {
     font-size: 0.75rem;

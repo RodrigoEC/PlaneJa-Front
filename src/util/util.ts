@@ -11,4 +11,17 @@ export const getLocalStorage = (key: string, defaultValue: any) => {
   return JSON.parse(localStorage.getItem(key) || JSON.stringify(defaultValue));
 };
 
+export const setLocalStorage = (key: string, value: any) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
 export const defaultFunction = () => {};
+
+export const handleLocalStorageStateUpdate = (
+  key: string,
+  stateUpdate: Function,
+  value: any
+) => {
+  setLocalStorage(key, value);
+  stateUpdate(value);
+};

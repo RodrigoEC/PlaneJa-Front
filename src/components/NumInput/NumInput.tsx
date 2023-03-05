@@ -5,14 +5,15 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
 export const NumInput = (): ReactElement => {
+  const { setAvailableSubjects } = useRecordExtractionContext()
   const {
     numEssentialSubjects,
     setNumEssentialSubjects,
-    setEssentialSubjects,
   } = useRestraintsContext();
   const [invalidInput, setInvalidInput] = useState(false);
 
@@ -23,7 +24,7 @@ export const NumInput = (): ReactElement => {
 
     localStorage.setItem("planeja@num_subjects", String(numSubjects));
     setNumEssentialSubjects(numSubjects);
-    setEssentialSubjects((previous: string[]) =>
+    setAvailableSubjects((previous: string[]) =>
       previous.slice(0, numSubjects)
     );
 
