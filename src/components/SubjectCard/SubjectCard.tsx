@@ -32,7 +32,7 @@ export const SubjectCard = ({
       );
 
       setEssentialSubjects(filteredSubjects);
-    } else if (availableSubjects.length < numEssentialSubjects) {
+    } else if (essentialSubjects.length < numEssentialSubjects) {
       setEssentialSubjects([...essentialSubjects, subject]);
     }
   }, [essentialSubjects, setEssentialSubjects, hasSubject]);

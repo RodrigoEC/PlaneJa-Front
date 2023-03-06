@@ -30,7 +30,7 @@ type WrapperType = {
   blocked: string;
 }
 export const Title = styled.span`
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 150%;
   color: ${({ theme }) => theme.colors.forth};
   transition: 0.3s;
