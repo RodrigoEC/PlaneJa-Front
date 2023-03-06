@@ -54,6 +54,7 @@ export const RestraintsProvider = ({
   
 
   useEffect(() => {
+    console.log(essentialSubjects)
     setLocalStorage("planeja@essential_subjects", subjectsBackup);
   }, [subjectsBackup]);
 

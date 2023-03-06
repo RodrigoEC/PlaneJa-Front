@@ -24,20 +24,6 @@ export const extractRecord = async (
   }
 };
 
-// export const getSemesterSubjects = async (
-//   course: string
-// ): Promise<[UniqueSubjects, number]> => {
-//   try {
-//     const response = await api.get("unique-subjects", {
-//       params: { name: course.toLocaleLowerCase() },
-//     });
-
-//     return [response.data || defaultSemester, response.status];
-//   } catch (e: any) {
-//     return [{ semester: "--", subjects: [] }, e.response.status];
-//   }
-// };
-
 const subjects = [
   {
     seg: {
