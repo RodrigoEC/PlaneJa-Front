@@ -22,7 +22,7 @@ export const SubjectCard = ({
   const [hasSubject, setHasSubject] = useState<boolean>(false);
 
   const displayedTitle =
-    title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
+    title.length > 35 ? title.slice(0, 23) + "..." + title.slice(-3) : title;
 
   const onClick = useCallback((): void => {
     if (hasSubject) {
