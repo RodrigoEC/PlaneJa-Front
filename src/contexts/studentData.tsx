@@ -44,7 +44,7 @@ export const StudentDataProvider = ({
     getLocalStorage("planeja@student_record", defaultStudentRecord)
   );
   const [semester, setSemester] = useState<string>(
-    getLocalStorage("planeja@semester_date", "")
+    getLocalStorage("planeja@semester", "")
   );
   const [enrollments, setEnrollments] = useState<Array<Subject[]>>(
     getLocalStorage("planeja@enrollments", [])

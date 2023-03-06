@@ -11,9 +11,9 @@ import { Subject } from "./restraints.interfaces";
 interface ExtratedContent {
   numEssentialSubjects: number;
   setNumEssentialSubjects: Function;
-  essentialSubjects: string[];
+  essentialSubjects: Subject[];
   setEssentialSubjects: Function;
-  subjectsBackup: string[];
+  subjectsBackup: Subject[];
   setSubjectsBackup: Function;
   availableSubjects: Subject[];
   setAvailableSubjects: Function;
@@ -39,18 +39,19 @@ export const RestraintsProvider = ({
   const [numEssentialSubjects, setNumEssentialSubjects] = useState<number>(
     getLocalStorage("planeja@num_subjects", 5)
   );
-
-  const [essentialSubjects, setEssentialSubjects] = useState<string[]>(
-    getLocalStorage("planeja@essential_subjects", [])
-  );
-
-  const [subjectsBackup, setSubjectsBackup] = useState<string[]>(
-    getLocalStorage("planeja@essential_subjects", [])
-  );
   
   const [availableSubjects, setAvailableSubjects] = useState<Subject[]>(
     getLocalStorage("planeja@available_subjects", [])
   );
+
+  const [essentialSubjects, setEssentialSubjects] = useState<Subject[]>(
+    getLocalStorage("planeja@essential_subjects", [])
+  );
+
+  const [subjectsBackup, setSubjectsBackup] = useState<Subject[]>(
+    getLocalStorage("planeja@essential_subjects", [])
+  );
+  
 
   useEffect(() => {
     setLocalStorage("planeja@essential_subjects", subjectsBackup);

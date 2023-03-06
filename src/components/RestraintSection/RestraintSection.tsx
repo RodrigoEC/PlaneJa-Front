@@ -13,6 +13,7 @@ import { useRestraintsContext } from "../../contexts/restraints";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { FixedSubject } from "../FixedSubject/FixedSubject";
 import { useStudentDataContext } from "../../contexts/studentData";
+import { Subject } from "../../contexts/restraints.interfaces";
 
 export const RestraintSection = (): ReactElement => {
   const {
@@ -71,10 +72,10 @@ export const RestraintSection = (): ReactElement => {
       </ButtonsContainer>
       {essentialSubjects?.length > 0 && (
         <SubjectsContainer>
-          {essentialSubjects.map((subject: string) => (
+          {essentialSubjects?.map((subject: Subject) => (
             <FixedSubject
-              key={subject}
-              title={subject}
+              title={`${subject.name} - T${subject.class_num}`}
+              key={`${subject.id}-fixed`}
             />
           ))}
         </SubjectsContainer>

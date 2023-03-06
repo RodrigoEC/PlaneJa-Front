@@ -3,21 +3,18 @@ import { Subject } from "../../contexts/restraints.interfaces";
 import { Delete, Text, Wrapper } from "./FixedSubject.style";
 
 export const FixedSubject = ({ title }: { title: string }) => {
-  const { setAvailableSubjects, availableSubjects } =
-    useRestraintsContext();
-  const titleText = 
-    title.length > 20 ? title.slice(0, 10) + "..." + title.slice(-10) : title;
+  const { setEssentialSubjects, essentialSubjects } = useRestraintsContext();
+  const titleText =
+    title?.length > 20 ? title.slice(0, 10) + "..." + title.slice(-10) : title;
 
   const removeSubject = () => {
     const [name, num] = title.split(" - T");
 
-
-    // Consertar
-    setAvailableSubjects(
-      availableSubjects.map((subject: Subject) => {
-        console.log(num, name, availableSubjects)
-        return (subject.name !== name.trim() && subject.class_num !== num.trim());
-      })
+    setEssentialSubjects(
+      essentialSubjects.filter(
+        (subject: Subject) =>
+          subject.name !== name.trim() || subject.class_num !== num.trim()
+      )
     );
   };
 

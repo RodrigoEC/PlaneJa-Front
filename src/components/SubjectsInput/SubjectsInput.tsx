@@ -4,6 +4,7 @@ import { useRestraintsContext } from "../../contexts/restraints";
 import { Schedule, Subject } from "../../contexts/restraints.interfaces";
 import { useStudentDataContext } from "../../contexts/studentData";
 import { DayOfTheWeek, numberToDay } from "../../util/constants";
+import { Option } from "../Option/Option";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
 export const SubjectsInput = (): ReactElement => {
@@ -23,20 +24,17 @@ export const SubjectsInput = (): ReactElement => {
     event.stopPropagation();
 
     setCurrentInput("");
-    if (
-      availableSubjects.filter((subject) => {
-        const [title, classNum] = currentInput.toUpperCase().split(" - T");
-        return title === subject.name && classNum === subject.class_num;
-      }) &&
-      currentInput !== ""
-    ) {
-      setEssentialSubjects((previous: string[]) => {
-        if (previous.includes(currentInput)) {
-          return previous;
-        }
-        return [currentInput, ...previous];
-      });
-    }
+    const [name, num] = currentInput.split(" - T");
+    const subject = availableSubjects.find(
+      (subject: Subject) => subject.name === name && subject.class_num === num
+    );
+    
+    setEssentialSubjects((previous: Subject[]) => {
+      if (previous.includes(subject as Subject)) {
+        return previous;
+      }
+      return [subject, ...previous];
+    });
   };
 
   useEffect(() => {
@@ -84,28 +82,10 @@ export const SubjectsInput = (): ReactElement => {
       />
       <List id="subjects">
         {availableSubjects
-          .filter(
-            (subject) =>
-              !essentialSubjects.includes(
-                `${subject.name} - T${subject.class_num}`
-              )
-          )
-          .map((subject: Subject, index: number) => {
-            const subjectInfo = subject?.schedule.map(
-              (element: Schedule) =>
-                ` ${numberToDay[element.day as DayOfTheWeek]} (${
-                  element.init_time
-                } - ${element.end_time})`
-            );
-            return (
-              <option
-                key={index}
-                value={`${subject?.name} - T${subject?.class_num}`}
-              >
-                {`Dias:${subjectInfo}`}
-              </option>
-            );
-          })}
+          .filter((subject) => !essentialSubjects.includes(subject))
+          .map((subject: Subject) => (
+            <Option subject={subject} key={subject.id} />
+          ))}
       </List>
       <AddButton onClick={addClass} disabled={isDisabled || invalidData}>
         <Add aria-label="Cross icon" />
