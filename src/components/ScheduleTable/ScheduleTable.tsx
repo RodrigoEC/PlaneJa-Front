@@ -1,7 +1,7 @@
 import {
   useSubjectsTableContext,
 } from "../../contexts/weeklySchedule";
-import { WeekSchedule } from "../../util/interfaces";
+import { WeekSchedule } from "../../contexts/weeklySchedule.interfaces";
 import { DailyColumn } from "../DailyColumn/DailyColumn";
 import { TableContent, Wrapper, Timing, Time } from "./ScheduleTable.style";
 

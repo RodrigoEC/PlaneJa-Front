@@ -1,13 +1,7 @@
 import axios from "axios";
-import {
-  defaultRecord,
-  defaultRecordsResponse,
-  defaultSemester,
-  enrollmentInfo,
-  Record,
-  UniqueSubjects,
-  WeekSchedule,
-} from "../util/interfaces";
+import { defaultExtractionResponse, ExtractionResponse } from "../contexts/extraction.interfaces";
+import { WeekSchedule } from "../contexts/weeklySchedule.interfaces";
+
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -16,7 +10,7 @@ const api = axios.create({
 
 export const extractRecord = async (
   formData: FormData
-): Promise<[{ record: Record, enrollment_info: enrollmentInfo  }, number]> => {
+): Promise<[ExtractionResponse, number]> => {
   try {
     const response = await api.post("/records?recommend", formData, {
       headers: {
@@ -26,23 +20,23 @@ export const extractRecord = async (
 
     return [response.data, response.status];
   } catch (e: any) {
-    return [defaultRecordsResponse, e.response.status];
+    return [defaultExtractionResponse, e.response.status];
   }
 };
 
-export const getSemesterSubjects = async (
-  course: string
-): Promise<[UniqueSubjects, number]> => {
-  try {
-    const response = await api.get("unique-subjects", {
-      params: { name: course.toLocaleLowerCase() },
-    });
+// export const getSemesterSubjects = async (
+//   course: string
+// ): Promise<[UniqueSubjects, number]> => {
+//   try {
+//     const response = await api.get("unique-subjects", {
+//       params: { name: course.toLocaleLowerCase() },
+//     });
 
-    return [response.data || defaultSemester, response.status];
-  } catch (e: any) {
-    return [{ semester: "--", subjects: [] }, e.response.status];
-  }
-};
+//     return [response.data || defaultSemester, response.status];
+//   } catch (e: any) {
+//     return [{ semester: "--", subjects: [] }, e.response.status];
+//   }
+// };
 
 const subjects = [
   {

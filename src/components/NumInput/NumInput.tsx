@@ -5,13 +5,12 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
 export const NumInput = (): ReactElement => {
-  const { setAvailableSubjects } = useRecordExtractionContext()
   const {
+    setAvailableSubjects,
     numEssentialSubjects,
     setNumEssentialSubjects,
   } = useRestraintsContext();

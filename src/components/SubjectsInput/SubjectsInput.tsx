@@ -1,13 +1,19 @@
 import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { Add } from "../../assets/icons/Add";
-import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 import { useRestraintsContext } from "../../contexts/restraints";
+import { Schedule, Subject } from "../../contexts/restraints.interfaces";
+import { useStudentDataContext } from "../../contexts/studentData";
+import { DayOfTheWeek, numberToDay } from "../../util/constants";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
 export const SubjectsInput = (): ReactElement => {
-  const { numEssentialSubjects, essentialSubjects, setEssentialSubjects } =
-    useRestraintsContext();
-  const { studentRecord, availableSubjects } = useRecordExtractionContext();
+  const {
+    numEssentialSubjects,
+    essentialSubjects,
+    setEssentialSubjects,
+    availableSubjects,
+  } = useRestraintsContext();
+  const { studentRecord } = useStudentDataContext();
   const [currentInput, setCurrentInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [invalidData, setInvalidData] = useState(false);
@@ -18,7 +24,10 @@ export const SubjectsInput = (): ReactElement => {
 
     setCurrentInput("");
     if (
-      availableSubjects.includes(currentInput.toUpperCase()) &&
+      availableSubjects.filter((subject) => {
+        const [title, classNum] = currentInput.toUpperCase().split(" - T");
+        return title === subject.name && classNum === subject.class_num;
+      }) &&
       currentInput !== ""
     ) {
       setEssentialSubjects((previous: string[]) => {
@@ -44,7 +53,10 @@ export const SubjectsInput = (): ReactElement => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (
-        !availableSubjects.includes(currentInput.toUpperCase()) &&
+        !availableSubjects.filter((subject) => {
+          const [title, classNum] = currentInput.toUpperCase().split(" - T");
+          return title === subject.name && classNum === subject.class_num;
+        }) &&
         currentInput !== ""
       )
         setInvalidData(true);
@@ -52,7 +64,7 @@ export const SubjectsInput = (): ReactElement => {
     }, 500);
 
     return () => clearTimeout(delay);
-  }, [currentInput, availableSubjects]);
+  }, [currentInput, essentialSubjects]);
 
   return (
     <Wrapper
@@ -64,17 +76,36 @@ export const SubjectsInput = (): ReactElement => {
         placeholder="Disciplinas fixas"
         onFocus={(e) => (e.target.value = "")}
         value={currentInput}
-        onChange={(event) => setCurrentInput(event.target.value)}
+        onChange={(event) => {
+          console.log(event.target.value);
+          setCurrentInput(event.target.value);
+        }}
         list="subjects"
       />
       <List id="subjects">
         {availableSubjects
-          .filter((subject) => !essentialSubjects.includes(subject))
-          .map((subject: string, index: number) => (
-            <option key={index} value={subject}>
-              {subject}
-            </option>
-          ))}
+          .filter(
+            (subject) =>
+              !essentialSubjects.includes(
+                `${subject.name} - T${subject.class_num}`
+              )
+          )
+          .map((subject: Subject, index: number) => {
+            const subjectInfo = subject?.schedule.map(
+              (element: Schedule) =>
+                ` ${numberToDay[element.day as DayOfTheWeek]} (${
+                  element.init_time
+                } - ${element.end_time})`
+            );
+            return (
+              <option
+                key={index}
+                value={`${subject?.name} - T${subject?.class_num}`}
+              >
+                {`Dias:${subjectInfo}`}
+              </option>
+            );
+          })}
       </List>
       <AddButton onClick={addClass} disabled={isDisabled || invalidData}>
         <Add aria-label="Cross icon" />

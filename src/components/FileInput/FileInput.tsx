@@ -1,10 +1,10 @@
 import { ChangeEvent, ReactElement } from "react";
 import { UploadIcon } from "../../assets/icons/Upload";
-import { useRecordExtractionContext } from "../../contexts/recordExtraction";
+import { useExtractionContext } from "../../contexts/extraction";
 import { Label, Text } from "./FileInput.style";
 
 export const FileInput = (): ReactElement => {
-  const { setFile, loading, error, setError } = useRecordExtractionContext();
+  const { setFile, loading, error, setError } = useExtractionContext();
 
   const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget as HTMLInputElement;
@@ -13,7 +13,7 @@ export const FileInput = (): ReactElement => {
   };
 
   return (
-    <Label error={error.error} className={loading ? "disabled" : ""}>
+    <Label error={error.warn} className={loading ? "disabled" : ""}>
       <Text>
         {loading ? (
           <span>Extraindo dados...</span>

@@ -1,7 +1,4 @@
-import { ReactElement, useCallback, useEffect, useState } from "react";
-import { useRestraintsContext } from "../../contexts/restraints";
-import { Record } from "../../util/interfaces";
-import { capitalize } from "../../util/util";
+import { ReactElement, useEffect, useState } from "react";
 import { FileInput } from "../FileInput/FileInput";
 import {
   Wrapper,
@@ -12,22 +9,18 @@ import {
   Send,
 } from "./UploadSection.style";
 import { useModalContext } from "../../contexts/modal";
-import { useRecordExtractionContext } from "../../contexts/recordExtraction";
+import { StudentRecord } from "../../contexts/studentData.interfaces";
+import { useStudentDataContext } from "../../contexts/studentData";
+import { useExtractionContext } from "../../contexts/extraction";
 
 export const UploadSection = (): ReactElement => {
-  const {
-    file,
-    loading,
-    extractData,
-    error,
-    semester: studentSemester,
-  } = useRecordExtractionContext();
-  const { semester } = studentSemester;
+  const { file, loading, extractData, error } = useExtractionContext();
+  const { semester } = useStudentDataContext();
   const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
 
   const submitData = async () => {
-    const record: Record = await extractData(file);
+    const record: StudentRecord = await extractData(file);
     // const subjectObj = subjects.reduce((object: any, subject: string) => {
     //   object[subject] = 0;
     //   return object;
@@ -65,12 +58,12 @@ export const UploadSection = (): ReactElement => {
         <UploadContainer>
           <QuestionIcon onClick={() => handleChangeContent("question")} />
           <FileInput />
-          <Send disabled={loading || !file || error.error} onClick={submitData}>
+          <Send disabled={loading || !file || error.warn} onClick={submitData}>
             Enviar
           </Send>
         </UploadContainer>
         {file?.name && (
-          <Message error={error.error} title={`Arquivo: ${file?.name}`}>
+          <Message error={error.warn} title={`Arquivo: ${file?.name}`}>
             {error ? (
               <>Não foi possível extrair dados do arquivo submetido</>
             ) : (

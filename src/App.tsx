@@ -21,12 +21,16 @@ import { ScheduleTable } from "./components/ScheduleTable/ScheduleTable";
 import { Dots } from "./assets/icons/Dots";
 import { ScheduleMenu } from "./components/ScheduleMenu/ScheduleMenu";
 import { ModalProvider } from "./contexts/modal";
-import { useRecordExtractionContext } from "./contexts/recordExtraction";
 import { SubjectsTableProvider } from "./contexts/weeklySchedule";
+import { useStudentDataContext } from "./contexts/studentData";
+import { useExtractionContext } from "./contexts/extraction";
 
 function App() {
-  const { studentRecord, loading } = useRecordExtractionContext();
+  const { loading } = useExtractionContext();
+
+  const { studentRecord } = useStudentDataContext();
   const { status, course } = studentRecord;
+
   const [theme, setTheme] = useState(
     localStorage.getItem("planeja@theme")
       ? JSON.parse(localStorage.getItem("planeja@theme") || "{}")

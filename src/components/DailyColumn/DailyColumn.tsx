@@ -2,7 +2,7 @@ import { ReactElement, useCallback } from "react";
 import {
   useSubjectsTableContext,
 } from "../../contexts/weeklySchedule";
-import { SubjectContent, WeekSchedule } from "../../util/interfaces";
+import { SubjectContent, WeekSchedule } from "../../contexts/weeklySchedule.interfaces";
 import { SubjectCard } from "../SubjectCard/SubjectCard";
 import { Loading } from "../SubjectData/SubjectData";
 import {

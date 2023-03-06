@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { getLocalStorage, setLocalStorage } from "../util/util";
-import { useRecordExtractionContext } from "./recordExtraction";
+import { Subject } from "./restraints.interfaces";
 
 interface ExtratedContent {
   numEssentialSubjects: number;
@@ -15,6 +15,8 @@ interface ExtratedContent {
   setEssentialSubjects: Function;
   subjectsBackup: string[];
   setSubjectsBackup: Function;
+  availableSubjects: Subject[];
+  setAvailableSubjects: Function;
 }
 
 const defaultFunction = () => {};
@@ -25,6 +27,8 @@ const RestraintsContext = createContext<ExtratedContent>({
   setEssentialSubjects: defaultFunction,
   subjectsBackup: [],
   setSubjectsBackup: defaultFunction,
+  availableSubjects: [],
+  setAvailableSubjects: defaultFunction,
 });
 
 export const RestraintsProvider = ({
@@ -33,7 +37,7 @@ export const RestraintsProvider = ({
   children: ReactElement;
 }): ReactElement => {
   const [numEssentialSubjects, setNumEssentialSubjects] = useState<number>(
-    Number(localStorage.getItem("planeja@num_subjects")) || 5
+    getLocalStorage("planeja@num_subjects", 5)
   );
 
   const [essentialSubjects, setEssentialSubjects] = useState<string[]>(
@@ -42,6 +46,10 @@ export const RestraintsProvider = ({
 
   const [subjectsBackup, setSubjectsBackup] = useState<string[]>(
     getLocalStorage("planeja@essential_subjects", [])
+  );
+  
+  const [availableSubjects, setAvailableSubjects] = useState<Subject[]>(
+    getLocalStorage("planeja@available_subjects", [])
   );
 
   useEffect(() => {
@@ -55,6 +63,8 @@ export const RestraintsProvider = ({
     setEssentialSubjects,
     subjectsBackup,
     setSubjectsBackup,
+    availableSubjects,
+    setAvailableSubjects,
   };
 
   return (

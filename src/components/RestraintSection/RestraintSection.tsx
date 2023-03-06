@@ -1,7 +1,6 @@
 import { MouseEvent, ReactElement, useCallback } from "react";
 import { SubjectsInput } from "../SubjectsInput/SubjectsInput";
 import { NumInput } from "../NumInput/NumInput";
-import { Subject } from "../Subject/Subject";
 import {
   Divider,
   InputArea,
@@ -12,7 +11,8 @@ import {
 } from "./RestraintSection.style";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
-import { useRecordExtractionContext } from "../../contexts/recordExtraction";
+import { FixedSubject } from "../FixedSubject/FixedSubject";
+import { useStudentDataContext } from "../../contexts/studentData";
 
 export const RestraintSection = (): ReactElement => {
   const {
@@ -22,7 +22,7 @@ export const RestraintSection = (): ReactElement => {
     setSubjectsBackup,
   } = useRestraintsContext();
 
-  const { studentRecord } = useRecordExtractionContext();
+  const { studentRecord } = useStudentDataContext();
 
   const { getSchedulesData } = useSubjectsTableContext();
 
@@ -72,7 +72,7 @@ export const RestraintSection = (): ReactElement => {
       {essentialSubjects?.length > 0 && (
         <SubjectsContainer>
           {essentialSubjects.map((subject: string) => (
-            <Subject
+            <FixedSubject
               key={subject}
               title={subject}
             />

@@ -8,8 +8,8 @@ import {
 } from "react";
 import { calculateSchedules } from "../service/api";
 import { defaultSchedule, defaultScheduleList } from "../util/constants";
-import { SubjectContent, WeekSchedule } from "../util/interfaces";
 import { defaultFunction, getLocalStorage } from "../util/util";
+import { SubjectContent, WeekSchedule } from "./weeklySchedule.interfaces";
 
 interface SubjectsTableContent {
   scheduleList: WeekSchedule[];

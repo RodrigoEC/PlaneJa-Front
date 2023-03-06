@@ -1,3 +1,5 @@
+import { Subject } from "../contexts/restraints.interfaces";
+
 export const capitalize = (string: string): string => {
   const words = string.split(" ");
   const wordsCapitalized = words.map(
@@ -24,4 +26,15 @@ export const handleLocalStorageStateUpdate = (
 ) => {
   setLocalStorage(key, value);
   stateUpdate(value);
+};
+
+export const filterSubjects = (subjectId: string, subjects: Subject[]): Subject | null => {
+  const [classId, classNum] = subjectId.split(".");
+  const subject = subjects.filter(
+    (element: Subject) =>
+      element.id === classId && element.class_num === classNum
+  );
+
+  if (subject) return subject[0]
+  return null
 };

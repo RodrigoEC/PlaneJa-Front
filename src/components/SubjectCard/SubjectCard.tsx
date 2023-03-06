@@ -1,5 +1,4 @@
 import { ReactElement, useCallback } from "react";
-import { useRecordExtractionContext } from "../../contexts/recordExtraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { colors } from "../../util/colors";
 import { LockedIcon, UnlockedIcon, Wrapper } from "./SubjectCard.styles";
@@ -11,15 +10,13 @@ export const SubjectCard = ({
   variant: string;
   title: string;
 }): ReactElement => {
-  const { availableSubjects, setAvailableSubjects } = useRecordExtractionContext()
-  const {
-    numEssentialSubjects,
-  } = useRestraintsContext();
+  const { numEssentialSubjects, availableSubjects, setAvailableSubjects } =
+    useRestraintsContext();
   const displayedTitle =
     title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
 
   const onClick = useCallback((): void => {
-    if (availableSubjects.includes(title)) {
+    if (availableSubjects.filter((subject) => title === subject.name)) {
       setAvailableSubjects((previous: string[]) =>
         previous.filter((subject) => subject !== title)
       );
@@ -35,13 +32,17 @@ export const SubjectCard = ({
       variant={variant as keyof typeof colors}
       blocked={
         availableSubjects.length === numEssentialSubjects &&
-        !availableSubjects.includes(title)
+        !availableSubjects.filter((subject) => title === subject.name)
           ? "T"
           : "F"
       }
     >
       {displayedTitle}
-      {availableSubjects.includes(title) ? <LockedIcon /> : <UnlockedIcon />}
+      {availableSubjects.filter((subject) => title === subject.name) ? (
+        <LockedIcon />
+      ) : (
+        <UnlockedIcon />
+      )}
     </Wrapper>
   );
 };
