@@ -1,9 +1,13 @@
 import { Subject } from "../contexts/restraints.interfaces";
+import { RomanNumerals } from "./constants";
 
 export const capitalize = (string: string): string => {
   const words = string.split(" ");
   const wordsCapitalized = words.map(
-    (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    (word) => {
+      if (RomanNumerals.includes(word.toUpperCase())) return word
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    }
   );
 
   return wordsCapitalized.join(" ");
@@ -24,8 +28,8 @@ export const handleLocalStorageStateUpdate = (
   stateUpdate: Function,
   value: any
 ) => {
-  setLocalStorage(key, value);
   stateUpdate(value);
+  setLocalStorage(key, value);
 };
 
 export const filterSubjects = (subjectId: string, subjects: Subject[]): Subject | null => {

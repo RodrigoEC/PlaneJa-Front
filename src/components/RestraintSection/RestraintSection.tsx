@@ -31,6 +31,8 @@ export const RestraintSection = (): ReactElement => {
   const SubmitData = useCallback(
     async (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
+      if (subjectsBackup.toString() === essentialSubjects.toString()) return;
+
       localStorage.setItem(
         "planeja@essential_subjects",
         JSON.stringify(essentialSubjects)

@@ -9,14 +9,14 @@ export const defaultScheduleList = [
   },
 ];
 
-export const defaultSchedule = {
-  seg: { name: "segunda-feira", subs: Array(8).fill(null) },
-  ter: { name: "terça-feira", subs: Array(8).fill(null) },
-  quar: { name: "quarta-feira", subs: Array(8).fill(null) },
-  qui: { name: "quinta-feira", subs: Array(8).fill(null) },
-  sex: { name: "sexta-feira", subs: Array(8).fill(null) },
-  sab: { name: "sábado", subs: Array(8).fill(null) },
-};
+export const scheduleTemplate = [
+  { name: "segunda-feira", num: "2" },
+  { name: "terça-feira", num: "3" },
+  { name: "quarta-feira", num: "4" },
+  { name: "quinta-feira", num: "5" },
+  { name: "sexta-feira", num: "6" },
+  { name: "sábado", num: "7" },
+];
 
 export type DayOfTheWeek = "2" | "3" | "4" | "5" | "6" | "7";
 export const numberToDay = {
@@ -27,3 +27,9 @@ export const numberToDay = {
   "6": "Sex.",
   "7": "Sab",
 };
+
+export const defaultCurrentSchedule = () => {
+  return Array.from({ length: 6 }, () => Array.from({ length: 8 }, () => null))
+}
+
+export const RomanNumerals = ["I", "II", "III", "IV", "V"]

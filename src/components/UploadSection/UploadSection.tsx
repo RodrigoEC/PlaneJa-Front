@@ -12,21 +12,27 @@ import { useModalContext } from "../../contexts/modal";
 import { useStudentDataContext } from "../../contexts/studentData";
 import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
-import { handleLocalStorageStateUpdate, setLocalStorage } from "../../util/util";
+import {
+  handleLocalStorageStateUpdate,
+  setLocalStorage,
+} from "../../util/util";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 
 export const UploadSection = (): ReactElement => {
   const { file, loading, extractData, error } = useExtractionContext();
   const { semester, fillStudentData } = useStudentDataContext();
   const { setAvailableSubjects } = useRestraintsContext();
+  const { setSchedules, updateSchedule } = useSubjectsTableContext();
   const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
 
   const submitData = async () => {
     const extractedData = await extractData(file);
     const { record, enrollment_info } = extractedData;
-    fillStudentData(
-      record,
-      enrollment_info.semester,
+
+    handleLocalStorageStateUpdate(
+      "planeja@schedules",
+      setSchedules,
       enrollment_info.enrollments
     );
 
@@ -35,6 +41,13 @@ export const UploadSection = (): ReactElement => {
       setAvailableSubjects,
       enrollment_info.subjects_available
     );
+
+    fillStudentData(
+      record,
+      enrollment_info.semester,
+      enrollment_info.enrollments
+    );
+
   };
 
   useEffect(() => {

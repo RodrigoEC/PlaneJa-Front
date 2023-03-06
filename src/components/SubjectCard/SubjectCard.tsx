@@ -1,48 +1,63 @@
-import { ReactElement, useCallback } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
+import { Subject } from "../../contexts/restraints.interfaces";
 import { colors } from "../../util/colors";
-import { LockedIcon, UnlockedIcon, Wrapper } from "./SubjectCard.styles";
+import { capitalize } from "../../util/util";
+import { LockedIcon, UnlockedIcon, Wrapper, Title } from "./SubjectCard.styles";
 
 export const SubjectCard = ({
   variant,
-  title,
+  subject,
 }: {
   variant: string;
-  title: string;
+  subject: Subject;
 }): ReactElement => {
-  const { numEssentialSubjects, availableSubjects, setAvailableSubjects } =
-    useRestraintsContext();
+  const {
+    numEssentialSubjects,
+    availableSubjects,
+    essentialSubjects,
+    setEssentialSubjects,
+  } = useRestraintsContext();
+  const title = subject.name;
+  const [hasSubject, setHasSubject] = useState<boolean>(false);
+
   const displayedTitle =
     title.length > 30 ? title.slice(0, 25) + "..." + title.slice(-3) : title;
 
   const onClick = useCallback((): void => {
-    if (availableSubjects.filter((subject) => title === subject.name)) {
-      setAvailableSubjects((previous: string[]) =>
-        previous.filter((subject) => subject !== title)
+    if (hasSubject) {
+      const filteredSubjects = essentialSubjects.filter(
+        (s: Subject) =>
+          s.name !== subject.name || subject.class_num !== s.class_num
       );
+
+      setEssentialSubjects(filteredSubjects);
     } else if (availableSubjects.length < numEssentialSubjects) {
-      setAvailableSubjects((previous: string[]) => [...previous, title].sort());
+      setEssentialSubjects([...essentialSubjects, subject]);
     }
-  }, [availableSubjects, setAvailableSubjects, title]);
+  }, [essentialSubjects, setEssentialSubjects, hasSubject]);
+
+  useEffect(() => {
+    const hasSub = essentialSubjects.find(
+      (s: Subject) =>
+        s.name === subject.name && subject.class_num === s.class_num
+    );
+
+    setHasSubject(hasSub !== undefined);
+  }, [essentialSubjects, setEssentialSubjects, setHasSubject]);
 
   return (
     <Wrapper
-      title={title}
+      title={`${subject.name} - T${subject.class_num}`}
       onClick={onClick}
       variant={variant as keyof typeof colors}
-      blocked={
+      blocked={(
         availableSubjects.length === numEssentialSubjects &&
         !availableSubjects.filter((subject) => title === subject.name)
-          ? "T"
-          : "F"
-      }
+      ).toString()}
     >
-      {displayedTitle}
-      {availableSubjects.filter((subject) => title === subject.name) ? (
-        <LockedIcon />
-      ) : (
-        <UnlockedIcon />
-      )}
+      <Title>{capitalize(displayedTitle)}</Title>
+      {hasSubject ? <LockedIcon /> : <UnlockedIcon />}
     </Wrapper>
   );
 };

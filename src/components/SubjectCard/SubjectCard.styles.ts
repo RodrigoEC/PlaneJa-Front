@@ -4,7 +4,7 @@ import { Unlocked } from "../../assets/icons/Unlocked";
 import { colors } from "../../util/colors";
 
 export const LockedIcon = styled(Locked)`
-  width: 0.8rem;
+  width: 1rem;
   position: absolute;
   align-self: center;
   fill: transparent;
@@ -15,7 +15,7 @@ export const LockedIcon = styled(Locked)`
 `;
 
 export const UnlockedIcon = styled(Unlocked)`
-  width: 1rem;
+  width: 1.2rem;
   position: absolute;
   align-self: center;
   fill: transparent;
@@ -29,19 +29,29 @@ type WrapperType = {
   variant: keyof typeof colors;
   blocked: string;
 }
+export const Title = styled.span`
+  font-size: 1rem;
+  line-height: 150%;
+  color: ${({ theme }) => theme.colors.forth};
+  transition: 0.3s;
+
+  @media screen and (max-width: 700px) {
+    font-size: 0.78rem;
+  }
+`
 
 export const Wrapper = styled.div<WrapperType>`
   display: flex;
   position: relative;
   justify-content: center;
   background-color: ${({ variant }: { variant: keyof typeof colors }) =>
-    colors[variant]}80;
+    colors[variant]}60;
   cursor: ${({ blocked }: { blocked: string }) =>
     blocked === "T" ? "not-allowed" : "pointer"};
-  height: 3.3rem;
+  height: 4rem;
   align-items: center;
   padding: 0.5rem;
-  width: 10.5rem;
+  width: 12rem;
   box-sizing: border-box;
   border-radius: 3px;
   border: 3px solid
@@ -58,8 +68,7 @@ export const Wrapper = styled.div<WrapperType>`
   }
 
   @media screen and (max-width: 700px) {
-    font-size: 0.78rem;
-    width: 9rem;
+    width: 10rem;
   }
 
   &:hover {
@@ -68,10 +77,15 @@ export const Wrapper = styled.div<WrapperType>`
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    color: ${({ variant }: { variant: keyof typeof colors }) =>
+
+    ${Title} {
+      color: ${({ variant }: { variant: keyof typeof colors }) =>
       colors[variant]}30;
+    }
     ${LockedIcon}, ${UnlockedIcon} {
       fill: ${({ theme }) => theme.colors.primary};
     }
   }
 `;
+
+

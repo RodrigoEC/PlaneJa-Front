@@ -3,7 +3,7 @@ import { LeftArrow, RightArrow, Wrapper, Index } from "./ScheduleMenu.style";
 
 export const ScheduleMenu = () => {
   const {
-    scheduleList,
+    schedules,
     currentScheduleIndex,
     updateSchedule,
     nextSchedule,
@@ -16,7 +16,7 @@ export const ScheduleMenu = () => {
         blocked={currentScheduleIndex === 0 ? "T" : undefined}
         onClick={previousSchedule}
       />
-      {scheduleList.map((_, i) => (
+      {schedules.map((_, i) => (
         <Index
           key={i}
           onClick={() => updateSchedule(i)}
@@ -27,7 +27,7 @@ export const ScheduleMenu = () => {
       ))}
       <RightArrow
         blocked={
-          currentScheduleIndex + 1 === scheduleList.length ? "T" : undefined
+          currentScheduleIndex + 1 === schedules.length ? "T" : undefined
         }
         onClick={nextSchedule}
       />

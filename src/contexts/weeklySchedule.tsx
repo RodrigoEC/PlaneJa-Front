@@ -7,14 +7,15 @@ import {
   useState,
 } from "react";
 import { calculateSchedules } from "../service/api";
-import { defaultSchedule, defaultScheduleList } from "../util/constants";
+import { colors } from "../util/colors";
+import { defaultCurrentSchedule } from "../util/constants";
 import { defaultFunction, getLocalStorage } from "../util/util";
-import { SubjectContent, WeekSchedule } from "./weeklySchedule.interfaces";
+import { Schedule, Subject } from "./restraints.interfaces";
 
 interface SubjectsTableContent {
-  scheduleList: WeekSchedule[];
-  setScheduleList: Function;
-  currentSchedule: WeekSchedule;
+  schedules: Subject[][];
+  setSchedules: Function;
+  currentSchedule: Array<Subject[] | null[]>;
   setCurrentSchedule: Function;
   currentScheduleIndex: number;
   setCurrentScheduleIndex: Function;
@@ -27,9 +28,9 @@ interface SubjectsTableContent {
 }
 
 const SubjectsTableContext = createContext<SubjectsTableContent>({
-  scheduleList: [],
-  setScheduleList: defaultFunction,
-  currentSchedule: defaultSchedule,
+  schedules: [],
+  setSchedules: defaultFunction,
+  currentSchedule: [],
   setCurrentSchedule: defaultFunction,
   currentScheduleIndex: 0,
   setCurrentScheduleIndex: defaultFunction,
@@ -47,41 +48,39 @@ export const SubjectsTableProvider = ({
   children: ReactElement;
 }): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [scheduleList, setScheduleList] = useState<WeekSchedule[]>(
-    getLocalStorage("planeja@schedules", defaultScheduleList)
+  const [schedules, setSchedules] = useState<Subject[][]>(
+    getLocalStorage("planeja@schedules", [[]])
   );
+  const [currentSchedule, setCurrentSchedule] = useState<
+    Array<Subject[] | null[]>
+  >(defaultCurrentSchedule());
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState<number>(0);
-  const [currentSchedule, setCurrentSchedule] =
-    useState<WeekSchedule>(defaultSchedule);
 
   const updateSchedule = useCallback(
     (id: number) => {
       setCurrentScheduleIndex(id);
-      const newSchedule = JSON.parse(JSON.stringify(defaultSchedule));
-      const subjectsList = scheduleList[id];
 
-      Object.keys(subjectsList).forEach((value: string) => {
-        const subjects = new Array(8).fill(null);
+      const newHours: Array<Subject[] | null[]>  = defaultCurrentSchedule();
+      const newSubjects = schedules[id].map((s, i) => ({
+        ...s,
+        variant: Object.keys(colors)[i],
+      }));
 
-        subjectsList[value as keyof WeekSchedule].subs.forEach(
-          (subElement: SubjectContent | null) => {
-            if (subElement !== null) {
-              subjects[subElement.position] = subElement;
-            }
-          }
-        );
-
-        newSchedule[value as keyof WeekSchedule].subs = subjects;
+      newSubjects?.forEach((subject: Subject) => {
+        subject.schedule.forEach((schedule: Schedule) => {
+          const init = Number(schedule.init_time.split(":")[0]);
+          newHours[Number(schedule.day) - 2][(init - 8) / 2] = subject;
+        });
       });
 
-      setCurrentSchedule(newSchedule);
+      setCurrentSchedule(newHours);
     },
 
-    [scheduleList, currentScheduleIndex]
+    [currentScheduleIndex, currentSchedule, schedules]
   );
 
   const nextSchedule = () => {
-    if (currentScheduleIndex < scheduleList.length - 1) {
+    if (currentScheduleIndex < schedules.length - 1) {
       updateSchedule(currentScheduleIndex + 1);
     }
   };
@@ -100,7 +99,7 @@ export const SubjectsTableProvider = ({
       );
       if (data.length > 0 && status !== 400) {
         localStorage.setItem("planeja@schedules", JSON.stringify(data));
-        setScheduleList(data);
+        setSchedules(data);
       }
     },
     []
@@ -108,11 +107,11 @@ export const SubjectsTableProvider = ({
 
   useEffect(() => {
     updateSchedule(currentScheduleIndex);
-  }, [updateSchedule, currentScheduleIndex, scheduleList]);
+  }, [currentScheduleIndex, schedules]);
 
   const value = {
-    scheduleList,
-    setScheduleList,
+    schedules,
+    setSchedules,
     loading,
     setLoading,
     currentSchedule,
@@ -135,4 +134,3 @@ export const SubjectsTableProvider = ({
 export const useSubjectsTableContext = () => {
   return { ...useContext(SubjectsTableContext) };
 };
-

@@ -50,15 +50,14 @@ export const SubjectsInput = (): ReactElement => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (
-        !availableSubjects.filter((subject) => {
-          const [title, classNum] = currentInput.toUpperCase().split(" - T");
-          return title === subject.name && classNum === subject.class_num;
-        }) &&
+        !availableSubjects
+          .map((s) => `${s.name} - T${s.class_num}`)
+          .includes(currentInput.toUpperCase()) &&
         currentInput !== ""
       )
         setInvalidData(true);
       else setInvalidData(false);
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(delay);
   }, [currentInput, essentialSubjects]);
@@ -90,7 +89,10 @@ export const SubjectsInput = (): ReactElement => {
             return <Option subject={subject} key={subject.id} />;
           })}
       </List>
-      <AddButton onClick={addClass} disabled={isDisabled || invalidData}>
+      <AddButton
+        onClick={addClass}
+        disabled={isDisabled || invalidData || currentInput === ""}
+      >
         <Add aria-label="Cross icon" />
       </AddButton>
     </Wrapper>

@@ -1,8 +1,8 @@
-import { ReactElement, useCallback } from "react";
-import {
-  useSubjectsTableContext,
-} from "../../contexts/weeklySchedule";
-import { SubjectContent, WeekSchedule } from "../../contexts/weeklySchedule.interfaces";
+import { ReactElement, useCallback, useEffect, useState } from "react";
+import { Schedule, Subject } from "../../contexts/restraints.interfaces";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
+import { SubjectContent } from "../../contexts/weeklySchedule.interfaces";
+import { colors } from "../../util/colors";
 import { SubjectCard } from "../SubjectCard/SubjectCard";
 import { Loading } from "../SubjectData/SubjectData";
 import {
@@ -13,28 +13,30 @@ import {
   EmptySubject,
 } from "./DailyColumn.style";
 
-export const DailyColumn = ({ index }: { index: keyof WeekSchedule }) => {
-  const { loading, scheduleList, currentScheduleIndex, currentSchedule } =
+export const DailyColumn = ({
+  columnInfo,
+}: {
+  columnInfo: { name: string; num: string };
+}) => {
+  const { loading, currentSchedule } =
     useSubjectsTableContext();
-
-  const formatSubjectCard = useCallback(
-    (props: SubjectContent | null, key: number): ReactElement =>
-      props === null || loading ? (
-        <EmptySubject key={key}>{loading && <Loading />}</EmptySubject>
-      ) : (
-        <SubjectCard {...props} key={key} />
-      ),
-    [currentScheduleIndex]
-  );
 
   return (
     <Wrapper>
-      <Title>{scheduleList[currentScheduleIndex][index].name}</Title>
+      <Title>{columnInfo.name}</Title>
       <Divider />
       <SubjectsContainer>
-        {currentSchedule[index].subs.map(
-          (value: SubjectContent | null, index: number) =>
-            formatSubjectCard(value, index)
+        {currentSchedule[Number(columnInfo.num) - 2].map(
+          (subject: Subject | null, index: number) =>
+            subject === null || loading ? (
+              <EmptySubject key={index}>{loading && <Loading />}</EmptySubject>
+            ) : (
+              <SubjectCard
+                subject={subject}
+                variant={subject?.variant || "cyan"}
+                key={index}
+              />
+            )
         )}
       </SubjectsContainer>
     </Wrapper>

@@ -5,6 +5,7 @@ declare module "styled-components" {
     primary: string;
     secondary: string;
     third: string;
+    forth: string;
     contrast: string;
     alert: string;
     stroke: string;
@@ -114,7 +115,7 @@ export const InnerContainer = styled.div`
   justify-content: center;
 
   min-height: 100vh;
-  max-width: 1320px;
+  max-width: 1500px;
   width: 100%;
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.primary};

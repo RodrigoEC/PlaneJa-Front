@@ -1,5 +1,6 @@
 import axios from "axios";
 import { defaultExtractionResponse, ExtractionResponse } from "../contexts/extraction.interfaces";
+import { Subject } from "../contexts/restraints.interfaces";
 import { WeekSchedule } from "../contexts/weeklySchedule.interfaces";
 
 
@@ -86,14 +87,13 @@ const subjects = [
 export const calculateSchedules = async (
   student_subjects: any,
   required_subjects: string[]
-): Promise<[WeekSchedule[], number]> => {
+): Promise<[Array<Subject[]>, number]> => {
   try {
     const response = await api.post("/recommend", {
       student_subjects,
       required_subjects,
     });
 
-    response.data = subjects;
     return [response.data, response.status];
   } catch (e: any) {
     return [[], 400];

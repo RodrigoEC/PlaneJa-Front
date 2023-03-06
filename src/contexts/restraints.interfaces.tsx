@@ -5,6 +5,7 @@ export interface Subject {
   credits: number;
   workload: number;
   schedule: Schedule[];
+  variant?: string;
 }
 
 export interface Schedule {

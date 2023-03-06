@@ -1,12 +1,9 @@
-import {
-  useSubjectsTableContext,
-} from "../../contexts/weeklySchedule";
-import { WeekSchedule } from "../../contexts/weeklySchedule.interfaces";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
+import { scheduleTemplate } from "../../util/constants";
 import { DailyColumn } from "../DailyColumn/DailyColumn";
 import { TableContent, Wrapper, Timing, Time } from "./ScheduleTable.style";
 
 export const ScheduleTable = () => {
-  const { currentSchedule } = useSubjectsTableContext();
 
   return (
     <Wrapper>
@@ -18,8 +15,8 @@ export const ScheduleTable = () => {
           ))}
       </Timing>
       <TableContent>
-        {Object.keys(currentSchedule).map((value) => (
-          <DailyColumn key={value} index={value as keyof WeekSchedule} />
+        {scheduleTemplate.map((value, i) => (
+          <DailyColumn key={i} columnInfo={value} />
         ))}
       </TableContent>
     </Wrapper>

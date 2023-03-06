@@ -47,14 +47,14 @@ export const EmptySubject = styled.div`
   justify-content: center;
   border: 2px dashed
     ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}50;
-  height: 3.3rem;
-  width: 10.5rem;
+  height: 4rem;
+  width: 12rem;
   border-radius: 3px;
   box-sizing: border-box;
   font-size: 1.2rem;
 
   @media screen and (max-width: 700px) {
     font-size: 0.8rem;
-    width: 9rem;
+    width: 10rem;
   }
 `;

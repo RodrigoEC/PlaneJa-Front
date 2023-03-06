@@ -51,43 +51,45 @@ function App() {
         <Wrapper>
           <InnerContainer>
             <ModalProvider>
-              <>
-                <Header themeHandler={swapTheme} />
-                <Body>
-                  {loading ? (
-                    <Title disabled={"disabled"}>
-                      <Loading />
-                    </Title>
-                  ) : (
-                    <Title disabled={course}>{course || "planejá-UFCG"}</Title>
-                  )}
-                  <Progress />
-                  <SubjectsDataSection>
-                    <SubjectData
-                      title="Obrigatórias"
-                      status={status.mandatory}
-                    />
-                    <SubjectData title="Optativas" status={status.optative} />
-                    <SubjectData
-                      title="Complementares"
-                      status={status.complementary}
-                    />
-                  </SubjectsDataSection>
-                  <Divider />
-                  <UploadSection />
-                  <Divider />
+              <SubjectsTableProvider>
+                <>
+                  <Header themeHandler={swapTheme} />
+                  <Body>
+                    {loading ? (
+                      <Title disabled={"disabled"}>
+                        <Loading />
+                      </Title>
+                    ) : (
+                      <Title disabled={course}>
+                        {course || "planejá-UFCG"}
+                      </Title>
+                    )}
+                    <Progress />
+                    <SubjectsDataSection>
+                      <SubjectData
+                        title="Obrigatórias"
+                        status={status.mandatory}
+                      />
+                      <SubjectData title="Optativas" status={status.optative} />
+                      <SubjectData
+                        title="Complementares"
+                        status={status.complementary}
+                      />
+                    </SubjectsDataSection>
+                    <Divider />
+                    <UploadSection />
+                    <Divider />
 
-                  <SubjectsTableProvider>
                     <ScheduleContainer>
                       <RestraintSection />
                       <ScheduleTable />
                       <Dots />
                       <ScheduleMenu />
                     </ScheduleContainer>
-                  </SubjectsTableProvider>
-                </Body>
-                <Footer></Footer>
-              </>
+                  </Body>
+                  <Footer></Footer>
+                </>
+              </SubjectsTableProvider>
             </ModalProvider>
           </InnerContainer>
         </Wrapper>
