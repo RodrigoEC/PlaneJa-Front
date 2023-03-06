@@ -64,7 +64,7 @@ export const InnerWrapper = styled("div")<{
     loading ? "animation: loading 1.5s infinite" : undefined};
 
   @media screen and (max-width: 700px) {
-    min-width: 0.75rem;
+    min-width: 1.75rem;
   }
 `;
 

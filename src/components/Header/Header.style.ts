@@ -35,7 +35,7 @@ export const Name = styled.span`
     font-size: 0.75rem;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 550px) {
     display: None;
   }
 `
