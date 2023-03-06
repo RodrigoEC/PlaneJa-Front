@@ -74,7 +74,6 @@ export const SubjectsInput = (): ReactElement => {
         onFocus={(e) => (e.target.value = "")}
         value={currentInput}
         onChange={(event) => {
-          console.log(event.target.value);
           setCurrentInput(event.target.value);
         }}
         list="subjects"
