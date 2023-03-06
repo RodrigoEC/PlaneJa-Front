@@ -23,7 +23,6 @@ export interface ErrorInterface {
   warn: boolean;
 }
 
-
 export const defaultExtractionResponse = {
   record: defaultStudentRecord,
   enrollment_info: EnrollmentInfo,

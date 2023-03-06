@@ -15,12 +15,20 @@ import { useExtractionContext } from "../../contexts/extraction";
 
 export const UploadSection = (): ReactElement => {
   const { file, loading, extractData, error } = useExtractionContext();
-  const { semester } = useStudentDataContext();
+  const { semester, fillStudentData } = useStudentDataContext();
   const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
 
   const submitData = async () => {
-    const record: StudentRecord = await extractData(file);
+    const extractedData = await extractData(file);
+    const { record, enrollment_info } = extractedData;
+    console.log(extractedData)
+    fillStudentData(
+      record,
+      enrollment_info.semester,
+      enrollment_info.enrollments
+    );
+
     // const subjectObj = subjects.reduce((object: any, subject: string) => {
     //   object[subject] = 0;
     //   return object;

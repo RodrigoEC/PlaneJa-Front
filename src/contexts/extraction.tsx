@@ -1,14 +1,14 @@
 import { createContext, ReactElement, useContext, useState } from "react";
 import { extractRecord } from "../service/api";
 import { defaultFunction } from "../util/util";
-import { ErrorInterface, ExtractionResponse } from "./extraction.interfaces";
+import { defaultExtractionResponse, ErrorInterface, ExtractionResponse } from "./extraction.interfaces";
 
 export interface ExtratedContent {
   loading: boolean;
   setLoading: Function;
   file: any;
   setFile: Function;
-  extractData: Function;
+  extractData: (file: File) => Promise<ExtractionResponse>;
   error: ErrorInterface;
   setError: Function;
 }
@@ -18,7 +18,7 @@ const ExtractionContext = createContext<ExtratedContent>({
   setLoading: defaultFunction,
   file: null,
   setFile: defaultFunction,
-  extractData: defaultFunction,
+  extractData: async (file: File) => defaultExtractionResponse,
   error: { code: 200, warn: false },
   setError: defaultFunction,
 });
