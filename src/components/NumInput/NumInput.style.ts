@@ -30,6 +30,10 @@ export const InputNumber = styled.input`
   font-weight: bold;
   outline: none;
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   @media screen and (max-width: 700px) {
     height: 1.5rem;
   }

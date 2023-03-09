@@ -1,8 +1,10 @@
 import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { Add } from "../../assets/icons/Add";
+import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { Subject } from "../../contexts/restraints.interfaces";
 import { useStudentDataContext } from "../../contexts/studentData";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { Option } from "../Option/Option";
 import { AddButton, Input, List, Wrapper } from "./SubjectsInput.style";
 
@@ -14,6 +16,8 @@ export const SubjectsInput = (): ReactElement => {
     availableSubjects,
   } = useRestraintsContext();
   const { studentRecord } = useStudentDataContext();
+  const { extractionLoading } = useExtractionContext();
+  const { TableLoading } = useSubjectsTableContext()
   const [currentInput, setCurrentInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [invalidData, setInvalidData] = useState(false);
@@ -39,12 +43,15 @@ export const SubjectsInput = (): ReactElement => {
   useEffect(() => {
     setIsDisabled(
       studentRecord.subjects.length === 0 ||
-        essentialSubjects.length >= numEssentialSubjects
+        essentialSubjects.length >= numEssentialSubjects ||
+        extractionLoading ||
+        TableLoading
     );
   }, [
     essentialSubjects.length,
     numEssentialSubjects,
     studentRecord?.subjects.length,
+    extractionLoading,
   ]);
 
   useEffect(() => {

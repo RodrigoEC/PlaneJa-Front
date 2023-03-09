@@ -5,7 +5,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { InputNumber, Text, Wrapper } from "./NumInput.style";
 
 export const NumInput = (): ReactElement => {
@@ -14,6 +16,8 @@ export const NumInput = (): ReactElement => {
     numEssentialSubjects,
     setNumEssentialSubjects,
   } = useRestraintsContext();
+  const { extractionLoading } = useExtractionContext();
+  const { TableLoading } = useSubjectsTableContext();
   const [invalidInput, setInvalidInput] = useState(false);
 
   const onBlur = useCallback(() => {
@@ -44,6 +48,7 @@ export const NumInput = (): ReactElement => {
         min="4"
         max="7"
         type="number"
+        disabled={TableLoading || extractionLoading}
         value={numEssentialSubjects}
         onBlur={onBlur}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
