@@ -19,8 +19,8 @@ interface SubjectsTableContent {
   setCurrentSchedule: Function;
   currentScheduleIndex: number;
   setCurrentScheduleIndex: Function;
-  loading: boolean;
-  setLoading: Function;
+  TableLoading: boolean;
+  setTableLoading: Function;
   nextSchedule: Function;
   previousSchedule: Function;
   updateSchedule: Function;
@@ -34,8 +34,8 @@ const SubjectsTableContext = createContext<SubjectsTableContent>({
   setCurrentSchedule: defaultFunction,
   currentScheduleIndex: 0,
   setCurrentScheduleIndex: defaultFunction,
-  loading: false,
-  setLoading: defaultFunction,
+  TableLoading: false,
+  setTableLoading: defaultFunction,
   nextSchedule: defaultFunction,
   previousSchedule: defaultFunction,
   updateSchedule: defaultFunction,
@@ -47,7 +47,7 @@ export const SubjectsTableProvider = ({
 }: {
   children: ReactElement;
 }): ReactElement => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [TableLoading, setTableLoading] = useState<boolean>(false);
   const [schedules, setSchedules] = useState<Subject[][]>(
     getLocalStorage("planeja@schedules", [[]])
   );
@@ -59,21 +59,25 @@ export const SubjectsTableProvider = ({
   const updateSchedule = useCallback(
     (id: number) => {
       setCurrentScheduleIndex(id);
+      setTableLoading(true);
 
-      const newHours: Array<Subject[] | null[]>  = defaultCurrentSchedule();
-      const newSubjects = schedules[id].map((s, i) => ({
+      const newHours: Array<Subject[] | null[]> = defaultCurrentSchedule();
+      const newSubjects = schedules[id]?.map((s, i) => ({
         ...s,
         variant: Object.keys(colors)[i],
       }));
 
       newSubjects?.forEach((subject: Subject) => {
-        subject.schedule.forEach((schedule: Schedule) => {
+        subject?.schedule?.forEach((schedule: Schedule) => {
           const init = Number(schedule.init_time.split(":")[0]);
           newHours[Number(schedule.day) - 2][(init - 8) / 2] = subject;
         });
       });
 
-      setCurrentSchedule(newHours);
+      setTimeout(() => {
+        setCurrentSchedule(newHours);
+        setTableLoading(false);
+      }, 200);
     },
 
     [currentScheduleIndex, currentSchedule, schedules]
@@ -112,8 +116,8 @@ export const SubjectsTableProvider = ({
   const value = {
     schedules,
     setSchedules,
-    loading,
-    setLoading,
+    TableLoading,
+    setTableLoading,
     currentSchedule,
     setCurrentSchedule,
     currentScheduleIndex,

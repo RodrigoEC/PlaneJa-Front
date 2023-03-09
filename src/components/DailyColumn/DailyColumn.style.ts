@@ -51,7 +51,7 @@ export const EmptySubject = styled.div`
   width: 12rem;
   border-radius: 3px;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 
   @media screen and (max-width: 700px) {
     font-size: 0.8rem;

@@ -26,7 +26,7 @@ import { useStudentDataContext } from "./contexts/studentData";
 import { useExtractionContext } from "./contexts/extraction";
 
 function App() {
-  const { loading } = useExtractionContext();
+  const { extractionLoading } = useExtractionContext();
 
   const { studentRecord } = useStudentDataContext();
   const { status, course } = studentRecord;
@@ -55,7 +55,7 @@ function App() {
                 <>
                   <Header themeHandler={swapTheme} />
                   <Body>
-                    {loading ? (
+                    {extractionLoading ? (
                       <Title disabled={"disabled"}>
                         <Loading />
                       </Title>

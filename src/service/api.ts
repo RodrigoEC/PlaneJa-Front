@@ -1,7 +1,6 @@
 import axios from "axios";
 import { defaultExtractionResponse, ExtractionResponse } from "../contexts/extraction.interfaces";
 import { Subject } from "../contexts/restraints.interfaces";
-import { WeekSchedule } from "../contexts/weeklySchedule.interfaces";
 
 
 const api = axios.create({
@@ -24,65 +23,6 @@ export const extractRecord = async (
     return [defaultExtractionResponse, e.response.status];
   }
 };
-
-const subjects = [
-  {
-    seg: {
-      name: "segunda-feira",
-      subs: [
-        {
-          title: "Fundamentos de matemática para ciência da computação II",
-          variant: "cyan",
-          position: 2,
-          locked: true,
-        },
-      ],
-    },
-    ter: {
-      name: "terça-feira",
-      subs: [
-        {
-          title: "Banco De Dados Ii",
-          variant: "lightOrange",
-          position: 4,
-          locked: true,
-        },
-      ],
-    },
-    quar: { name: "quarta-feira", subs: [] },
-    qui: { name: "quinta-feira", subs: [] },
-    sex: { name: "sexta-feira", subs: [] },
-    sab: { name: "sábado", subs: [] },
-  },
-  {
-    seg: {
-      name: "segunda-feira",
-      subs: [
-        {
-          title: "Fundamentos de matemática para ciência da computação II",
-          variant: "cyan",
-          position: 3,
-          locked: true,
-        },
-      ],
-    },
-    ter: {
-      name: "terça-feira",
-      subs: [
-        {
-          title: "Fundamentos de matemática para ciência da computação II",
-          variant: "cyan",
-          position: 1,
-          locked: true,
-        },
-      ],
-    },
-    quar: { name: "quarta-feira", subs: [] },
-    qui: { name: "quinta-feira", subs: [] },
-    sex: { name: "sexta-feira", subs: [] },
-    sab: { name: "sábado", subs: [] },
-  },
-];
 
 export const calculateSchedules = async (
   student_subjects: any,

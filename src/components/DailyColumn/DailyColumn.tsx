@@ -1,4 +1,5 @@
 import { ReactElement, useCallback, useEffect, useState } from "react";
+import { useExtractionContext } from "../../contexts/extraction";
 import { Schedule, Subject } from "../../contexts/restraints.interfaces";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { SubjectContent } from "../../contexts/weeklySchedule.interfaces";
@@ -18,8 +19,9 @@ export const DailyColumn = ({
 }: {
   columnInfo: { name: string; num: string };
 }) => {
-  const { loading, currentSchedule } =
-    useSubjectsTableContext();
+  const { TableLoading, currentSchedule } = useSubjectsTableContext();
+
+  const { extractionLoading } = useExtractionContext();
 
   return (
     <Wrapper>
@@ -28,8 +30,10 @@ export const DailyColumn = ({
       <SubjectsContainer>
         {currentSchedule[Number(columnInfo.num) - 2].map(
           (subject: Subject | null, index: number) =>
-            subject === null || loading ? (
-              <EmptySubject key={index}>{loading && <Loading />}</EmptySubject>
+            subject === null || TableLoading || extractionLoading ? (
+              <EmptySubject key={index}>
+                {TableLoading || extractionLoading && <Loading />}
+              </EmptySubject>
             ) : (
               <SubjectCard
                 subject={subject}

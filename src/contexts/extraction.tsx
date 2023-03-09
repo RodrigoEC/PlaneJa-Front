@@ -4,8 +4,8 @@ import { defaultFunction } from "../util/util";
 import { defaultExtractionResponse, ErrorInterface, ExtractionResponse } from "./extraction.interfaces";
 
 export interface ExtratedContent {
-  loading: boolean;
-  setLoading: Function;
+  extractionLoading: boolean;
+  setExtractionLoading: Function;
   file: any;
   setFile: Function;
   extractData: (file: File) => Promise<ExtractionResponse>;
@@ -14,8 +14,8 @@ export interface ExtratedContent {
 }
 
 const ExtractionContext = createContext<ExtratedContent>({
-  loading: false,
-  setLoading: defaultFunction,
+  extractionLoading: false,
+  setExtractionLoading: defaultFunction,
   file: null,
   setFile: defaultFunction,
   extractData: async (file: File) => defaultExtractionResponse,
@@ -29,11 +29,11 @@ export const ExtractionProvider = ({
   children: ReactElement;
 }): ReactElement => {
   const [file, setFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [extractionLoading, setExtractionLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorInterface>({ code: 200, warn: false });
 
   const extractData = async (file: File): Promise<ExtractionResponse> => {
-    setLoading(true);
+    setExtractionLoading(true);
     const form = new FormData();
     form.append("file", file);
 
@@ -43,13 +43,13 @@ export const ExtractionProvider = ({
       warn: statusCode !== 200 && statusCode !== 206,
     });
 
-    setLoading(false);
+    setExtractionLoading(false);
     return extractedInfo;
   };
 
   const value = {
-    loading,
-    setLoading,
+    extractionLoading,
+    setExtractionLoading,
     file,
     setFile,
     extractData,

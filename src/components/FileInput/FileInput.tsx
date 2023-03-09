@@ -4,7 +4,7 @@ import { useExtractionContext } from "../../contexts/extraction";
 import { Label, Text } from "./FileInput.style";
 
 export const FileInput = (): ReactElement => {
-  const { setFile, loading, error, setError } = useExtractionContext();
+  const { setFile, extractionLoading, error, setError } = useExtractionContext();
 
   const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget as HTMLInputElement;
@@ -13,9 +13,9 @@ export const FileInput = (): ReactElement => {
   };
 
   return (
-    <Label error={error.warn} className={loading ? "disabled" : ""}>
+    <Label error={error.warn} className={extractionLoading ? "disabled" : ""}>
       <Text>
-        {loading ? (
+        {extractionLoading ? (
           <span>Extraindo dados...</span>
         ) : (
           <>
@@ -25,7 +25,7 @@ export const FileInput = (): ReactElement => {
         )}
       </Text>
       <input
-        disabled={loading}
+        disabled={extractionLoading}
         hidden
         type="file"
         multiple={false}

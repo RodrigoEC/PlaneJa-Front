@@ -15,7 +15,7 @@ export const SubjectData = ({
   title: string;
   status: string[];
 }): ReactElement => {
-  const { loading } = useExtractionContext();
+  const { extractionLoading } = useExtractionContext();
   const current = status[0] || "--";
   const max = status[1] || "--";
 
@@ -23,7 +23,7 @@ export const SubjectData = ({
     <Wrapper>
       <Title>{title}</Title>
       <Data>
-        {loading ? <Loading /> : current}/{loading ? <Loading /> : max}
+        {extractionLoading ? <Loading /> : current}/{extractionLoading ? <Loading /> : max}
       </Data>
       <Atribute>créditos</Atribute>
     </Wrapper>
