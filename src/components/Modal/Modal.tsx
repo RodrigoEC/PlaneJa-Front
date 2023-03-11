@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Wrapper, Background, Close, Title } from "./Modal.style";
+import { Wrapper, Background, Close, Title, Divider } from "./Modal.style";
 
 export const Modal = ({
   onClose,
@@ -41,7 +41,9 @@ export const Modal = ({
         closed={closedModal.toString()}
       >
         <Title>{title}</Title>
+        <Divider/>
         {children}
+        <Divider/>
         <Close onClick={handleClose}>
           <strong>F</strong>echar
         </Close>

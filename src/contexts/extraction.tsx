@@ -8,7 +8,7 @@ export interface ExtratedContent {
   setExtractionLoading: Function;
   file: any;
   setFile: Function;
-  extractData: (file: File) => Promise<ExtractionResponse>;
+  extractData: (file: File) => Promise<[ExtractionResponse, number]>;
   error: ErrorInterface;
   setError: Function;
 }
@@ -18,7 +18,7 @@ const ExtractionContext = createContext<ExtratedContent>({
   setExtractionLoading: defaultFunction,
   file: null,
   setFile: defaultFunction,
-  extractData: async (file: File) => defaultExtractionResponse,
+  extractData: async (file: File) => [defaultExtractionResponse, 200],
   error: { code: 200, warn: false },
   setError: defaultFunction,
 });
@@ -32,7 +32,7 @@ export const ExtractionProvider = ({
   const [extractionLoading, setExtractionLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorInterface>({ code: 200, warn: false });
 
-  const extractData = async (file: File): Promise<ExtractionResponse> => {
+  const extractData = async (file: File): Promise<[ExtractionResponse, number]> => {
     setExtractionLoading(true);
     const form = new FormData();
     form.append("file", file);
@@ -44,7 +44,7 @@ export const ExtractionProvider = ({
     });
 
     setExtractionLoading(false);
-    return extractedInfo;
+    return [extractedInfo, statusCode];
   };
 
   const value = {

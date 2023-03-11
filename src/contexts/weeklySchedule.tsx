@@ -74,8 +74,8 @@ export const SubjectsTableProvider = ({
         });
       });
 
+      setCurrentSchedule(newHours);
       setTimeout(() => {
-        setCurrentSchedule(newHours);
         setTableLoading(false);
       }, 200);
     },

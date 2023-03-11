@@ -62,7 +62,6 @@ export const Wrapper = styled.div`
     text-align: center;
     font-size: 0.9rem;
     line-height: 1.25;
-    gap: 0.25rem;
   }
 
   img {
@@ -72,16 +71,22 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h3`
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.2rem;
+  line-height: 1.5;
 
   @media screen and (max-width: 700px) {
     letter-spacing: 0.1rem;
     padding: 0.25rem 0;
   }
 `;
+
+export const Divider = styled.div`
+  width: 100%;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
+`
 
 export const Text = styled.div``;
 

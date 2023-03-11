@@ -20,13 +20,18 @@ export const UploadSection = (): ReactElement => {
     useExtractionContext();
   const { semester, fillStudentData } = useStudentDataContext();
   const { setAvailableSubjects } = useRestraintsContext();
-  const { setSchedules, updateSchedule } = useSubjectsTableContext();
+  const { setSchedules } = useSubjectsTableContext();
   const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
 
   const submitData = async () => {
     const extractedData = await extractData(file);
-    const { record, enrollment_info } = extractedData;
+    const { record, enrollment_info } = extractedData[0];
+
+    if (extractedData[1] === 206) {
+      console.log(extractedData)
+      handleChangeContent(extractedData[1].toString())
+    }
 
     handleLocalStorageStateUpdate(
       "planeja@schedules",
