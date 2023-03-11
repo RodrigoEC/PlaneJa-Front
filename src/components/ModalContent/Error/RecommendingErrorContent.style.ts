@@ -7,6 +7,8 @@ export const Wrapper = styled.article`
 
   img {
     max-width: 11rem;
+    min-width: 11rem;
+    min-height: 11rem;
   }
 `;
 
