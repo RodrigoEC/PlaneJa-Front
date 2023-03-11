@@ -9,6 +9,7 @@ export const Wrapper = styled.article`
     max-width: 11rem;
     min-width: 11rem;
     min-height: 11rem;
+    background-color: ${({ theme }) => theme.colors.primary}50;
   }
 `;
 
