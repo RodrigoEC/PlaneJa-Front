@@ -24,7 +24,8 @@ export const Modal = ({
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
     const keys = ["Escape", "f"];
-    if (keys.includes(event.key)) {
+    console.log(event)
+    if (keys.includes(event.key) && !event.ctrlKey) {
       handleClose();
     }
   }, []);
@@ -33,6 +34,14 @@ export const Modal = ({
     document.addEventListener("keydown", handleKeyPress);
     return () => document.removeEventListener("keydown", handleKeyPress);
   }, [handleKeyPress]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   return (
     <Background onClick={handleClose}>

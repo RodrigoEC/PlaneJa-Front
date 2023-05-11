@@ -68,10 +68,12 @@ function App() {
                     <SubjectsDataSection>
                       <SubjectData
                         title="Obrigatórias"
+                        type="mandatory"
                         status={status.mandatory}
                       />
-                      <SubjectData title="Optativas" status={status.optative} />
+                      <SubjectData title="Optativas" type="optional" status={status.optative} />
                       <SubjectData
+                        type="complementary"
                         title="Complementares"
                         status={status.complementary}
                       />

@@ -7,17 +7,23 @@ import {
   Atribute,
   LoadingContainer,
 } from "./SubjectData.style";
+import { useModalContext } from "../../contexts/modal";
 
 export const SubjectData = ({
   title,
   status,
+  type,
 }: {
   title: string;
+  type: string;
   status: string[];
 }): ReactElement => {
   const { extractionLoading } = useExtractionContext();
+  const { handleChangeContent } = useModalContext();
   const current = status[0] || "--";
   const max = status[1] || "--";
+
+  console.log(title)
 
   return (
     <Wrapper>
@@ -25,7 +31,7 @@ export const SubjectData = ({
       <Data>
         {extractionLoading ? <Loading /> : current}/{extractionLoading ? <Loading /> : max}
       </Data>
-      <Atribute>detalhar</Atribute>
+      <Atribute onClick={() => handleChangeContent(type)}>detalhar</Atribute>
     </Wrapper>
   );
 };
