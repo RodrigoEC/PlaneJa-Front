@@ -43,6 +43,8 @@ export const GlobalStyle = createGlobalStyle`
 
   
 
+  
+
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, 
   footer, header, hgroup, menu, nav, section {
@@ -77,6 +79,8 @@ export const Wrapper = styled.div`
 
   transition: 0.3s;
   background-color: ${({ theme }) => theme.colors.contrast};
+
+  
 
   @keyframes pop {
     from {

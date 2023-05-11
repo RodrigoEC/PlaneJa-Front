@@ -37,9 +37,19 @@ export const Data = styled.span`
   }
 `;
 
-export const Atribute = styled.span`
+export const Atribute = styled.button`
   font-size: 0.85rem;
   font-weight: bold;
+  text-decoration: underline;
+  transition: 0.3s;
+  background-color: transparent;
+  border: none;
+  color: ${({ theme }) => theme.colors.primary};
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
 
   @media screen and (max-width: 1000px) {
     font-size: 0.75rem;

@@ -25,7 +25,7 @@ export const SubjectData = ({
       <Data>
         {extractionLoading ? <Loading /> : current}/{extractionLoading ? <Loading /> : max}
       </Data>
-      <Atribute>créditos</Atribute>
+      <Atribute>detalhar</Atribute>
     </Wrapper>
   );
 };
