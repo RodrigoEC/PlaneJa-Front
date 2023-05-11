@@ -12,15 +12,15 @@ export const contentMap = {
     children: <RecommendingErrorContent />,
   },
   mandatory: {
-    title: "Cadeira obrigatórias cursadas",
+    title: "Obrigatórias cursadas",
     children: <DefaultSubjectContent type="Obrigatória" />,
   },
   optional: {
-    title: "Cadeira optativas cursadas",
+    title: "Optativas cursadas",
     children: <DefaultSubjectContent type="Optativa" />,
   },
   complementary: {
-    title: "Cadeira complementares cursadas",
+    title: "Complementares cursadas",
     children: <DefaultSubjectContent type="Complementar" />,
   },
 };
