@@ -29,7 +29,6 @@ export const UploadSection = (): ReactElement => {
     const { record, enrollment_info } = extractedData[0];
 
     if (extractedData[1] === 206) {
-      console.log(extractedData)
       handleChangeContent(extractedData[1].toString())
     }
 

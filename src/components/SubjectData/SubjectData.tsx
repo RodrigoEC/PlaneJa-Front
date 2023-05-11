@@ -23,8 +23,6 @@ export const SubjectData = ({
   const current = status[0] || "--";
   const max = status[1] || "--";
 
-  console.log(title)
-
   return (
     <Wrapper>
       <Title>{title}</Title>

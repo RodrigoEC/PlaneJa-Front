@@ -24,7 +24,6 @@ export const Modal = ({
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
     const keys = ["Escape", "f"];
-    console.log(event)
     if (keys.includes(event.key) && !event.ctrlKey) {
       handleClose();
     }
