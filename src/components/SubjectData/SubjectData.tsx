@@ -8,6 +8,7 @@ import {
   LoadingContainer,
 } from "./SubjectData.style";
 import { useModalContext } from "../../contexts/modal";
+import { useStudentDataContext } from "../../contexts/studentData";
 
 export const SubjectData = ({
   title,
@@ -20,7 +21,8 @@ export const SubjectData = ({
 }): ReactElement => {
   const { extractionLoading } = useExtractionContext();
   const { handleChangeContent } = useModalContext();
-  const current = status[0] || "--";
+  const { studentRecord } = useStudentDataContext();
+  const current = studentRecord.subjects.filter((subject) => subject.type === type).reduce((sum, subject) => sum + subject.credits, 0) || "--";
   const max = status[1] || "--";
 
   return (
@@ -29,7 +31,7 @@ export const SubjectData = ({
       <Data>
         {extractionLoading ? <Loading /> : current}/{extractionLoading ? <Loading /> : max}
       </Data>
-      <Atribute onClick={() => handleChangeContent(type)}>detalhar</Atribute>
+      <Atribute disabled={studentRecord.subjects.length === 0} onClick={() => handleChangeContent(type)}>detalhar</Atribute>
     </Wrapper>
   );
 };

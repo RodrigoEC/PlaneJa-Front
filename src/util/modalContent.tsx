@@ -11,15 +11,15 @@ export const contentMap = {
     title: "Erro ao fazer a recomendação de matrículas",
     children: <RecommendingErrorContent />,
   },
-  mandatory: {
+  "Obrigatória": {
     title: "Obrigatórias cursadas",
     children: <DefaultSubjectContent type="Obrigatória" />,
   },
-  optional: {
+  "Optativa": {
     title: "Optativas cursadas",
     children: <DefaultSubjectContent type="Optativa" />,
   },
-  complementary: {
+  "Complementar": {
     title: "Complementares cursadas",
     children: <DefaultSubjectContent type="Complementar" />,
   },
