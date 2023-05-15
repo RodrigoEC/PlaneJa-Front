@@ -1,28 +1,26 @@
 import styled from "styled-components";
-import { Locked } from "../../assets/icons/Locked";
-import { Unlocked } from "../../assets/icons/Unlocked";
 import { colors } from "../../util/colors";
 
-export const LockedIcon = styled(Locked)`
-  width: 1rem;
+export const AboutContainer = styled.div`
   position: absolute;
   align-self: center;
-  fill: transparent;
-  transition: 0.3s;
-  left: calc(50% - 0.5rem);
-  animation-name: pop;
-  animation-duration: 0.2s;
-`;
+  display: flex;
+  gap: 1rem;
+`
 
-export const UnlockedIcon = styled(Unlocked)`
-  width: 1.2rem;
-  position: absolute;
-  align-self: center;
-  fill: transparent;
+export const About = styled.span`
+  color: transparent;
   transition: 0.3s;
-  left: calc(50% - 0.7rem);
   animation-name: pop;
   animation-duration: 0.2s;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 type WrapperType = {
@@ -80,10 +78,10 @@ export const Wrapper = styled.div<WrapperType>`
 
     ${Title} {
       color: ${({ variant }: { variant: keyof typeof colors }) =>
-      colors[variant]}30;
+    colors[variant]}30;
     }
-    ${LockedIcon}, ${UnlockedIcon} {
-      fill: ${({ theme }) => theme.colors.primary};
+    ${About} {
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 `;

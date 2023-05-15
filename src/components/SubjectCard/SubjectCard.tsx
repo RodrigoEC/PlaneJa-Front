@@ -3,7 +3,7 @@ import { useRestraintsContext } from "../../contexts/restraints";
 import { Subject } from "../../contexts/restraints.interfaces";
 import { colors } from "../../util/colors";
 import { capitalize } from "../../util/util";
-import { LockedIcon, UnlockedIcon, Wrapper, Title } from "./SubjectCard.styles";
+import { About, Wrapper, Title, AboutContainer } from "./SubjectCard.styles";
 
 export const SubjectCard = ({
   variant,
@@ -49,7 +49,7 @@ export const SubjectCard = ({
   return (
     <Wrapper
       title={`${subject.name} - T${subject.class_num}`}
-      onClick={onClick}
+
       variant={variant as keyof typeof colors}
       blocked={(
         availableSubjects.length === numEssentialSubjects &&
@@ -57,7 +57,9 @@ export const SubjectCard = ({
       ).toString()}
     >
       <Title>{capitalize(displayedTitle)}</Title>
-      {hasSubject ? <LockedIcon /> : <UnlockedIcon />}
+      <AboutContainer>
+        <About onClick={onClick}>Detalhar</About>
+      </AboutContainer>
     </Wrapper>
   );
 };

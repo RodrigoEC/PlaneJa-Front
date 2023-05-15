@@ -8,6 +8,7 @@ export const ScheduleMenu = () => {
     updateSchedule,
     nextSchedule,
     previousSchedule,
+    addSchedule
   } = useSubjectsTableContext();
 
   return (
@@ -25,6 +26,14 @@ export const ScheduleMenu = () => {
           {i + 1}
         </Index>
       ))}
+      <Index
+        key={'+'}
+        title={"Adicionar nova tabela"}
+        onClick={() => addSchedule()}
+        selected={'F'}
+      >
+        +
+      </Index>
       <RightArrow
         blocked={
           currentScheduleIndex + 1 === schedules.length ? "T" : undefined

@@ -25,6 +25,7 @@ interface SubjectsTableContent {
   previousSchedule: Function;
   updateSchedule: Function;
   getSchedulesData: Function;
+  addSchedule: Function;
 }
 
 const SubjectsTableContext = createContext<SubjectsTableContent>({
@@ -40,6 +41,7 @@ const SubjectsTableContext = createContext<SubjectsTableContent>({
   previousSchedule: defaultFunction,
   updateSchedule: defaultFunction,
   getSchedulesData: defaultFunction,
+  addSchedule: defaultFunction,
 });
 
 export const SubjectsTableProvider = ({
@@ -95,6 +97,12 @@ export const SubjectsTableProvider = ({
     }
   };
 
+  const addSchedule = () => {
+    const newSchedule = [...schedules, []]
+    localStorage.setItem("planeja@schedules", JSON.stringify(newSchedule));
+    setSchedules(newSchedule)
+  }
+
   const getSchedulesData = useCallback(
     async (studentSubjects: any, requiresSubjects: any) => {
       const [data, status] = await calculateSchedules(
@@ -126,6 +134,7 @@ export const SubjectsTableProvider = ({
     previousSchedule,
     updateSchedule,
     getSchedulesData,
+    addSchedule,
   };
 
   return (

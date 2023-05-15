@@ -31,7 +31,7 @@ export const SubjectData = ({
       <Data>
         {extractionLoading ? <Loading /> : current}/{extractionLoading ? <Loading /> : max}
       </Data>
-      <Atribute disabled={studentRecord.subjects.length === 0} onClick={() => handleChangeContent(type)}>detalhar</Atribute>
+      <Atribute disabled={current === "--"} onClick={() => handleChangeContent(type)}>detalhar</Atribute>
     </Wrapper>
   );
 };
