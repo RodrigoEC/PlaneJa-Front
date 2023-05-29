@@ -1,0 +1,10 @@
+import { ReactElement } from "react";
+
+export const FilterIcon = ({ ...props }): ReactElement => {
+  return (
+    <svg width="22" height="20" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M4.86364 12.3636H3.40909V16H1.95455V12.3636H0.5V10.1818H4.86364V12.3636ZM3.40909 0H1.95455V8.72727H3.40909V0ZM11.4091 5.09091H7.04545V7.27273H8.5V16H9.95455V7.27273H11.4091V5.09091ZM9.95455 0H8.5V3.63636H9.95455V0ZM17.9545 10.1818H13.5909V12.3636H15.0455V16H16.5V12.3636H17.9545V10.1818ZM16.5 0H15.0455V8.72727H16.5V0Z"/>
+    </svg>
+
+  );
+};

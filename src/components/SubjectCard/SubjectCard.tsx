@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { Subject } from "../../contexts/restraints.interfaces";
 import { colors } from "../../util/colors";
@@ -15,8 +15,6 @@ export const SubjectCard = ({
   const {
     numEssentialSubjects,
     availableSubjects,
-    essentialSubjects,
-    setEssentialSubjects,
   } = useRestraintsContext();
   const title = subject.name;
   const [hasSubject, setHasSubject] = useState<boolean>(false);
@@ -25,26 +23,7 @@ export const SubjectCard = ({
     title.length > 35 ? title.slice(0, 23) + "..." + title.slice(-3) : title;
 
   const onClick = useCallback((): void => {
-    if (hasSubject) {
-      const filteredSubjects = essentialSubjects.filter(
-        (s: Subject) =>
-          s.name !== subject.name || subject.class_num !== s.class_num
-      );
-
-      setEssentialSubjects(filteredSubjects);
-    } else if (essentialSubjects.length < numEssentialSubjects) {
-      setEssentialSubjects([...essentialSubjects, subject]);
-    }
-  }, [essentialSubjects, setEssentialSubjects, hasSubject]);
-
-  useEffect(() => {
-    const hasSub = essentialSubjects.find(
-      (s: Subject) =>
-        s.name === subject.name && subject.class_num === s.class_num
-    );
-
-    setHasSubject(hasSub !== undefined);
-  }, [essentialSubjects, setEssentialSubjects, setHasSubject]);
+  }, []);
 
   return (
     <Wrapper

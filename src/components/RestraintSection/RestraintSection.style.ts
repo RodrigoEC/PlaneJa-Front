@@ -3,10 +3,13 @@ import styled, { DefaultTheme } from "styled-components";
 export const Wrapper = styled.form`
   display: flex;
   flex-flow: column;
-  width: 100%;
+  width: fit-content;
   align-items: center;
   justify-content: center;
+  padding: 5px;
   gap: 1rem;
+  border: 2px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.primary}50;
+  border-radius: 5px;
 `;
 
 export const InputArea = styled.div`

@@ -12,7 +12,7 @@ export const extractRecord = async (
   formData: FormData
 ): Promise<[ExtractionResponse, number]> => {
   try {
-    const response = await api.post("/records?recommend", formData, {
+    const response = await api.post("/records", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

@@ -5,30 +5,26 @@ import {
   useEffect,
   useState,
 } from "react";
-import { getLocalStorage, setLocalStorage } from "../util/util";
+import { getLocalStorage } from "../util/util";
 import { Subject } from "./restraints.interfaces";
 
 interface ExtratedContent {
   numEssentialSubjects: number;
   setNumEssentialSubjects: Function;
-  essentialSubjects: Subject[];
-  setEssentialSubjects: Function;
-  subjectsBackup: Subject[];
-  setSubjectsBackup: Function;
   availableSubjects: Subject[];
   setAvailableSubjects: Function;
+  filteredSubjects: Subject[];
+  setFilteredSubjects: Function;
 }
 
 const defaultFunction = () => {};
 const RestraintsContext = createContext<ExtratedContent>({
   numEssentialSubjects: 5,
   setNumEssentialSubjects: defaultFunction,
-  essentialSubjects: [],
-  setEssentialSubjects: defaultFunction,
-  subjectsBackup: [],
-  setSubjectsBackup: defaultFunction,
   availableSubjects: [],
   setAvailableSubjects: defaultFunction,
+  filteredSubjects: [],
+  setFilteredSubjects: defaultFunction,
 });
 
 export const RestraintsProvider = ({
@@ -39,33 +35,24 @@ export const RestraintsProvider = ({
   const [numEssentialSubjects, setNumEssentialSubjects] = useState<number>(
     getLocalStorage("planeja@num_subjects", 5)
   );
-  
+
   const [availableSubjects, setAvailableSubjects] = useState<Subject[]>(
     getLocalStorage("planeja@available_subjects", [])
   );
 
-  const [essentialSubjects, setEssentialSubjects] = useState<Subject[]>(
-    getLocalStorage("planeja@essential_subjects", [])
-  );
-
-  const [subjectsBackup, setSubjectsBackup] = useState<Subject[]>(
-    getLocalStorage("planeja@essential_subjects", [])
-  );
-  
+  const [filteredSubjects, setFilteredSubjects] = useState(availableSubjects);
 
   useEffect(() => {
-    setLocalStorage("planeja@essential_subjects", subjectsBackup);
-  }, [subjectsBackup]);
+    setFilteredSubjects(availableSubjects);
+  }, []);
 
   const value = {
     numEssentialSubjects,
     setNumEssentialSubjects,
-    essentialSubjects,
-    setEssentialSubjects,
-    subjectsBackup,
-    setSubjectsBackup,
     availableSubjects,
     setAvailableSubjects,
+    filteredSubjects,
+    setFilteredSubjects,
   };
 
   return (

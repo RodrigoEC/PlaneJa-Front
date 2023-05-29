@@ -12,12 +12,9 @@ interface ExtratedContent {
   setStudentRecord: Function;
   semester: string;
   setSemester: Function;
-  enrollments: Array<Subject[]>;
-  setEnrollments: Function;
   fillStudentData: (
     studentRecord: StudentRecord,
     semester: string,
-    enrollmentList: Array<Subject[]>
   ) => void;
 }
 
@@ -26,12 +23,9 @@ const StudentDataContext = createContext<ExtratedContent>({
   setStudentRecord: defaultFunction,
   semester: "",
   setSemester: defaultFunction,
-  enrollments: [],
-  setEnrollments: defaultFunction,
   fillStudentData: (
     studentRecord: StudentRecord,
     semester: string,
-    enrollmentList: Array<Subject[]>
   ) => {},
 });
 
@@ -46,14 +40,10 @@ export const StudentDataProvider = ({
   const [semester, setSemester] = useState<string>(
     getLocalStorage("planeja@semester", "")
   );
-  const [enrollments, setEnrollments] = useState<Array<Subject[]>>(
-    getLocalStorage("planeja@enrollments", [])
-  );
 
   const fillStudentData = (
     studentRecord: StudentRecord,
     semester: string,
-    enrollmentList: Array<Subject[]>
   ) => {
     handleLocalStorageStateUpdate("planeja@semester", setSemester, semester);
 
@@ -62,19 +52,11 @@ export const StudentDataProvider = ({
       setStudentRecord,
       studentRecord
     );
-
-    handleLocalStorageStateUpdate(
-      "planeja@enrollments",
-      setEnrollments,
-      enrollmentList
-    );
   };
 
   const value = {
     studentRecord,
     setStudentRecord,
-    enrollments,
-    setEnrollments,
     semester,
     setSemester,
     fillStudentData,

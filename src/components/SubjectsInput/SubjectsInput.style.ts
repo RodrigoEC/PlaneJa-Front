@@ -1,16 +1,19 @@
 import styled from "styled-components";
+import { FilterIcon } from "../../assets/icons/Filter";
 
 export const Wrapper = styled.div`
   display: flex;
   gap: 0.5rem;
+  min-width: 15rem;
   
-  padding: 5px 5px 0 5px;
+  padding: 5px 5px 2.5px 5px;
   border-radius: 3px;
-  &:focus-within {
+  border-bottom: 1px solid;
+  /* &:focus-within {
     outline: solid;
     outline-width: 2px;
     outline-color: white;
-  }
+  } */
 
   &.invalid {
     color: ${({ theme }) => theme.colors.alert} !important;
@@ -30,13 +33,13 @@ export const Input = styled.input`
   background-color: ${({ theme }) => theme.colors.contrast};
   border: none;
   color: inherit;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: bold;
-  border-bottom: 1px solid;
   transition: 0.3s;
   letter-spacing: 1px;
   padding-bottom: 4px;
   outline: none;
+  width: 100%;
 
   &[disabled] {
     cursor: not-allowed;
@@ -67,27 +70,18 @@ export const Input = styled.input`
   }
 `;
 
-export const List = styled.datalist`
-  background-color: ${({ theme }) => theme.colors.contrast};
-`;
-
-export const AddButton = styled.button`
+export const Button = styled.button`
   background-color: transparent;
   border: none;
-  cursor: pointer;
-  transition: 0.3s;
   padding: 0;
-
-  &[disabled] {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  :hover {
-    opacity: 0.6;
-  }
-
-  svg {
-    fill: ${({ theme }) => theme.colors.primary};
-  }
 `;
+
+export const Filter = styled(FilterIcon)`
+  fill: ${({ theme }) => theme.colors.primary};
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`

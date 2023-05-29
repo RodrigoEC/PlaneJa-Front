@@ -3,7 +3,10 @@ import { Subject } from "./restraints.interfaces";
 
 export interface ExtractionResponse {
   record: StudentRecord;
-  enrollment_info: EnrollmentInfo;
+  semester_data: {
+    semester: string;
+    available_subjects: Subject[];
+  }
 }
 
 export interface EnrollmentInfo {
@@ -25,5 +28,8 @@ export interface ErrorInterface {
 
 export const defaultExtractionResponse = {
   record: defaultStudentRecord,
-  enrollment_info: EnrollmentInfo,
+  semester_data: {
+    semester: '--',
+    available_subjects: [],
+  }
 };

@@ -38,6 +38,7 @@ export const ExtractionProvider = ({
     form.append("file", file);
 
     const [extractedInfo, statusCode] = await extractRecord(form);
+    
     setError({
       code: statusCode,
       warn: statusCode !== 200 && statusCode !== 206,
