@@ -44,7 +44,7 @@ export const RestraintsProvider = ({
 
   useEffect(() => {
     setFilteredSubjects(availableSubjects);
-  }, []);
+  }, [setAvailableSubjects, availableSubjects]);
 
   const value = {
     numEssentialSubjects,

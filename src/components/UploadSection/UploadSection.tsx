@@ -13,7 +13,6 @@ import { useStudentDataContext } from "../../contexts/studentData";
 import { useExtractionContext } from "../../contexts/extraction";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { handleLocalStorageStateUpdate } from "../../util/util";
-import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 
 export const UploadSection = (): ReactElement => {
   const { file, extractionLoading, extractData, error } =

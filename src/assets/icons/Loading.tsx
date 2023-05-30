@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export const UploadIcon = ({ ...props }): ReactElement => {
+export const LoadingIcon = ({ ...props }): ReactElement => {
   return (
     <svg
       width="24"

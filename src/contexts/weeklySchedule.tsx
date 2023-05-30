@@ -26,6 +26,7 @@ interface SubjectsTableContent {
   updateSchedule: Function;
   getSchedulesData: Function;
   addSchedule: Function;
+  addSubject: Function;
 }
 
 const SubjectsTableContext = createContext<SubjectsTableContent>({
@@ -42,6 +43,7 @@ const SubjectsTableContext = createContext<SubjectsTableContent>({
   updateSchedule: defaultFunction,
   getSchedulesData: defaultFunction,
   addSchedule: defaultFunction,
+  addSubject: defaultFunction,
 });
 
 export const SubjectsTableProvider = ({
@@ -57,6 +59,22 @@ export const SubjectsTableProvider = ({
     Array<Subject[] | null[]>
   >(defaultCurrentSchedule());
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState<number>(0);
+
+  const addSubject = async (subject: Subject) => {
+    const oldSchedules = schedules;
+
+    let currentOldSchedule: Subject[] = schedules[currentScheduleIndex];
+
+    currentOldSchedule = [...currentOldSchedule, subject];
+
+    oldSchedules[currentScheduleIndex] = currentOldSchedule;
+
+    await setSchedules(oldSchedules);
+    localStorage.setItem("planeja@schedules", JSON.stringify(oldSchedules));
+    await updateSchedule(currentScheduleIndex);
+
+    return true;
+  };
 
   const updateSchedule = useCallback(
     (id: number) => {
@@ -82,6 +100,7 @@ export const SubjectsTableProvider = ({
       }, 200);
     },
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentScheduleIndex, currentSchedule, schedules]
   );
 
@@ -98,10 +117,10 @@ export const SubjectsTableProvider = ({
   };
 
   const addSchedule = () => {
-    const newSchedule = [...schedules, []]
+    const newSchedule = [...schedules, []];
     localStorage.setItem("planeja@schedules", JSON.stringify(newSchedule));
-    setSchedules(newSchedule)
-  }
+    setSchedules(newSchedule);
+  };
 
   const getSchedulesData = useCallback(
     async (studentSubjects: any, requiresSubjects: any) => {
@@ -119,6 +138,7 @@ export const SubjectsTableProvider = ({
 
   useEffect(() => {
     updateSchedule(currentScheduleIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentScheduleIndex, schedules]);
 
   const value = {
@@ -135,6 +155,7 @@ export const SubjectsTableProvider = ({
     updateSchedule,
     getSchedulesData,
     addSchedule,
+    addSubject,
   };
 
   return (

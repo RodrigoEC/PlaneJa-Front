@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback } from "react";
 import { useRestraintsContext } from "../../contexts/restraints";
 import { Subject } from "../../contexts/restraints.interfaces";
 import { colors } from "../../util/colors";
@@ -16,8 +16,7 @@ export const SubjectCard = ({
     numEssentialSubjects,
     availableSubjects,
   } = useRestraintsContext();
-  const title = subject.name;
-  const [hasSubject, setHasSubject] = useState<boolean>(false);
+  const { name: title, class_num } = subject;
 
   const displayedTitle =
     title.length > 35 ? title.slice(0, 23) + "..." + title.slice(-3) : title;
@@ -35,9 +34,9 @@ export const SubjectCard = ({
         !availableSubjects.filter((subject) => title === subject.name)
       ).toString()}
     >
-      <Title>{capitalize(displayedTitle)}</Title>
+      <Title>{capitalize(displayedTitle)} - T{class_num}</Title>
       <AboutContainer>
-        <About onClick={onClick}>Detalhar</About>
+        <About onClick={onClick}>Remover</About>
       </AboutContainer>
     </Wrapper>
   );
