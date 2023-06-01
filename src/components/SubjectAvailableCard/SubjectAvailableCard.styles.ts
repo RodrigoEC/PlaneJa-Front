@@ -1,14 +1,16 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 0.5rem;
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.colors.primary}20;
+  background-color: ${({ theme }) => theme.colors.primary}15;
   border-radius: 5px;
   gap: 0.75rem;
   flex-direction: column;
+  border: 2px solid ${({ theme }) => theme.colors.secondary}60;
+  margin-right: 0.15rem;
 `;
 
 export const InnerContainer = styled.div`
@@ -53,13 +55,15 @@ export const ButtonsContainer = styled.div`
 export const Button = styled.button`
   background-color: transparent;
   border: none;
-  padding: 0;
+  padding: 0.25rem 0;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
-  cursor: pointer;
+  border-radius: 5px;
+  color: ${({ isAvailable, theme }: { isAvailable: string, theme: DefaultTheme }) => isAvailable === 'T' ? theme.colors.primary : theme.colors.alert};
+  cursor: ${({ isAvailable }: { isAvailable: string }) => isAvailable === 'T' ? 'pointer': 'not-allowed'};
   transition: 0.3s;
   
+  
   &:hover {
-    opacity: 0.6;
+    background-color: ${({ isAvailable, theme }: { isAvailable: string, theme: DefaultTheme }) => isAvailable === 'T' && `${theme.colors.primary}20`};
   }
 `;

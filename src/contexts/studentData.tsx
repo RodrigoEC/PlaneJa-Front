@@ -4,7 +4,7 @@ import {
   getLocalStorage,
   handleLocalStorageStateUpdate,
 } from "../util/util";
-import { Subject } from "./restraints.interfaces";
+import { Subject } from "./weeklySchedule.interfaces";
 import { defaultStudentRecord, StudentRecord } from "./studentData.interfaces";
 
 interface ExtratedContent {

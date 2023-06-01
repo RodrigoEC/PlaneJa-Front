@@ -1,4 +1,4 @@
-import { Subject } from "../contexts/restraints.interfaces";
+import { Subject } from "../contexts/weeklySchedule.interfaces";
 import { RomanNumerals } from "./constants";
 
 export const capitalize = (string: string): string => {

@@ -13,7 +13,7 @@ interface ModalContent {
   question: { title: string; children: ReactElement };
 }
 
-interface ModalContext {
+interface ModalContextInterface {
   openModal: boolean;
   setOpenModal: Function;
   contentKey: keyof ModalContent;
@@ -21,7 +21,7 @@ interface ModalContext {
   handleChangeContent: Function;
 }
 
-const ModalContext = createContext<ModalContext>({
+const ModalContext = createContext<ModalContextInterface>({
   openModal: false,
   setOpenModal: defaultFunction,
   contentKey: "question",
@@ -38,7 +38,7 @@ export const ModalProvider = ({
   const [contentKey, setContentKey] = useState<keyof ModalContent>("question");
   const [content, setContent] = useState<{
     title: string;
-    children: ReactElement;
+    children: () => ReactElement;
   }>(contentMap.question);
 
   const handleChangeContent = (key: string) => {
@@ -64,7 +64,7 @@ export const ModalProvider = ({
     <ModalContext.Provider value={value}>
       {openModal && (
         <Modal title={content.title} onClose={() => setOpenModal(false)}>
-          {content.children}
+          {content.children()}
         </Modal>
       )}
       {children}

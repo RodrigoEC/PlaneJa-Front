@@ -1,3 +1,25 @@
+export interface Schedule {
+  day: string;
+  init_time: string;
+  end_time: string;
+}
+
+export interface Subject {
+  id: string;
+  name: string;
+  class_num: string;
+  credits: number;
+  workload: number;
+  schedule: Schedule[];
+  variant?: string;
+  available?: boolean;
+}
+
+export interface WeeklySchedule {
+  availableSubs: Subject[];
+  subjects: Subject[];
+}
+
 export interface SubjectContent {
   title: string;
   variant: string;

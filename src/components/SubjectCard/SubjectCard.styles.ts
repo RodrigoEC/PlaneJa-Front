@@ -25,7 +25,6 @@ export const About = styled.span`
 
 type WrapperType = {
   variant: keyof typeof colors;
-  blocked: string;
 }
 export const Title = styled.span`
   font-size: 0.8rem;
@@ -44,8 +43,7 @@ export const Wrapper = styled.div<WrapperType>`
   justify-content: center;
   background-color: ${({ variant }: { variant: keyof typeof colors }) =>
     colors[variant]}60;
-  cursor: ${({ blocked }: { blocked: string }) =>
-    blocked === "T" ? "not-allowed" : "pointer"};
+  cursor: pointer;
   height: 4rem;
   align-items: center;
   padding: 0.5rem;
@@ -59,11 +57,8 @@ export const Wrapper = styled.div<WrapperType>`
   transition: 0.3s;
   text-align: center;
   animation: appear 0.3s;
+  
 
-  & svg {
-    opacity: ${({ blocked }: { blocked: string }) =>
-    blocked === "T" ? "0.6" : "1"};;
-  }
 
   @media screen and (max-width: 700px) {
     width: 10rem;
@@ -85,5 +80,3 @@ export const Wrapper = styled.div<WrapperType>`
     }
   }
 `;
-
-

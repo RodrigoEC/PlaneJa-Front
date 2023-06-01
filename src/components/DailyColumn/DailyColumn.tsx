@@ -1,6 +1,6 @@
 import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useExtractionContext } from "../../contexts/extraction";
-import { Schedule, Subject } from "../../contexts/restraints.interfaces";
+import { Schedule, Subject } from "../../contexts/weeklySchedule.interfaces";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { SubjectContent } from "../../contexts/weeklySchedule.interfaces";
 import { colors } from "../../util/colors";

@@ -1,5 +1,5 @@
 import { defaultStudentRecord, StudentRecord } from "./studentData.interfaces";
-import { Subject } from "./restraints.interfaces";
+import { Subject } from "./weeklySchedule.interfaces";
 
 export interface ExtractionResponse {
   record: StudentRecord;

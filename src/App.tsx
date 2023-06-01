@@ -24,6 +24,7 @@ import { ModalProvider } from "./contexts/modal";
 import { SubjectsTableProvider } from "./contexts/weeklySchedule";
 import { useStudentDataContext } from "./contexts/studentData";
 import { useExtractionContext } from "./contexts/extraction";
+import { Button } from "./components/SubjectsInput/SubjectsInput.style";
 
 function App() {
   const { extractionLoading } = useExtractionContext();
@@ -71,7 +72,11 @@ function App() {
                         type="Obrigatória"
                         status={status.mandatory}
                       />
-                      <SubjectData title="Optativas" type="Optativa" status={status.optative} />
+                      <SubjectData
+                        title="Optativas"
+                        type="Optativa"
+                        status={status.optative}
+                      />
                       <SubjectData
                         type="Complementar"
                         title="Complementares"

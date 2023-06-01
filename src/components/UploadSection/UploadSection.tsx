@@ -11,14 +11,14 @@ import {
 import { useModalContext } from "../../contexts/modal";
 import { useStudentDataContext } from "../../contexts/studentData";
 import { useExtractionContext } from "../../contexts/extraction";
-import { useRestraintsContext } from "../../contexts/restraints";
 import { handleLocalStorageStateUpdate } from "../../util/util";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 
 export const UploadSection = (): ReactElement => {
   const { file, extractionLoading, extractData, error } =
     useExtractionContext();
   const { semester, fillStudentData } = useStudentDataContext();
-  const { setAvailableSubjects } = useRestraintsContext();
+  const { setAvailableSubs } = useSubjectsTableContext();
   const { handleChangeContent } = useModalContext();
   const [fileName, setFileName] = useState("");
 
@@ -30,9 +30,11 @@ export const UploadSection = (): ReactElement => {
       handleChangeContent(extractedData[1].toString())
     }
 
+    console.log(semester_data)
+
     handleLocalStorageStateUpdate(
       "planeja@available_subjects",
-      setAvailableSubjects,
+      setAvailableSubs,
       semester_data.available_subjects
     );
 

@@ -63,3 +63,19 @@ export const TableContent = styled.div`
     gap: 0.5rem;
   }
 `;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: 1px solid  ${({ theme }) => theme.colors.primary};
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+  color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.contrast};
+  }
+`;

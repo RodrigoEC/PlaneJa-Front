@@ -1,4 +1,4 @@
-import { Schedule, Subject } from "../../contexts/restraints.interfaces";
+import { Schedule, Subject } from "../../contexts/weeklySchedule.interfaces";
 import { DayOfTheWeek, numberToDay } from "../../util/constants";
 
 export const Option = ({ subject }: { subject: Subject }) => {

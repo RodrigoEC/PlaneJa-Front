@@ -1,31 +1,27 @@
 import { ReactElement, useEffect, useState } from "react";
-import { useRestraintsContext } from "../../contexts/restraints";
 import { Button, Filter, Input, Wrapper } from "./SubjectsInput.style";
-import { Subject } from "../../contexts/restraints.interfaces";
+import { Subject } from "../../contexts/weeklySchedule.interfaces";
+import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 
 export const SubjectsInput = ({
   setLoading,
 }: {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }): ReactElement => {
-  const {
-    availableSubjects,
-    setAvailableSubjects,
-    setFilteredSubjects,
-  } = useRestraintsContext();
+  const { filteredSubjects, setSearchedSubject } = useSubjectsTableContext();
   const [currentInput, setCurrentInput] = useState("");
   const [invalidData, setInvalidData] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     const delay = setTimeout(() => {
-      const newAvailableSubjects = availableSubjects.filter(
-        (subject: Subject) => subject.name.includes(currentInput.toUpperCase())
+      const newSearchedSubjects = filteredSubjects.filter((subject: Subject) =>
+        subject.name.includes(currentInput.toUpperCase())
       );
 
-      setFilteredSubjects(newAvailableSubjects);
+      setSearchedSubject(newSearchedSubjects);
 
-      if (newAvailableSubjects.length === 0 && currentInput !== "") {
+      if (newSearchedSubjects.length === 0 && currentInput !== "") {
         setInvalidData(true);
       } else setInvalidData(false);
       setLoading(false);
@@ -33,16 +29,14 @@ export const SubjectsInput = ({
 
     return () => clearTimeout(delay);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentInput, setAvailableSubjects]);
+  }, [currentInput, filteredSubjects]);
 
   return (
     <Wrapper
       onClick={() => setCurrentInput("")}
       className={invalidData ? "invalid" : ""}
     >
-      <Button>
-        <Filter />
-      </Button>
+      <Filter />
       <Input
         placeholder="Pesquisar disciplinas"
         onFocus={(e) => (e.target.value = "")}

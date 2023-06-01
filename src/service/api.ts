@@ -1,6 +1,6 @@
 import axios from "axios";
 import { defaultExtractionResponse, ExtractionResponse } from "../contexts/extraction.interfaces";
-import { Subject } from "../contexts/restraints.interfaces";
+import { Subject } from "../contexts/weeklySchedule.interfaces";
 
 
 const api = axios.create({

@@ -1,5 +1,4 @@
 import { ReactElement, useCallback } from "react";
-import { Schedule, Subject } from "../../contexts/restraints.interfaces";
 import { capitalize } from "../../util/util";
 import {
   Title,
@@ -7,12 +6,12 @@ import {
   ScheduleContainer,
   InnerContainer,
   Wrapper,
-  ButtonsContainer,
   Day,
   ScheduleTime,
 } from "./SubjectAvailableCard.styles";
 import { DayOfTheWeek, numberToDay } from "../../util/constants";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
+import { Schedule, Subject } from "../../contexts/weeklySchedule.interfaces";
 
 export const SubjectAvailableCard = ({
   subject,
@@ -20,7 +19,8 @@ export const SubjectAvailableCard = ({
   subject: Subject;
 }): ReactElement => {
   const { addSubject } = useSubjectsTableContext();
-  const { name, class_num, schedule } = subject;
+  const { name, class_num, schedule, available } = subject;
+  const isAvailable = available || false;
 
   const add = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -47,10 +47,9 @@ export const SubjectAvailableCard = ({
           ))}
         </ScheduleContainer>
       </InnerContainer>
-      <ButtonsContainer>
-        <Button onClick={add}>Adicionar</Button>
-        <Button>Detalhar</Button>
-      </ButtonsContainer>
+      <Button isAvailable={isAvailable ? "T" : "F"} onClick={add}>
+        {isAvailable ? "Adicionar" : "Horário indisponível"}
+      </Button>
     </Wrapper>
   );
 };

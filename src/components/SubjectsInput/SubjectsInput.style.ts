@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { FilterIcon } from "../../assets/icons/Filter";
+import { Logo } from "../../assets/icons/Logo";
+import { Add } from "../../assets/icons/Add";
+import { Arrow } from "../../assets/icons/Arrow";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -76,12 +79,6 @@ export const Button = styled.button`
   padding: 0;
 `;
 
-export const Filter = styled(FilterIcon)`
+export const Filter = styled(Arrow)`
   fill: ${({ theme }) => theme.colors.primary};
-  transition: 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.6;
-  }
 `
