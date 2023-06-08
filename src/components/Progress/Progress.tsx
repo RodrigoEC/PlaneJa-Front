@@ -21,7 +21,7 @@ export const Progress = (): ReactElement => {
       <Wrapper>
         {/* loading ? 1 : 0 to prevent console error*/}
         <InnerWrapper progress={studenProgress} loading={extractionLoading.toString()}>
-          <ProgressValue>{extractionLoading ? "??" : `${studenProgress}%`}</ProgressValue>
+          <ProgressValue>{extractionLoading ? "??" : `${studenProgress.toFixed()}%`}</ProgressValue>
         </InnerWrapper>
       </Wrapper>
     </Container>
