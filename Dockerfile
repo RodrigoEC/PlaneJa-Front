@@ -1,6 +1,6 @@
 
 
-FROM node:lts-alpine as dependency
+FROM node as dependency
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY package.json .
 
 RUN npm install
 
-FROM node:lts-alpine
+FROM node
 
 ARG user=node
 

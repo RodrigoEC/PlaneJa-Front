@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { Button, Filter, Input, Wrapper } from "./SubjectsInput.style";
 import { Subject } from "../../contexts/weeklySchedule.interfaces";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
+import { removeWordAccent } from "../../util/util";
 
 export const SubjectsInput = ({
   setLoading,
@@ -16,7 +17,9 @@ export const SubjectsInput = ({
     setLoading(true);
     const delay = setTimeout(() => {
       const newSearchedSubjects = filteredSubjects.filter((subject: Subject) =>
-        subject.name.includes(currentInput.toUpperCase())
+        removeWordAccent(subject.name)
+          .toUpperCase()
+          .includes(removeWordAccent(currentInput.toUpperCase()))
       );
 
       setSearchedSubject(newSearchedSubjects);

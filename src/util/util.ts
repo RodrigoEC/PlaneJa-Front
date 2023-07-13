@@ -42,3 +42,7 @@ export const filterSubjects = (subjectId: string, subjects: Subject[]): Subject 
   if (subject) return subject[0]
   return null
 };
+
+export const removeWordAccent = (word: string) => {
+  return word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
