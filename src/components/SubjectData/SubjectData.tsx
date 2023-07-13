@@ -9,6 +9,7 @@ import {
 } from "./SubjectData.style";
 import { useModalContext } from "../../contexts/modal";
 import { useStudentDataContext } from "../../contexts/studentData";
+import { Subject } from "../../contexts/weeklySchedule.interfaces";
 
 export const SubjectData = ({
   title,
@@ -22,7 +23,10 @@ export const SubjectData = ({
   const { extractionLoading } = useExtractionContext();
   const { handleChangeContent } = useModalContext();
   const { studentRecord } = useStudentDataContext();
-  const current = studentRecord.subjects.filter((subject) => subject.type === type).reduce((sum, subject) => sum + subject.credits, 0) || "--";
+
+
+  const subsTaken = studentRecord.subjects.filter((subject) => subject?.status === 'Aprovado')
+  const current = subsTaken.filter((subject) => subject.type === type).reduce((sum, subject) => sum + subject.credits, 0) || "--";
   const max = status[1] || "--";
 
   return (

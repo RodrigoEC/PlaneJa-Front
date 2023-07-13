@@ -30,7 +30,6 @@ export const UploadSection = (): ReactElement => {
       handleChangeContent(extractedData[1].toString())
     }
 
-    console.log(semester_data)
 
     handleLocalStorageStateUpdate(
       "planeja@available_subjects",
