@@ -57,13 +57,56 @@ export const Button = styled.button`
   border: none;
   padding: 0.25rem 0;
   font-weight: bold;
+  width: 100%;
   border-radius: 5px;
-  color: ${({ isAvailable, theme }: { isAvailable: string, theme: DefaultTheme }) => isAvailable === 'T' ? theme.colors.primary : theme.colors.alert};
-  cursor: ${({ isAvailable }: { isAvailable: string }) => isAvailable === 'T' ? 'pointer': 'not-allowed'};
+  color: ${({
+    isAvailable,
+    theme,
+  }: {
+    isAvailable: string;
+    theme: DefaultTheme;
+  }) => (isAvailable === "T" ? theme.colors.primary : theme.colors.alert)};
+  cursor: ${({ isAvailable }: { isAvailable: string }) =>
+    isAvailable === "T" ? "pointer" : "not-allowed"};
   transition: 0.3s;
-  
-  
+
   &:hover {
-    background-color: ${({ isAvailable, theme }: { isAvailable: string, theme: DefaultTheme }) => isAvailable === 'T' && `${theme.colors.primary}20`};
+    background-color: ${({
+      isAvailable,
+      theme,
+    }: {
+      isAvailable: string;
+      theme: DefaultTheme;
+    }) => isAvailable === "T" && `${theme.colors.primary}20`};
   }
 `;
+
+export const SubWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+`;
+
+export const SubList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`;
+
+export const InlineList = styled.div`
+  display: flex;
+  justify-content: ${({ spread }: { spread: string }) =>
+    spread === "spread" && "space-between"};
+  gap: 2rem;
+`;
+
+export const ListItem = styled.li``;
+
+export const ListTitle = styled.span`
+  font-weight: bold;
+`;
+
+export const ListContent = styled.span``;

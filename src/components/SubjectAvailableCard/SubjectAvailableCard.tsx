@@ -1,4 +1,4 @@
-import { ReactElement, useCallback } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import { capitalize } from "../../util/util";
 import {
   Title,
@@ -8,10 +8,18 @@ import {
   Wrapper,
   Day,
   ScheduleTime,
+  ButtonsContainer,
+  SubWrapper,
+  ListItem,
+  ListTitle,
+  ListContent,
+  SubList,
+  InlineList,
 } from "./SubjectAvailableCard.styles";
 import { DayOfTheWeek, numberToDay } from "../../util/constants";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
 import { Schedule, Subject } from "../../contexts/weeklySchedule.interfaces";
+import { Modal } from "../Modal/Modal";
 
 export const SubjectAvailableCard = ({
   subject,
@@ -19,6 +27,7 @@ export const SubjectAvailableCard = ({
   subject: Subject;
 }): ReactElement => {
   const { addSubject } = useSubjectsTableContext();
+  const [showSub, setShowSub] = useState<boolean>(false);
   const { name, class_num, schedule, available } = subject;
   const isAvailable = available || false;
 
@@ -28,6 +37,14 @@ export const SubjectAvailableCard = ({
       addSubject(subject);
     },
     [addSubject, subject]
+  );
+
+  const datailSub = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+      e.preventDefault();
+      setShowSub(true);
+    },
+    [setShowSub]
   );
 
   return (
@@ -47,9 +64,67 @@ export const SubjectAvailableCard = ({
           ))}
         </ScheduleContainer>
       </InnerContainer>
-      <Button isAvailable={isAvailable ? "T" : "F"} onClick={add}>
-        {isAvailable ? "Adicionar" : "Horário indisponível"}
-      </Button>
+      <ButtonsContainer>
+        <Button isAvailable={isAvailable ? "T" : "F"} onClick={add}>
+          {isAvailable ? "Adicionar" : "Horário conflitante"}
+        </Button>
+        <Button isAvailable={"T"} onClick={datailSub}>
+          Detalhar
+        </Button>
+      </ButtonsContainer>
+      {showSub && (
+        <Modal
+          title={name}
+          onClose={() => setShowSub(false)}
+          children={<SubContent subject={subject} />}
+        />
+      )}
     </Wrapper>
+  );
+};
+
+const SubContent = ({ subject }: { subject: Subject }) => {
+  return (
+    <SubWrapper>
+      <SubList>
+        <InlineList spread="spread">
+          <ListItem>
+            <ListTitle>Nome:</ListTitle>{" "}
+            <ListContent>{capitalize(subject.name)}</ListContent>
+          </ListItem>
+          <ListItem>
+            <ListTitle>Turma:</ListTitle>{" "}
+            <ListContent>{subject.class_num}</ListContent>
+          </ListItem>
+        </InlineList>
+        <InlineList spread="not-spread">
+          <ListItem>
+            <ListTitle>Carga Horária:</ListTitle>{" "}
+            <ListContent>{subject.workload}</ListContent>
+          </ListItem>
+          <ListItem>
+            <ListTitle>Créditos:</ListTitle>{" "}
+            <ListContent>{subject.credits}</ListContent>
+          </ListItem>
+        </InlineList>
+        <ListTitle>Professores:</ListTitle>{" "}
+        <ListItem>
+          {subject.professors?.map(
+            (prof: string | null) =>
+              prof && <ListContent>- {capitalize(prof)}</ListContent>
+          )}
+        </ListItem>
+        <ListTitle>Horários:</ListTitle>
+        {subject.schedule?.map((schedule: Schedule) => (
+          <ListItem>
+            -{" "}
+            <ListTitle>
+              {numberToDay[`${schedule.day}` as DayOfTheWeek]}
+            </ListTitle>{" "}
+            {schedule.init_time} - {schedule.end_time}
+          </ListItem>
+        ))}
+      </SubList>
+    </SubWrapper>
   );
 };

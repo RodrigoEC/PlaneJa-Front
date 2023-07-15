@@ -13,6 +13,7 @@ export interface Subject {
   schedule: Schedule[];
   variant?: string;
   available?: boolean;
+  professors?: string[];
 }
 
 export interface WeeklySchedule {
