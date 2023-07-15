@@ -15,6 +15,8 @@ import {
   ListContent,
   SubList,
   InlineList,
+  ClassNumber,
+  Divider,
 } from "./SubjectAvailableCard.styles";
 import { DayOfTheWeek, numberToDay } from "../../util/constants";
 import { useSubjectsTableContext } from "../../contexts/weeklySchedule";
@@ -87,17 +89,16 @@ const SubContent = ({ subject }: { subject: Subject }) => {
   return (
     <SubWrapper>
       <SubList>
-        <InlineList spread="spread">
-          <ListItem>
-            <ListTitle>Nome:</ListTitle>{" "}
-            <ListContent>{capitalize(subject.name)}</ListContent>
-          </ListItem>
+        <ListItem>
+          <ListTitle>Nome:</ListTitle>{" "}
+          <ListContent>{capitalize(subject.name)}</ListContent>
+        </ListItem>
+        <Divider/>
+        <InlineList>
           <ListItem>
             <ListTitle>Turma:</ListTitle>{" "}
-            <ListContent>{subject.class_num}</ListContent>
+            <ClassNumber>{subject.class_num}</ClassNumber>
           </ListItem>
-        </InlineList>
-        <InlineList spread="not-spread">
           <ListItem>
             <ListTitle>Carga Horária:</ListTitle>{" "}
             <ListContent>{subject.workload}</ListContent>
@@ -107,13 +108,13 @@ const SubContent = ({ subject }: { subject: Subject }) => {
             <ListContent>{subject.credits}</ListContent>
           </ListItem>
         </InlineList>
+        <Divider/>
         <ListTitle>Professores:</ListTitle>{" "}
-        <ListItem>
-          {subject.professors?.map(
-            (prof: string | null) =>
-              prof && <ListContent>- {capitalize(prof)}</ListContent>
-          )}
-        </ListItem>
+        {subject.professors?.map(
+          (prof: string | null) =>
+            prof && <ListItem>- {capitalize(prof)}</ListItem>
+        )}
+        <Divider/>
         <ListTitle>Horários:</ListTitle>
         {subject.schedule?.map((schedule: Schedule) => (
           <ListItem>

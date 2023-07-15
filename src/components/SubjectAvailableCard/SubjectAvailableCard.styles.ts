@@ -93,20 +93,31 @@ export const SubWrapper = styled.div`
 export const SubList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 `;
 
 export const InlineList = styled.div`
   display: flex;
-  justify-content: ${({ spread }: { spread: string }) =>
-    spread === "spread" && "space-between"};
   gap: 2rem;
 `;
 
-export const ListItem = styled.li``;
+export const ListItem = styled.li`
+  line-height: 1.25;
+`;
 
 export const ListTitle = styled.span`
   font-weight: bold;
 `;
 
-export const ListContent = styled.span``;
+export const ListContent = styled.span`
+`;
+
+export const ClassNumber = styled(ListContent)`
+  line-break: strict;
+`
+
+export const Divider = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary}30;
+  margin: 0;
+  padding: 0;
+`
