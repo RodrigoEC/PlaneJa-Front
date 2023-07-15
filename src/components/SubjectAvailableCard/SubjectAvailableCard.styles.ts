@@ -98,7 +98,7 @@ export const SubList = styled.ul`
 
 export const InlineList = styled.div`
   display: flex;
-  gap: 2rem;
+  justify-content: space-between;
 `;
 
 export const ListItem = styled.li`
